@@ -1,38 +1,54 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import Test from '../components/Test'
+import axios from 'axios'
 
-export default class Tests extends Component {
-  render() {
+const baseURL="http://localhost:8080"
+
+const Tests = () => {
+  const [tests, setTests] = useState([]);
+  const [buttonClick, setButtonClick] = useState(true);
+
+  function getTests(){
+    setButtonClick(!buttonClick)
+    if(buttonClick){
+      axios.get(baseURL+"/tests").then((tests)=>{
+        setTests(tests.data)
+      })
+    }else{
+      setTests([])
+    }
+  }
+ 
     return (
         <main>
-        <div class="content-block">
-            <div class="distant"><h2>Тесты текущего семестра</h2></div>
+        <div className="content-block">
+            <div className="distant"><h2>Тесты текущего семестра</h2></div>
             
-            <button class="accordion">Семестр <i>Место для запроса номера актуального семестра</i></button>
-            <div class="panel">
-                <br/><p><a href="/preview">Предмет 1.1</a></p><br/>
-                <br/><p><i>Место для запроса актуального теста</i></p><br/>
-                <br/><p><i>Место для запроса актуального теста</i></p><br/>
-                <br/><p><i>Место для запроса актуального теста</i></p><br/>
-                <br/><p><i>Место для запроса актуального теста</i></p><br/>
-                <br/><p><i>Место для запроса актуального теста</i></p><br/>
-                <br/><p><i>Либо 1 запрос выводящий все тесты списком</i></p><br/>
+            <button className="accordion" onClick={getTests}>Семестр <i>Место для запроса номера актуального семестра</i></button>
+            <div className="panel">
+                <div>
+              
+                  {tests &&
+                    tests.map(test=>(
+                        <Test key={test.id} name={test.name}/>
+                    ))   
+                  }
+                </div>
             </div>
-
-
-            <br/><p><a href="/preview">Предмет 1.1</a></p><br/>
 
         </div>
     </main>
     )
-  }
 }
+
+export default Tests
 //            <script>
-//               var acc = document.getElementsByClassName("accordion");
+//               var acc = document.getElementsByclassNameName("accordion");
 //                var i;
 
 //                for (i = 0; i < acc.length; i++) {
 //                    acc[i].addEventListener("click", function() {
-//                        this.classList.toggle("active");
+//                        this.classNameList.toggle("active");
 //                        var panel = this.nextElementSibling;
 //                        if (panel.style.maxHeight) {
 //                            panel.style.maxHeight = null;

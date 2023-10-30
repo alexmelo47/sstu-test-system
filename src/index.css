@@ -185,13 +185,7 @@ main {
     content: "\2212";
 }
 
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
+
 
 .distant{
     margin: 15px 100px;

@@ -4,14 +4,14 @@ export default class Attestation extends Component {
     render() {
     return (
         <main>
-        <div class="content-block">
+        <div className="content-block">
             <fieldset>
                 <legend><h3>&nbsp;Вопрос <i>например через i++</i>&nbsp;</h3></legend>
-                <div class="question">
+                <div className="question">
                     <br/>Текст задания находится здесь. <br/><br/><br/>
                 </div>
 
-                <div class="question">
+                <div className="question">
                     <form>
                         <div>
                             <input id="var_1" type="radio" name="var" value="1"/> 
@@ -31,7 +31,7 @@ export default class Attestation extends Component {
                         </div>
 
                         <div>
-                            <div class="dropdown">
+                            <div className="dropdown">
                                 <label for="var_4">Факт 4&nbsp;</label>
                                 <input  type="text" list="browsers"/>
                                 <datalist id="browsers">
@@ -48,10 +48,10 @@ export default class Attestation extends Component {
 
             </fieldset>
 
-            <div class="quest-btn">
-                <input class="btn btn-2" type="submit" value="Предыдущий"/>
-                <input class="btn btn-1" type="submit" value="Подтвердить"/>
-                <input class="btn btn-2" type="submit" value="Следующий"/>
+            <div className="quest-btn">
+                <input className="btn btn-2" type="submit" value="Предыдущий"/>
+                <input className="btn btn-1" type="submit" value="Подтвердить"/>
+                <input className="btn btn-2" type="submit" value="Следующий"/>
             </div>
 
         </div>

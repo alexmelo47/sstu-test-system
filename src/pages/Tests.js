@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import Test from '../components/Test'
 import axios from 'axios'
 
@@ -6,9 +7,9 @@ const baseURL="http://localhost:8080"
 
 const Tests = () => {
   const [tests, setTests] = useState([]);
-  const [buttonClick, setButtonClick] = useState(true);
+  const [buttonClick, setButtonClick] = useState(true); 
 
-  function getTests(){
+  function getTests(){                                          /* Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты */
     setButtonClick(!buttonClick)
     if(buttonClick){
       axios.get(baseURL+"/tests").then((tests)=>{
@@ -24,7 +25,7 @@ const Tests = () => {
         <div className="content-block">
             <div className="distant"><h2>Тесты текущего семестра</h2></div>
             
-            <button className="accordion" onClick={getTests}>Семестр <i>Место для запроса номера актуального семестра</i></button>
+            <button className="accordion" onClick={getTests}>Доступные тесты</button> 
             <div className="panel">
                 <div>
               
@@ -35,6 +36,8 @@ const Tests = () => {
                   }
                 </div>
             </div>
+
+            <div><Link to="/preview/">Информатика 2 курс</Link></div> 
 
         </div>
     </main>

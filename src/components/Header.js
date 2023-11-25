@@ -1,6 +1,6 @@
-import React, { useState }  from 'react';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-
+import React, { useState, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import axios from 'axios';
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -14,18 +14,41 @@ import Home from '../pages/Home';
 import Tests from '../pages/Tests';
 import Preview from '../pages/Preview';
 import Attestation from '../pages/Attestation';
+import setAuthToken from '../components/setToken';
 
 export default function Header() {
 
     /* авторизация через модальное окно, пока без связи с сервером */ 
-  const[open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  }
-  const handleClose = () => {
-    setOpen(false);
-  }
+    const loginRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setOpen(false);
+    }
+    const handleAuth = () => {
+
+        //auth development
+        const loginPayload = {
+            login: loginRef.textContent,
+            password: passwordRef.textContent
+        }
+
+        axios.post('/auth/login', loginPayload)
+            .then(function (response) {
+                console.log(response);
+                const token = response.data.token;
+                localStorage.setItem("token", token);
+                setAuthToken(token);
+                //localStorage.getItem("token") ? flag=true : flag=false
+            })
+            .catch(err => console.log(err));
+        setOpen(false);
+    }
 
   return (
     <>
@@ -42,30 +65,32 @@ export default function Header() {
                         <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
                         <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
-                        <Dialog open={open} onClose={handleClose} aria-aria-labelledby="authorization">
+                        <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
                            <DialogTitle id="authorization">Авторизация</DialogTitle> 
                             <DialogContent>
                                 <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
                                 <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Логин"
-                                type="text"
-                                fullWidth
+                                    ref={loginRef}
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Логин"
+                                    type="text"
+                                    fullWidth
                                 />
                                 <TextField
-                                autoFocus
-                                margin="dense"
-                                id="pass"
-                                label="Пароль"
-                                type="password"
-                                fullWidth
+                                    ref={passwordRef}
+                                    autoFocus
+                                    margin="dense"
+                                    id="pass"
+                                    label="Пароль"
+                                    type="password"
+                                    fullWidth
                                 />
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} color="primary">Закрыть</Button>
-                                <Button onClick={handleClose} color="primary">Авторизация</Button>
+                                <Button onClick={handleAuth} color="primary">Авторизация</Button>
                             </DialogActions>
                         </Dialog>
 

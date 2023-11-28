@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -20,9 +20,7 @@ export default function Header() {
 
     /* авторизация через модальное окно, пока без связи с сервером */ 
     const [open, setOpen] = React.useState(false);
-
-    const loginRef = useRef(null);
-    const passwordRef = useRef(null);
+    const baseURL = "https://maile.fita.cc";
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -34,18 +32,33 @@ export default function Header() {
 
         //auth development
         const loginPayload = {
-            login: loginRef.textContent,
-            password: passwordRef.textContent
+            "login": document.getElementById("name").value,
+            "password": document.getElementById("pass").value
         }
-
-        axios.post('/auth/login', loginPayload)
+        console.log(loginPayload);
+        axios.post(baseURL + '/auth/login', loginPayload)
             .then(function (response) {
-                console.log(response);
-                const token = response.data.token;
-                localStorage.setItem("token", token);
+                //console.log(response);
+                const token = response.data.accessToken;
+                localStorage.setItem("accessToken", token);
+                //console.log(token);
                 setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
+            .catch(err => console.log(err));
+        setOpen(false);
+    }
+
+    const handletst = () => {
+        axios.get(baseURL + '/disciplines/', {
+            headers: {
+                "Accept" : "*/*",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+            })//axios.defaults.headers.common["Access-Control-Allow-Origin"] = `*`;
             .catch(err => console.log(err));
         setOpen(false);
     }
@@ -70,7 +83,6 @@ export default function Header() {
                             <DialogContent>
                                 <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
                                 <TextField
-                                    ref={loginRef}
                                     autoFocus
                                     margin="dense"
                                     id="name"
@@ -79,7 +91,6 @@ export default function Header() {
                                     fullWidth
                                 />
                                 <TextField
-                                    ref={passwordRef}
                                     autoFocus
                                     margin="dense"
                                     id="pass"
@@ -91,6 +102,7 @@ export default function Header() {
                             <DialogActions>
                                 <Button onClick={handleClose} color="primary">Закрыть</Button>
                                 <Button onClick={handleAuth} color="primary">Авторизация</Button>
+                                <Button onClick={handletst} color="primary">get disciplines</Button>
                             </DialogActions>
                         </Dialog>
 

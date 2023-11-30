@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import QShort from '../components/qa/QShort'
 
 export default class Attestation extends Component {
     render() {
@@ -262,7 +263,7 @@ export default class Attestation extends Component {
 
 
 
-
+                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" />
 
 
             </fieldset>

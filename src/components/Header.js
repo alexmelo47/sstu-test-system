@@ -14,7 +14,7 @@ import Home from '../pages/Home';
 import Tests from '../pages/Tests';
 import Preview from '../pages/Preview';
 import Attestation from '../pages/Attestation';
-import setAuthToken from '../components/setToken';
+//import setAuthToken from '../components/setToken';
 
 export default function Header() {
 
@@ -42,7 +42,7 @@ export default function Header() {
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
                 //console.log(token);
-                setAuthToken(token);
+                //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
             .catch(err => console.log(err));

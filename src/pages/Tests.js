@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Test from '../components/Test'
 import axios from 'axios'
 
-const baseURL="http://localhost:8080"
+const baseURL ="https://maile.fita.cc"
 
 const Tests = () => {
   const [tests, setTests] = useState([]);

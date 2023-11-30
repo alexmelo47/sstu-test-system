@@ -1,9 +1,11 @@
 import React from 'react'
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import setAuthTokenStored from './components/setTokenStored';
 
 
 function App() {
+    setAuthTokenStored();
   return (
     <div>
       <Header />

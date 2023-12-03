@@ -14,11 +14,12 @@ import Home from '../pages/Home';
 import Tests from '../pages/Tests';
 import Preview from '../pages/Preview';
 import Attestation from '../pages/Attestation';
+import Testtest from '../pages/Testtest';
 //import setAuthToken from '../components/setToken';
 
 export default function Header() {
 
-    /* авторизация через модальное окно, пока без связи с сервером */ 
+    /* авторизация через модальное окно */ 
     const [open, setOpen] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
@@ -41,7 +42,7 @@ export default function Header() {
                 //console.log(response);
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
-                //console.log(token);
+                console.log(token);
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
@@ -50,12 +51,12 @@ export default function Header() {
     }
 
     const handletst = () => {
-        axios.get(baseURL + '/disciplines/', {
-            headers: {
-                "Accept" : "*/*",
-                "Access-Control-Allow-Origin": "*"
-            }
-        })
+        axios.get(baseURL + '/tests', //{
+       //     headers: {
+         //       "Accept" : "*/*",
+           //     "Access-Control-Allow-Origin": "*"
+            //}
+        /*}*/)
             .then(function (response) {
                 console.log(response);
             })//axios.defaults.headers.common["Access-Control-Allow-Origin"] = `*`;
@@ -117,7 +118,8 @@ export default function Header() {
             <Route exact path="/" element={<Home/>} />
             <Route exact path="/tests" element={<Tests/>} />
             <Route exact path="/preview" element={<Preview/>} />
-            <Route exact path="/attestation" element={<Attestation/>} />
+            <Route exact path="/attestation" element={<Attestation />} />
+            <Route exact path="/testtest" element={<Testtest />} />
         </Routes>
     </Router>
 

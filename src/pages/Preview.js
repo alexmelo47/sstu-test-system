@@ -14,7 +14,8 @@ export default class Preview extends Component {
                     Метод оценивания: Последняя попытка</i><br/>
                     <br/>
               </span>
-              <Link className="btn btn-1" to="/attestation/">Пройти тестирование</Link>
+                <Link className="btn btn-1" to="/attestation/">Пройти тестирование</Link>
+                <Link className="btn btn-1" to="/testtest/">Пройти тестирование (актуальное)</Link>
           </div>
         </main>
     )

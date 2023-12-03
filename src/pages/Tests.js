@@ -30,8 +30,8 @@ const Tests = () => {
                 <div>
               
                   {tests &&
-                    tests.map(test=>(
-                        <Test key={test.id} name={test.name}/>
+                    tests.map(test => (
+                        <Test key={test.id} tid={test.id} name={test.name} />
                     ))   
                   }
                 </div>

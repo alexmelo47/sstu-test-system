@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default function AMatches({ aid, aname, anum }) {
+export default function AMatches({ cnt, aid, aname, anum }) {
+
+    let componentsArr = [];
+    for (let i = 0; i < cnt; i++) {
+        componentsArr.push(<option value={i + 1}>{i + 1}</option>);
+    }
     
     return (
         /* 
@@ -8,12 +13,9 @@ export default function AMatches({ aid, aname, anum }) {
         */
 
         <div>
-            <label>Создать стиль ячейки - &nbsp;</label>
-            <select value={anum}>
-                <option value="2">2</option>
-                <option value="1">1</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
+            <label>{aname}</label>
+            <select className="orderboxes" id={aid} value={anum}>
+                {componentsArr}
             </select><br/>
             <br/>
         </div>

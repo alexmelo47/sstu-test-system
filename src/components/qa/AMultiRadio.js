@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AMulti_radio({ aid, aname }) {
+export default function AMultiRadio({ aid, aname, selected }) {
     
     return (
         /* 
@@ -8,7 +8,10 @@ export default function AMulti_radio({ aid, aname }) {
         */
   
         <div>                         
-            <li><input name="quest_897582" type="radio" value="" /><label>Названия</label></li>
+            <li>
+                <input className="radioboxes" name="quest_897582" type="radio" value={aid} defaultChecked={selected} />
+                <label>{aname}</label>
+            </li>
             <br/>
         </div>
 

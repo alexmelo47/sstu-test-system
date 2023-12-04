@@ -1,11 +1,11 @@
 import React from 'react'
-import AMulti_radio from './AMulti_radio'
+import AMultiRadio from './AMultiRadio'
 
 export default function QMulti_radio({ qname, cnt, a_arr}) {
     
     let componentsArr = [];
-    for (let i = 0; i < cnt*2; i += 2) {
-        componentsArr.push(<AMulti_radio aid = a_arr[i], aname = a_arr[i+1] />);
+    for (let i = 0; i < cnt; i++) {
+        componentsArr.push(<AMultiRadio aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected} />);
     }
 
     return (
@@ -16,7 +16,9 @@ export default function QMulti_radio({ qname, cnt, a_arr}) {
         <div>
             <div className="question">
                 <br/><br/><p className="questiontext">
-                    <span><p>Напишите оператор сравнения НЕРАВНО в среде MS Excel?</p></span>
+                    <span>
+                        {qname}
+                    </span>
                 </p><br/><br/>
                 
                 <div><ul class="multichoice">{componentsArr}</ul></div>      

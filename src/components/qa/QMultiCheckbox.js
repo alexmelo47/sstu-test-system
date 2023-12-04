@@ -1,11 +1,11 @@
 import React from 'react'
-import AMulti_checkbox from './AMulti_checkbox'
+import AMultiCheckbox from './AMultiCheckbox'
 
 export default function QMulti_checkbox({ qname, cnt, a_arr }) {
     
     let componentsArr = [];
-    for (let i = 0; i < cnt*2; i += 2) {
-        componentsArr.push(<AMulti_checkbox aid = a_arr[i], aname = a_arr[i+1] />);
+    for (let i = 0; i < cnt; i++) {
+        componentsArr.push(<AMultiCheckbox aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected} />);
     }
 
     return (
@@ -16,10 +16,12 @@ export default function QMulti_checkbox({ qname, cnt, a_arr }) {
         <div>
             <div className="question">
                 <br/><br/><p className="questiontext">
-                    <span><p>Напишите оператор сравнения НЕРАВНО в среде MS Excel?</p></span>
+                    <span>
+                        {qname}
+                    </span>
                 </p><br/><br/>
                 
-                <ul class="multichoice">{componentsArr}</ul>           
+                <ul className="multichoice">{componentsArr}</ul>           
 
             </div>
         </div>

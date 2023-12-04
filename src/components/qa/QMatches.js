@@ -4,8 +4,8 @@ import AMatches from './AMatches'
 export default function QMatches({ qname, cnt, a_arr }) {
     
     let componentsArr = [];
-    for (let i = 0; i < cnt*3; i += 3) {
-        componentsArr.push(<AMatches aid=a_arr[i], aname = a_arr[i+1], anum = a_arr[i+2] />);
+    for (let i = 0; i < cnt; i++) {
+        componentsArr.push(<AMatches cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} />);
     }
 
     return (

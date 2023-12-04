@@ -1,5 +1,5 @@
 import React from 'react'
-import AnsShort from './AnsShort';
+import AShort from './AShort';
 
 export default function QShort({ qname }) {
     
@@ -15,7 +15,7 @@ export default function QShort({ qname }) {
                     <p className="questiontext">{qname}</p>
                     <br/>
 
-                    <AnsShort />
+                    <AShort />
                 <br/><br/>
 
             </div>

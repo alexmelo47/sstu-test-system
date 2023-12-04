@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 
 export default function AMatches({ aid, aname, anum }) {
     
@@ -10,7 +9,7 @@ export default function AMatches({ aid, aname, anum }) {
 
         <div>
             <label>Создать стиль ячейки - &nbsp;</label>
-            <select>
+            <select value={anum}>
                 <option value="2">2</option>
                 <option value="1">1</option>
                 <option value="4">4</option>

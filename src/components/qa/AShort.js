@@ -5,7 +5,7 @@ export default function AnsShort() {
         <ul className="shortanswer/numerical">
             <li>
                 <label className="accesshide" for="">Ответ</label>
-                <input id="" name="" type="text" />
+                <input id="1" name="answer-input" type="text" />
             </li>
         </ul>
 

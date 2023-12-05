@@ -51,16 +51,24 @@ export default function Header() {
     }
 
     const handletst = () => {
-        axios.get(baseURL + '/tests', //{
-       //     headers: {
-         //       "Accept" : "*/*",
-           //     "Access-Control-Allow-Origin": "*"
-            //}
-        /*}*/)
+    //    axios.get(baseURL + '/tests', {
+    //        headers: {
+    //            "Accept" : "*/*",
+    //           "Access-Control-Allow-Origin": "*"
+    //        }
+    //    })
+    //        .then(function (response) {
+    //            console.log(response);
+    //        })//axios.defaults.headers.common["Access-Control-Allow-Origin"] = `*`;
+    //     .catch(err => console.log(err));
+
+        //localStorage.setItem("session_id", response.data.id)
+        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
             .then(function (response) {
                 console.log(response);
-            })//axios.defaults.headers.common["Access-Control-Allow-Origin"] = `*`;
+            })
             .catch(err => console.log(err));
+
         setOpen(false);
     }
 

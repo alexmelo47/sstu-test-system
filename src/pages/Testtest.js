@@ -17,7 +17,7 @@ const Testtest = () => {
         const Payload = {
             "testId": testid
         }
-        console.log(Payload);
+        //console.log(Payload);
         axios.post(baseURL + '/sessions', Payload)
             .then(function (response) {
                 console.log(response);
@@ -27,15 +27,13 @@ const Testtest = () => {
                 //console.log(response.data.item);
             })
             .catch(err => console.log(err));
-        
     };
 
     function handlePrev() {
-
+        
     }
 
-    function handleNext() {
-
+    function prepPayload() {
         let answerload, Payload;
 
         if (question.type === "MULTIPLE_CHOICE") {
@@ -89,6 +87,18 @@ const Testtest = () => {
                 "answerIds": answerload
             }
         }
+
+        if (answerload === undefined) {//не отправляем ничего, просто переход
+            return "DONOTSEND";
+        }
+        else {
+            return Payload;
+        }
+    }
+
+    function handleNext() {
+
+        let Payload = prepPayload();
         
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + localStorage.getItem("question_id") + '/answer';
         console.log(url);
@@ -123,6 +133,7 @@ const Testtest = () => {
             })
             .catch(err => console.log(err));
     }
+
     //add MATCHING type and handle it
     return (
         <main>

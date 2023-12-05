@@ -43,7 +43,7 @@ const Testtest = () => {
 
             for (let i = 0; i < chosen_radio.length; i++) {
                 if (chosen_radio[i].checked) {
-                    answerload = chosen_radio[i].value;
+                    answerload = Number(chosen_radio[i].value);
                 }
             }
 
@@ -57,7 +57,7 @@ const Testtest = () => {
 
             for (let i = 0; i < chosen_boxes.length; i++) {
                 if (chosen_boxes[i].checked) {
-                    answerload.push(chosen_boxes[i].value);
+                    answerload.push(Number(chosen_boxes[i].value));
                 }
             }
 
@@ -65,7 +65,13 @@ const Testtest = () => {
                 "answerIds": answerload
             }
         }
-        else if (question.type === "TEXT" || question.type === "NUMBER") {
+        else if (question.type === "NUMBER") {
+            answerload = parseFloat(document.getElementById("AnsShort").value);
+            Payload = {
+                "answer": answerload
+            }
+        }
+        else if (question.type === "TEXT") {
             answerload = document.getElementById("AnsShort").value;
             Payload = {
                 "answer": answerload
@@ -76,7 +82,7 @@ const Testtest = () => {
             let chosen_order = document.getElementsByClassName("orderboxes");
 
             for (let i = 0; i < chosen_order.length; i++) {
-                answerload.push(chosen_order[i].value);
+                answerload.push(Number(chosen_order[i].value));
             }
 
             Payload = {

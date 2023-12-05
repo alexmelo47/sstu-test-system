@@ -21,7 +21,9 @@ export default function QMulti_radio({ qname, cnt, a_arr}) {
                     </span>
                 </p><br/><br/>
                 
-                <div><ul class="multichoice">{componentsArr}</ul></div>      
+                <div>
+                    <ul className="multichoice">{componentsArr}</ul>
+                </div>      
 
             </div>
         </div>

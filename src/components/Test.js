@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Test = (props) => {
+const Test = ({ tid, name, status, method }) => {
     return (
-        <div>{props.tid} : {props.name}</div>
+        <div>{tid} | {name} | {status} | {method} </div>
     )
 } 
 

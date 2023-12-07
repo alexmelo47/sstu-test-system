@@ -31,7 +31,7 @@ const Tests = () => {
               
                   {tests &&
                     tests.map(test => (
-                        <Test key={test.id} tid={test.id} name={test.name} />
+                        <Test tid={test.id} name={test.name} status={test.status} method={test.method} />
                     ))   
                   }
                 </div>

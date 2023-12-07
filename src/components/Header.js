@@ -63,13 +63,13 @@ export default function Header() {
     //     .catch(err => console.log(err));
 
         //localStorage.setItem("session_id", response.data.id)
-        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(err => console.log(err));
-
-        setOpen(false);
+    //    axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
+    //        .then(function (response) {
+    //            console.log(response);
+    //        })
+    //        .catch(err => console.log(err));
+    //
+    //    setOpen(false);
     }
 
   return (

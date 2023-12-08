@@ -1,9 +1,21 @@
 import React from 'react';
 
 const Test = (props) => {
+    if (props.status === 1){
     return(
-        <div>{props.name}</div>
+        <ul className="test-list examinational"><li>{props.name}</li><li>{props.method}</li><li>{props.status}</li><li><button className="open-test">Открыть тест</button></li></ul>
     )
+    }
+    if (props.status === 2){
+    return(
+        <ul className="test-list training"><li>{props.name}</li><li>{props.method}</li><li>{props.status}</li><li><button className="open-test">Открыть тест</button></li></ul>
+        )
+    }
+    if (props.status === 3){
+    return(
+        <ul className="test-list debugging"><li>{props.name}</li><li>{props.method}</li><li>{props.status}</li><li><button className="open-test">Открыть тест</button></li></ul>
+        )
+    }
 } 
 
 export default Test

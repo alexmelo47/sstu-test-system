@@ -14,17 +14,28 @@ import Home from '../pages/Home';
 import Tests from '../pages/Tests';
 import Preview from '../pages/Preview';
 import Attestation from '../pages/Attestation';
+import ActiveTest from '../pages/ActiveTest';
+import Result from '../pages/Result';
+import Guid from '../pages/Guid';
 
 export default function Header() {
 
-    /* авторизация через модальное окно, пока без связи с сервером */ 
-  const[open, setOpen] = React.useState(false);
+  /* авторизация через модальное окно, пока без связи с сервером */ 
 
+  const[open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   }
   const handleClose = () => {
     setOpen(false);
+  }
+
+  const[open2, setOpenRemind] = React.useState(false);
+  const handleClickOpenRemind = () => {
+    setOpenRemind(true);
+  }
+  const handleCloseRemind = () => {
+    setOpenRemind(false);
   }
 
   return (
@@ -64,8 +75,28 @@ export default function Header() {
                                 />
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">Закрыть</Button>
+                                <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
+                            </DialogActions>
+                            <DialogActions>
                                 <Button onClick={handleClose} color="primary">Авторизация</Button>
+                            </DialogActions>
+                        </Dialog>
+
+                        <Dialog open={open2} onClose={handleCloseRemind} aria-aria-labelledby="reminder">
+                           <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
+                                <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Почта"
+                                type="email"
+                                fullWidth
+                                />
+                            </DialogContent>                      
+                            <DialogActions>
+                                <Button onClick={handleCloseRemind} color="primary">Напомнить данные</Button>
                             </DialogActions>
                         </Dialog>
 
@@ -81,6 +112,9 @@ export default function Header() {
             <Route exact path="/tests" element={<Tests/>} />
             <Route exact path="/preview" element={<Preview/>} />
             <Route exact path="/attestation" element={<Attestation/>} />
+            <Route exact path="/activetest" element={<ActiveTest/>} />
+            <Route exact path="/Result" element={<Result/>} />
+            <Route exact path="/Guid" element={<Guid/>} />
         </Routes>
     </Router>
 

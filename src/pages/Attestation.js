@@ -1,8 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, useState} from 'react'
 import axios from 'axios'
 
-export default class Attestation extends Component {
-    render() {
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
+
+export default function Attestation() {
+
+        
+    const[open, setOpen] = React.useState(false);
+    const handleClickOpenWarn = () => {
+      setOpen(true);
+    }
+    const handleClose = () => {
+      setOpen(false);
+    }
+
     return (
         /* 
         Страница с примерами визуализации разных типов вопросов: на 1 вариант ответа, 
@@ -12,9 +28,23 @@ export default class Attestation extends Component {
         и выбор правильного порядка 
         */
         <main>
+            <input className="btn-fin" type="submit" value="Завершить тестирование"/>
         <div className="content-block">
             <fieldset>
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
+
+                <a className="btn btn-1" onClick={handleClickOpenWarn}> &nbsp;Предупреждение&nbsp; </a>
+                        <Dialog open={open} onClose={handleClose} aria-aria-labelledby="warning">
+                           <DialogTitle id="warning">Предупреждение</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите продолжить?</DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} color="primary">Да</Button>
+                                <Button onClick={handleClose} color="primary">Нет</Button>
+                            </DialogActions>
+                        </Dialog>
+
                 <div className="question">
                     <br/>Microsoft Office Word это ... <br/><br/>
                 </div>
@@ -276,5 +306,5 @@ export default class Attestation extends Component {
         </div>
     </main>
     )
-    }
+
 }

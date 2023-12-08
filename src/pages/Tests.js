@@ -31,14 +31,14 @@ const Tests = () => {
               
                   {tests &&
                     tests.map(test=>(
-                        <Test key={test.id} name={test.name}/>
+                        <Test key={test.id} name={test.name} status={test.status} method={test.method}/>
                     ))   
                   }
                 </div>
             </div>
 
             <div><Link to="/preview/">Информатика 2 курс</Link></div> 
-
+            <div><button className="open-test">Открыть тест</button></div>
         </div>
     </main>
     )

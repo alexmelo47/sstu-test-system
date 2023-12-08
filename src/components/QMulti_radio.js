@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 export default function QMulti_radio({ qname, cnt, a_arr}) {
-    
     let componentsArr = [];
     for (let i = 0; i < cnt*2; i += 2) {
         componentsArr.push(<AMulti_radio aid = a_arr[i], aname = a_arr[i+1] />);

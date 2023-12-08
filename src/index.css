@@ -196,7 +196,7 @@ main {
     text-align: center;
     width: 130px;
     border-radius:40px;
-    background: #fff;
+    background: #8ef89c;
     border: 2px solid green;
     color:green;
     letter-spacing:1px;
@@ -215,11 +215,14 @@ main {
 }
 
 .test-list {
-    width: 90%;
-    height: 40px;
+    width: 100%;
+    height: 45px;
+    border-radius:10px;
+    margin: 3px;
     display: table;
     table-layout: fixed;
     border-collapse: collapse;
+    font-weight:bold;  
 }
 
 .test-list li {

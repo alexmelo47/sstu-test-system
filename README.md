@@ -1,12 +1,4 @@
-dev ветка
-!!
-название ветки изменено, измените и у себя командами гита
-!!!!
-git branch -m auth dev
-git fetch origin
-git branch -u origin/dev dev
-git remote set-head origin -a
-!!!!
+Основная ветка, для запуска требуется Node.js
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

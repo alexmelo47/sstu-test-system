@@ -18,4 +18,3 @@ export default App;
 
 //cd sstu-test-system
 //npm start
-//

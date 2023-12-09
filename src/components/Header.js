@@ -22,6 +22,7 @@ export default function Header() {
 
     /* авторизация через модальное окно */ 
     const [open, setOpen] = React.useState(false);
+    const [open2, setOpenRemind] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
     const handleClickOpen = () => {
@@ -30,16 +31,15 @@ export default function Header() {
     const handleClose = () => {
         setOpen(false);
     }
+
+    const handleClickOpenRemind = () => {
+        setOpenRemind(true);
+    }
+    const handleCloseRemind = () => {
+        setOpenRemind(false);
+    }
+
     const handleAuth = () => {
-
-  const[open2, setOpenRemind] = React.useState(false);
-  const handleClickOpenRemind = () => {
-    setOpenRemind(true);
-  }
-  const handleCloseRemind = () => {
-    setOpenRemind(false);
-  }
-
         //auth development
         const loginPayload = {
             "login": document.getElementById("name").value,
@@ -59,110 +59,84 @@ export default function Header() {
         setOpen(false);
     }
 
-    const handletst = () => {
-    //    axios.get(baseURL + '/tests', {
-    //        headers: {
-    //            "Accept" : "*/*",
-    //           "Access-Control-Allow-Origin": "*"
-    //        }
-    //    })
-    //        .then(function (response) {
-    //            console.log(response);
-    //        })//axios.defaults.headers.common["Access-Control-Allow-Origin"] = `*`;
-    //     .catch(err => console.log(err));
-
-        //localStorage.setItem("session_id", response.data.id)
-    //    axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
-    //        .then(function (response) {
-    //            console.log(response);
-    //        })
-    //        .catch(err => console.log(err));
-    //
-    //    setOpen(false);
-    }
-
   return (
     <>
 
-    <header>
-        <div className="container">
-            <div className="header-inner">
+        <header>
+            <div className="container">
+                <div className="header-inner">
 
-                <div className="logo"><img src='./img/logo_sstu.png' height="30px" alt="logo"/>&nbsp;Система тестирования&nbsp;</div>
+                    <div className="logo"><img src='./img/logo_sstu.png' height="30px" alt="logo"/>&nbsp;Система тестирования&nbsp;</div>
 
-                <div>
-                    <nav>
-                        <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                        <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
+                    <div>
+                        <nav>
+                            <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
+                            <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                        <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
-                        <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
-                           <DialogTitle id="authorization">Авторизация</DialogTitle> 
-                            <DialogContent>
-                                <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
-                                <TextField
+                            <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
+                            <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
+                               <DialogTitle id="authorization">Авторизация</DialogTitle> 
+                                <DialogContent>
+                                    <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name"
+                                        label="Логин"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="pass"
+                                        label="Пароль"
+                                        type="password"
+                                        fullWidth
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary">Закрыть</Button>
+                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>
+                                    <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
+                                </DialogActions>
+                            </Dialog>
+
+                            <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
+                               <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
+                                <DialogContent>
+                                    <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
+                                    <TextField
                                     autoFocus
                                     margin="dense"
                                     id="name"
-                                    label="Логин"
-                                    type="text"
+                                    label="Почта"
+                                    type="email"
                                     fullWidth
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="pass"
-                                    label="Пароль"
-                                    type="password"
-                                    fullWidth
-                                />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose} color="primary">Закрыть</Button>
-                                <Button onClick={handleAuth} color="primary">Авторизация</Button>
-                                <Button onClick={handletst} color="primary">get disciplines</Button>
-                                <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
-                            </DialogActions>
-                            <DialogActions>
-                                <Button onClick={handleClose} color="primary">Авторизация</Button>
-                            </DialogActions>
-                        </Dialog>
+                                    />
+                                </DialogContent>                      
+                                <DialogActions>
+                                    <Button onClick={handleCloseRemind} color="primary">Напомнить данные</Button>
+                                </DialogActions>
+                            </Dialog>
 
-                        <Dialog open={open2} onClose={handleCloseRemind} aria-aria-labelledby="reminder">
-                           <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
-                            <DialogContent>
-                                <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
-                                <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Почта"
-                                type="email"
-                                fullWidth
-                                />
-                            </DialogContent>                      
-                            <DialogActions>
-                                <Button onClick={handleCloseRemind} color="primary">Напомнить данные</Button>
-                            </DialogActions>
-                        </Dialog>
-
-                    </nav>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <Router>
-        <Routes>
-            <Route exact path="/" element={<Home/>} />
-            <Route exact path="/tests" element={<Tests/>} />
-            <Route exact path="/preview" element={<Preview/>} />
-            <Route exact path="/attestation" element={<Attestation/>} />
-            <Route exact path="/activetest" element={<ActiveTest/>} />
-            <Route exact path="/Result" element={<Result/>} />
-            <Route exact path="/Guid" element={<Guid/>} />
-        </Routes>
-    </Router>
+        <Router>
+            <Routes>
+                <Route exact path="/" element={<Home/>} />
+                <Route exact path="/tests" element={<Tests/>} />
+                <Route exact path="/preview" element={<Preview/>} />
+                <Route exact path="/attestation" element={<Attestation/>} />
+                <Route exact path="/activetest" element={<ActiveTest/>} />
+                <Route exact path="/Result" element={<Result/>} />
+                <Route exact path="/Guid" element={<Guid/>} />
+            </Routes>
+        </Router>
 
     </>
   )

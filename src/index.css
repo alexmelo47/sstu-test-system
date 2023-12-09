@@ -85,10 +85,16 @@ footer {
     left: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between
 }
 
 footer p {
     margin: 0;
+}
+
+.info:after {
+    font-family: FontAwesome;
+    content:"\f05a";
 }
 
 h1 {
@@ -196,9 +202,9 @@ main {
     text-align: center;
     width: 130px;
     border-radius:40px;
-    background: #8ef89c;
+    background: green;
     border: 2px solid green;
-    color:green;
+    color:white;
     letter-spacing:1px;
     font-size: 12px;    
     font-weight:bold;    
@@ -206,8 +212,8 @@ main {
     transition: all 0.25s ease;
     }    
 .open-test:hover {
-    color:white;
-    background: green;
+    color:green;
+    background: white;
 }
 .open-test:active {
     letter-spacing: 2px ;
@@ -217,11 +223,9 @@ main {
 .test-list {
     width: 100%;
     height: 45px;
-    border-radius:10px;
     margin: 3px;
     display: table;
     table-layout: fixed;
-    border-collapse: collapse;
     font-weight:bold;  
 }
 
@@ -233,9 +237,11 @@ main {
 }
 
 .examinational {
-    background-color: #ff9494; 
+    border: 2px solid green;
+    border-radius:10px;
 }
 
+/*
 .training {
     background-color: #8affbd; 
 }

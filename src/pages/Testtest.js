@@ -11,14 +11,17 @@ const baseURL = "https://maile.fita.cc";
 
 const Testtest = () => {
 
-    let testid = 4;//---> localStorage.getItem("tid")
+    let testid = 1;//---> localStorage.getItem("tid")
     const [question, setQuestion] = useState([]);
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
     const [loaded, set_loaded] = useState(false);
     const [is_adaptive_test] = useState(false);//don't forget to clen up all localstorage items ---> localStorage.getItem("adaptive")
-    //let q_box = [];
+    const [is_last, set_last] = useState(false);
+    const [is_first, set_first] = useState(true);
 
+    //question_list[0].id !== Number(localStorage.getItem("question_id"))
+    //question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))
     function handleFirst() {
         
         const Payload = {
@@ -41,12 +44,17 @@ const Testtest = () => {
             .then(function (response) {
                 console.log(response);
                 setQuestionList(response.data);
+                set_loaded(!loaded);
+                localStorage.setItem("question_list", question_list);
+                if (response.data.length === 1) {
+                    set_last(!is_last);
+                }
              //   for (var i = 0; i < response.data.length; i++) {
              //       q_box.push(<Button variant="outlined">{response.data[i].id}</Button>);
              //   }
-                set_loaded(!loaded);
             })
             .catch(err => console.log(err));
+
     };
 
     function prepPayload() {
@@ -104,7 +112,7 @@ const Testtest = () => {
             }
         }
 
-        if (answerload === undefined) {//не отправляем ничего, просто переход
+        if (answerload === undefined || isNaN(answerload) || answerload.length === 0) {//не отправляем ничего, просто переход
             return "DONOTSEND";
         }
         else {
@@ -139,8 +147,8 @@ const Testtest = () => {
         axios.get(url)
             .then(function (response) {
                 console.log(response);
-                localStorage.setItem("question_id", response.data.item.id);
-                setQuestion(response.data.item);
+                localStorage.setItem("question_id", response.data.id);
+                setQuestion(response.data);
             })
             .catch(err => console.log(err));
 
@@ -148,14 +156,38 @@ const Testtest = () => {
 
     function handleNext() {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
-            handleSendOne(question_list.findIndex((elem) => { return elem === Number(localStorage.getItem("question_id")) }) + 1);
+            for (var i = 0; i < question_list.length; i++) {
+                if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
+                    if (question_list[question_list.length - 1].id === question_list[i + 1].id) {
+                        set_last(!is_last);
+                    }
+                    if (is_first) {
+                        set_first(!is_first);
+                    }
+                    handleSendOne(question_list[i + 1].id);
+                }
+            }
         }
     }
     function handlePrev() {
         if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
-            handleSendOne(question_list.findIndex((elem) => { return elem === Number(localStorage.getItem("question_id")) }) - 1);
+            for (var i = 0; i < question_list.length; i++) {
+                if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
+                    if (question_list[0].id === question_list[i - 1].id) {
+                        set_first(!is_first);
+                    }
+                    if (is_last) {
+                        set_last(!is_last);
+                    }
+                    handleSendOne(question_list[i - 1].id);
+                }
+            }
         }
     }
+
+   // function handleMenu(elem) {
+   //
+   // }
 
     function handleSendAll() {
 
@@ -173,18 +205,19 @@ const Testtest = () => {
         <main>
             <div id="test-body" className="content-block">
 
-                {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} q_arr={question_list} />}
+                {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
 
                 {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                 {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                 {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} />}
                 {question.type === "SORTING" && <QMatches qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
+                {question.type === "MATCHING" && <input value="MATCHING" type="submit" />}
 
                 <div className="quest-btn">
                     {!started && <input onClick={handleFirst} className="btn btn-2" type="submit" value="Начать тест" />}
-                    {started && !is_adaptive_test && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий (NO)" />}
-                    {started && <input onClick={handleSendAll} className="btn btn-1" type="submit" value="Подтвердить" />}
-                    {started && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
+                    {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий" />}
+                    {started && !is_adaptive_test && <input onClick={handleSendAll} className="btn btn-1" type="submit" value="Подтвердить" />}
+                    {started && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
                 </div>
             </div>
         </main>

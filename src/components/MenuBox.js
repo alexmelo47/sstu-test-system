@@ -1,11 +1,11 @@
 import React from 'react'
-import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button"
 
-export default function MenuBox({ cnt, q_arr }) {
+export default function MenuBox({ cnt }) {
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<Button variant="outlined">{ q_arr[i].id }</Button >);
+        componentsArr.push(<Button className="menubox" variant="outlined">{i + 1}</Button >);
     }
 
     return (

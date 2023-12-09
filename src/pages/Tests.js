@@ -12,7 +12,8 @@ const Tests = () => {
   function getTests(){                                          /* Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты */
     setButtonClick(!buttonClick)
     if(buttonClick){
-      axios.get(baseURL+"/tests").then((tests)=>{
+        axios.get(baseURL + "/tests").then((tests) => {
+            console.log(tests);
         setTests(tests.data)
       })
     }else{

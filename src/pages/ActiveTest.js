@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
 import QShort from '../components/qa/QShort'
@@ -28,10 +28,34 @@ const ActiveTest = () => {
     const [is_last, set_last] = useState(false);
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
+
+    /*const [menustate, set_menustate] = useState(0);
+    useEffect(() => {
+        if (loaded) {
+            let id = question_list[menustate].id;
+            handleSendOne(id);
+        }
+        return () => {};
+    }, [menustate]);*/
     
     const [open, setOpen] = useState(false);
     const handleClickOpenWarn = () => {
-        setOpen(true);
+        let unanswered = false;
+        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//check answered
+            .then(function (response) {
+                console.log(response);
+                setQuestionList(response.data);
+            })
+            .catch(err => console.log(err));
+        for (var i = 0; i < question_list.length; i++) {
+            if (!question_list[i].answered) {
+                unanswered = true;
+                setOpen(true);
+            }
+        }
+        if (!unanswered) {
+            handleSendAll();
+        }
     }
     const handleClose = () => {
         setOpen(false);
@@ -106,11 +130,7 @@ const ActiveTest = () => {
                 }
             }
         }
-        else if (question.type === "NUMBER") {
-            answerload = parseFloat(document.getElementById("AnsShort").value);
-            Payload.text = answerload;
-        }
-        else if (question.type === "TEXT") {
+        else if (question.type === "TEXT" || question.type === "NUMBER") {
             answerload = document.getElementById("AnsShort").value;
             Payload.text = answerload;
         }
@@ -124,7 +144,7 @@ const ActiveTest = () => {
             }
         }
 
-        if (answerload === undefined || isNaN(answerload) || answerload.length === 0) {//не отправляем ничего, просто переход
+        if (answerload === undefined || answerload.length === 0) {//не отправляем ничего, просто переход
             return "DONOTSEND";
         }
         else {
@@ -247,7 +267,7 @@ const ActiveTest = () => {
 
                     {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} />}
+                    {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} />}
                     {question.type === "SORTING" && <QMatches qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {question.type === "MATCHING" && <input value="MATCHING" type="submit" />}
 

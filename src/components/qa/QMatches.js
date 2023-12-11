@@ -1,7 +1,7 @@
 import React from 'react'
 import AMatches from './AMatches'
 
-export default function QMatches({ qname, cnt, a_arr }) {
+export default function QMatches({ qname, cnt, a_arr }) {//добавить задание выбранных раньше значений
     
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {

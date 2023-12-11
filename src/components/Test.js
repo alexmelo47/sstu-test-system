@@ -9,7 +9,7 @@ const Test = ({ tid, name, status, method }) => {
             <li>{method}</li>
             <li>{status}</li>
             <li>
-                <button className="open-test">Открыть тест</button>
+                <button onClick={() => { localStorage.setItem("tid", tid) } } className="open-test">Открыть тест</button>
             </li>
         </ul>
     )

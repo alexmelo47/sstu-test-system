@@ -19,7 +19,7 @@ const baseURL = "https://maile.fita.cc";
 
 const ActiveTest = () => {
 
-    let testid = 1;//---> localStorage.getItem("tid")
+    let testid = Number(localStorage.getItem("tid"));
     const [question, setQuestion] = useState([]);
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
@@ -58,24 +58,24 @@ const ActiveTest = () => {
                 setQuestion(response.data.item);
                 set_started(!started);
                 //console.log(response.data.item);
+
+                    axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
+                        .then(function (response) {
+                            console.log(response);
+                            setQuestionList(response.data);
+                            set_loaded(!loaded);
+                            localStorage.setItem("question_list", question_list);
+                            if (response.data.length === 1) {
+                                set_last(!is_last);
+                            }
+                            //   for (var i = 0; i < response.data.length; i++) {
+                            //       q_box.push(<Button variant="outlined">{response.data[i].id}</Button>);
+                            //   }
+                        })
+                        .catch(err => console.log(err));
+
             })
             .catch(err => console.log(err));
-
-        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
-            .then(function (response) {
-                console.log(response);
-                setQuestionList(response.data);
-                set_loaded(!loaded);
-                localStorage.setItem("question_list", question_list);
-                if (response.data.length === 1) {
-                    set_last(!is_last);
-                }
-             //   for (var i = 0; i < response.data.length; i++) {
-             //       q_box.push(<Button variant="outlined">{response.data[i].id}</Button>);
-             //   }
-            })
-            .catch(err => console.log(err));
-
     };
 
     function prepPayload() {
@@ -207,6 +207,13 @@ const ActiveTest = () => {
         axios.patch(url)
             .then(function (response) {
                 console.log(response);
+                localStorage.removeItem("session_id");
+                localStorage.removeItem("question_id");
+                localStorage.removeItem("question_list");
+                localStorage.removeItem("tid");
+                localStorage.setItem("fullTime", response.data.fullTime);
+                localStorage.setItem("grade", response.data.grade);
+                localStorage.setItem("test_name", response.data.test.name);
                 set_finished(!finished);
             })
             .catch(err => console.log(err));

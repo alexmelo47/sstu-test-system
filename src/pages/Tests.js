@@ -8,6 +8,9 @@ const baseURL ="https://maile.fita.cc"
 const Tests = () => {
   const [tests, setTests] = useState([]);
   const [buttonClick, setButtonClick] = useState(true); 
+  localStorage.removeItem("fullTime");
+  localStorage.removeItem("grade");
+  localStorage.removeItem("test_name");
 
   function getTests(){  // Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты
     setButtonClick(!buttonClick)

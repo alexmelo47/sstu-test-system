@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 export default function AnsShort(props) {
     const [input, setInput] = useState(props?.value ?? '');
     return (
+        /*
+        Компонент ответа на вопрос с ручным вводом ответа 
+        */
         <ul className="shortanswer/numerical">
             <li>
                 <label className="accesshide" htmlFor="AnsShort">Ответ</label>

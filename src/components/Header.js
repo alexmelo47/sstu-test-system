@@ -56,7 +56,7 @@ export default function Header() {
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
             .catch(err => console.log(err));
-        setOpen(false);
+        setOpen(false);//<img src='./img/logo_sstu.png' height="30px" alt="logo"/>
     }
 
   return (
@@ -66,7 +66,7 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                    <div className="logo"><img src='./img/logo_sstu.png' height="30px" alt="logo"/>&nbsp;Система тестирования&nbsp;</div>
+                    <div className="logo">&nbsp;Система тестирования&nbsp;ТестИнтел</div>
 
                     <div>
                         <nav>

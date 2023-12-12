@@ -23,7 +23,7 @@ const Tests = () => {
       setTests([])
     }
   }
- 
+ //Название Дисциплина Тип Время_до_окончания
     return (
         <main>
             <div className="content-block">

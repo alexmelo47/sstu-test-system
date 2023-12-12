@@ -1,6 +1,8 @@
 import React, { Component, useState} from 'react'
-import axios from 'axios'
 import QShort from '../components/qa/QShort'
+import QMultiRadio from '../components/qa/QMultiRadio'
+import QMultiCheckbox from '../components/qa/QMultiCheckbox'
+import QSorting from '../components/qa/QSorting'
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -20,13 +22,41 @@ export default function Attestation() {
       setOpen(false);
     }
 
+    //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
+    //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
+    //aid_arr={aids} aname={a_arr[i].answer} anum={a_arr[i].number}
+    let answersR, answersC, answersS;//------------------------------------------->add matching
+    answersR = answersC = answersS = [];
+
+    let aidar = [];
+    for (var i = 0; i < 3; i++) {
+        aidar.push(i);
+    }
+
+    for (var i = 0; i < 3; i++) {
+        let idrcs = i + "r";
+        answersR.push({ id: idrcs, answer: "answer", selected: 1 });
+        idrcs = i + "c";
+        answersC.push({ id: idrcs, answer: "answer", selected: 1 });
+        idrcs = i + "s";
+        answersS.push({ id: idrcs, answer: "answer", number: 1 });
+    }
+
     return (
         /* 
-        Страница с примерами визуализации разных типов вопросов: на 1 вариант ответа, 
-        несколько вариантов ответа, 
-        ввод ответа вручную, 
-        на соответствие 
-        и выбор правильного порядка 
+        Страница с примерами визуализации разных типов вопросов: 
+            1 вариант ответа(1)
+            несколько вариантов ответа (1)
+            ввод ответа вручную (1)
+            на соответствие (1)
+            на соответствие (2)
+            1 вариант ответа(2)
+            несколько вариантов ответа (2)
+            ввод ответа вручную (2)
+            выбор правильного порядка 
+            ввод ответа вручную (3)
+
+            ТЕСТОВАЯ СЕКЦИЯ КОМПОНЕНТ
         */
         <main>
             <input className="btn-fin" type="submit" value="Завершить тестирование"/>
@@ -291,10 +321,14 @@ export default function Attestation() {
                 </div>
 
 
-
-
+                    <br /><br /><p className="questiontext">
+                        <span><p>ТЕСТ КОМПОНЕНТОВ</p></span>
+                    </p><br /><br />
+                    
                     <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" />
-
+                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} />
+                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} />
+                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} />
 
             </fieldset>
 

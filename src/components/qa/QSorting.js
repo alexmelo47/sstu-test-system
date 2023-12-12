@@ -1,16 +1,20 @@
 import React from 'react'
-import AMatches from './AMatches'
+import ASorting from './ASorting'
 
-export default function QMatches({ qname, cnt, a_arr }) {//добавить задание выбранных раньше значений
+export default function QSorting({ qname, cnt, a_arr }) {
     
     let componentsArr = [];
+    let aids = [];
+    for (var i = 0; i < cnt; i++) {
+        aids.push(a_arr[i].id);
+    }
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<AMatches cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} />);
+        componentsArr.push(<ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={a_arr[i].number} />);
     }
 
     return (
         /* 
-        Компонент условия вопроса с несколькими вариантами ответа
+        Компонент условия вопроса с сортировкой
         */
 
         <div>

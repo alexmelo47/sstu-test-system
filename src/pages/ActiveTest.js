@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, /*useEffect*/ } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
 import QShort from '../components/qa/QShort'
-import QMatches from '../components/qa/QMatches'
+import QSorting from '../components/qa/QSorting'
+import QMatching from '../components/qa/QMatching'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
-//import Button from "@material-ui/core/Button";
 import MenuBox from '../components/MenuBox'
 
 import Dialog from "@material-ui/core/Dialog";
@@ -24,10 +24,16 @@ const ActiveTest = () => {
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
     const [loaded, set_loaded] = useState(false);
-    const [is_adaptive_test] = useState(false);//don't forget to clen up all localstorage items ---> localStorage.getItem("adaptive")
+    const [is_adaptive_test] = useState(false);                 //don't forget to clen up all localstorage items ---> localStorage.getItem("adaptive")
     const [is_last, set_last] = useState(false);
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
+
+   // let menubtns = [];
+   //
+   // for (var i = 0; i < 100; i++) {
+   //     menubtns.push(<Button onClick={() => { handleSendOne(i) } } className="menubox" variant="outlined">{i + 1}</Button >);//------>maybe will work somehow
+   // }
 
     /*const [menustate, set_menustate] = useState(0);
     useEffect(() => {
@@ -140,7 +146,18 @@ const ActiveTest = () => {
 
             for (let i = 0; i < chosen_order.length; i++) {
                 answerload.push(Number(chosen_order[i].value));
+                console.log(chosen_order[i].value);//------------------------------------------------------>debug if all works
                 Payload.answer.push({ "id": Number(chosen_order[i].value) });
+            }
+        }
+        else if (question.type === "MATCHING") {
+            answerload = [];
+            let chosen_matches = document.getElementsByClassName("matchboxes");
+
+            for (let i = 0; i < chosen_matches.length; i++) {
+                answerload.push(Number(chosen_matches[i].value));
+                console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
+                Payload.answer.push({ "id": Number(chosen_matches[i].value) });
             }
         }
 
@@ -152,7 +169,7 @@ const ActiveTest = () => {
         }
     }
 
-    function handleSendOne(question_id) {//move to question
+    function handleSendOne(question_id) {//move to question by id
 
         //send answer/don't send
         let Payload = prepPayload();
@@ -239,8 +256,7 @@ const ActiveTest = () => {
             .catch(err => console.log(err));
         
     }
-
-    //add MATCHING type and handle it {started && !is_adaptive_test && <input onClick={handleSendAll} className="btn btn-1" type="submit" value="Подтвердить" />}
+    
     if (finished) {
         return <Navigate to="/result/" />
     }
@@ -268,8 +284,8 @@ const ActiveTest = () => {
                     {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} />}
-                    {question.type === "SORTING" && <QMatches qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {question.type === "MATCHING" && <input value="MATCHING" type="submit" />}
+                    {question.type === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
+                    {question.type === "MATCHING" && <QMatching qname={question.question} a_arr={question.answers} />}
 
                 </fieldset>
 

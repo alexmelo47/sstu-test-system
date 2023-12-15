@@ -95,10 +95,13 @@ export default function Header() {
                                         fullWidth
                                     />
                                 </DialogContent>
+
                                 <DialogActions>
-                                    <Button onClick={handleClose} color="primary">Закрыть</Button>
-                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>
                                     <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
+                                </DialogActions>
+
+                                <DialogActions>     
+                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>  
                                 </DialogActions>
                             </Dialog>
 

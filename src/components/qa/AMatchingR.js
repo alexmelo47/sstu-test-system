@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ASorting({ cnt, aid_arr, aname, anum }) {
+export default function AMatchingR({ cnt, aid, aid_arr, aname, anum }) {//dev
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
@@ -9,12 +9,12 @@ export default function ASorting({ cnt, aid_arr, aname, anum }) {
     
     return (
         /* 
-        Компонент выбора ответа вопроса с сортировкой
+        Правый компонент(выбора) ответа вопроса с соответствием
         */
 
         <div>
             <label>{aname}</label>
-            <select className="orderboxes" defaultValue={anum}>
+            <select className="matchboxes" id={aid} defaultValue={anum}>
                 {componentsArr}
             </select><br/>
             <br/>

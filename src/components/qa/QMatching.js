@@ -1,16 +1,28 @@
 import React from 'react'
-import ASorting from './AMatching'
+import AMatchingL from './AMatchingL'
+import AMatchingR from './AMatchingR'
 
-export default function QMatching({ qname, a_arr }) {//dev
+export default function QMatching({ qname, a_arr, cnt }) {
     
     let componentsArr = [];
-    /*
-    1.вычислить количество левых и правых\выводить подряд все
-    2.учесть порядок и сопоставление id
-    */
-    //for (let i = 0; i < cnt; i++) {
-    //    componentsArr.push(<ASorting cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} />);
-    //}
+    let aids = [];
+    let Lcnt = 0;
+    let i;
+
+    for (i = 0; i < cnt; i++) {
+        if (a_arr[i].type === "L") {
+            aids.push(a_arr[i].id);
+            Lcnt++;
+        }
+    }
+    for (i = 0; i < cnt; i++) {
+        if (a_arr[i].type === "L") {
+            componentsArr.push(<AMatchingL aname={a_arr[i].answer} />);
+        }
+        else {
+            componentsArr.push(<AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} aname={a_arr[i].answer} anum={a_arr[i].number} />);
+        }
+    }
 
     return (
         /* 

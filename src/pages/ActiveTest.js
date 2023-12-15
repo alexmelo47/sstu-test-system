@@ -155,9 +155,15 @@ const ActiveTest = () => {
             let chosen_matches = document.getElementsByClassName("matchboxes");
 
             for (let i = 0; i < chosen_matches.length; i++) {
+
                 answerload.push(Number(chosen_matches[i].value));
                 console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].value) });
+
+                console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
+                answerload.push(Number(chosen_matches[i].id));
+                Payload.answer.push({ "id": Number(chosen_matches[i].id) });
+
             }
         }
 
@@ -285,7 +291,7 @@ const ActiveTest = () => {
                     {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} />}
                     {question.type === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {question.type === "MATCHING" && <QMatching qname={question.question} a_arr={question.answers} />}
+                    {question.type === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
 
                 </fieldset>
 

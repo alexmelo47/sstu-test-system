@@ -1,7 +1,7 @@
 import React from 'react'
 import AShort from './AShort';
 
-export default function QShort({ qname }) {
+export default function QShort({ qname, qa }) {
     
     return (
         /* 
@@ -12,10 +12,10 @@ export default function QShort({ qname }) {
 
             <div className="question">
                 <br/>
-                    <p className="questiontext">{qname}</p>
-                    <br/>
+                <p className="questiontext">{qname}</p>
+                <br/>
 
-                    <AShort />
+                <AShort value={qa} />
                 <br/><br/>
 
             </div>

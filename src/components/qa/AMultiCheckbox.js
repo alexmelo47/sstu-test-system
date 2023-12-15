@@ -4,7 +4,7 @@ export default function AMultiCheckbox({ aid, aname, selected }) {
     
     return (
         /* 
-        Компонент условия вопроса с ручным вводом ответа 
+        Компонент ответа с несколькими правильными вариантами ответа
         */
   
         <div>               

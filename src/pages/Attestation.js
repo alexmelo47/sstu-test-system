@@ -152,7 +152,7 @@ export default function Attestation() {
                 <div className="question">
                     <form>
                         <div>
-                                <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var"/><br/>
+                            <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var"/><br/>
                         </div>
                     </form><br/>
                 </div>
@@ -166,7 +166,7 @@ export default function Attestation() {
                 <div className="question">
                     <form>
                     <div className="dropdown">
-                                <label htmlFor="var_4">MS Word - &nbsp;</label>
+                        <label htmlFor="var_4">MS Word - &nbsp;</label>
                         <input  type="text" list="browsers"/>
                         <datalist id="browsers">
                             <option value="Текстовый редактор"/>
@@ -177,7 +177,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_4">Функция КОРЕНЬ() - &nbsp;</label>
+                        <label htmlFor="var_4">Функция КОРЕНЬ() - &nbsp;</label>
                         <input  type="text" list="browsers"/>
                         <datalist id="browsers">
                             <option value="Текстовый редактор"/>
@@ -188,7 +188,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_4">Объекты WordArt - &nbsp;</label>
+                        <label htmlFor="var_4">Объекты WordArt - &nbsp;</label>
                         <input  type="text" list="browsers"/>
                         <datalist id="browsers">
                             <option value="Текстовый редактор"/>
@@ -199,7 +199,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_4">Функция ОКРУГЛВНИЗ() - &nbsp;</label>
+                        <label htmlFor="var_4">Функция ОКРУГЛВНИЗ() - &nbsp;</label>
                         <input  type="text" list="browsers"/>
                         <datalist id="browsers">
                             <option value="Текстовый редактор"/>
@@ -220,7 +220,7 @@ export default function Attestation() {
                 <div className="question">
                     <form>
                     <div className="dropdown">
-                                <label htmlFor="var_5">Создать стиль ячейки - &nbsp;</label>
+                        <label htmlFor="var_5">Создать стиль ячейки - &nbsp;</label>
                         <input  type="text" list="browsers2"/>
                         <datalist id="browsers2">
                             <option value='1'/>
@@ -231,7 +231,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_5">Выбрать команду Главная - &nbsp;</label>
+                        <label htmlFor="var_5">Выбрать команду Главная - &nbsp;</label>
                         <input  type="text" list="browsers2"/>
                         <datalist id="browsers2">
                             <option value="1"/>
@@ -242,7 +242,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_5">Открыть Стили - &nbsp;</label>
+                        <label htmlFor="var_5">Открыть Стили - &nbsp;</label>
                         <input  type="text" list="browsers2"/>
                         <datalist id="browsers2">
                             <option value="1"/>
@@ -253,7 +253,7 @@ export default function Attestation() {
                     </div><br/>
 
                     <div className="dropdown">
-                                <label htmlFor="var_5">Открыть Стили ячеек - &nbsp;</label>
+                        <label htmlFor="var_5">Открыть Стили ячеек - &nbsp;</label>
                         <input  type="text" list="browsers2"/>
                         <datalist id="browsers2">
                             <option value="1"/>
@@ -302,39 +302,51 @@ export default function Attestation() {
                     <br/><br/>
 
                     <ul className="match">
-                            <label className="accesshide" htmlFor="quest_897580_0">Создать стиль ячейки - &nbsp;</label>
-                            <select id="quest_897580_0" className="select custom-select menuquest_897580_0" name="quest_897580_0">
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                        </select><br/>
-                        
-                            <label className="accesshide" htmlFor="quest_897580_1">Выбрать команду Главная - &nbsp;</label>
-                            <select id="quest_897580_1" className="select custom-select menuquest_897580_1" name="quest_897580_1">
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                        </select><br/>
-                        
-                            <label className="accesshide" htmlFor="quest_897580_2">Открыть Стили - &nbsp;</label>
-                            <select id="quest_897580_2" className="select custom-select menuquest_897580_2" name="quest_897580_2">
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                        </select><br/>
+                        <form>
 
-                        <label className="accesshide" for="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
-                            <select id="quest_897580_3" className="select custom-select menuquest_897580_3" name="quest_897580_3">
+                        <div className="matches">
+                        <label className="accesshide" htmlFor="quest_897580_0">Создать стиль ячейки -&nbsp;</label>
+                        <select id="quest_897580_0" className="select custom-select menuquest_897580_0" name="quest_897580_0">
                             <option value="2">2</option>
                             <option value="1">1</option>
                             <option value="4">4</option>
                             <option value="3">3</option>
-                        </select>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label className="accesshide" htmlFor="quest_897580_1">Выбрать команду Главная - &nbsp;</label>
+                        <select id="quest_897580_1" className="select custom-select menuquest_897580_1" name="quest_897580_1">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label className="accesshide" htmlFor="quest_897580_2">Открыть Стили - &nbsp;</label>
+                        <select id="quest_897580_2" className="select custom-select menuquest_897580_2" name="quest_897580_2">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label className="accesshide" for="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
+                        <select id="quest_897580_3" className="select custom-select menuquest_897580_3" name="quest_897580_3">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+
+                        </form>
                     </ul>
-                    <br/><br/>
+                    <br/>
 
                 </div>
 

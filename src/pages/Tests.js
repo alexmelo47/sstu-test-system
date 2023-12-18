@@ -11,6 +11,7 @@ const Tests = () => {
   localStorage.removeItem("fullTime");
   localStorage.removeItem("grade");
   localStorage.removeItem("test_name");
+  localStorage.removeItem("test_author");
 
   function getTests(){  // Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты
     setButtonClick(!buttonClick)

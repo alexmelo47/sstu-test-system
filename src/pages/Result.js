@@ -6,11 +6,12 @@ export default class Result extends Component {
         let time = localStorage.getItem("fullTime");
         let grade = localStorage.getItem("grade");
         let tname = localStorage.getItem("test_name");
+        let author = localStorage.getItem("test_author");
     return (
         <main>
           <div className="content-preview">
                 <h1>
-                    <i>{tname}(Преп. Иван Иванов)</i>
+                    <i>{tname}(Преп. {author})</i>
                 </h1>
               <span>
                     <br /><br /><i>Ваша оценка:{grade}<br/><br/>

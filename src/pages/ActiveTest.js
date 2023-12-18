@@ -6,7 +6,7 @@ import QSorting from '../components/qa/QSorting'
 import QMatching from '../components/qa/QMatching'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
-import MenuBox from '../components/MenuBox'
+//import MenuBox from '../components/MenuBox'
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -29,6 +29,7 @@ const ActiveTest = () => {
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
 
+   // const [menubtns, set_mb] = useState([]);
    // let menubtns = [];
    //
    // for (var i = 0; i < 100; i++) {
@@ -93,19 +94,28 @@ const ActiveTest = () => {
                         .then(function (response) {
                             console.log(response);
                             setQuestionList(response.data);
-                            set_loaded(!loaded);
                             localStorage.setItem("question_list", question_list);
                             if (response.data.length === 1) {
                                 set_last(!is_last);
                             }
-                            //   for (var i = 0; i < response.data.length; i++) {
-                            //       q_box.push(<Button variant="outlined">{response.data[i].id}</Button>);
-                            //   }
+
+                            //for (let i = 0; i < question_list.length; i++) {
+                            //    set_mb( // Replace the state
+                            //        [ // with a new array
+                            //            ...menubtns, // that contains all the old items
+                            //            <Button variant="outlined" onClick={() => { handleSendOne(question_list[i].id) }}>{i}</Button> // and one new item at the end
+                            //        ]
+                            //    );
+                            //    //menubtns.push(<Button variant="outlined" onClick={() => { handleSendOne(response.data[i].id) }}>{response.data[i].id}</Button>);
+                            //}
+                            set_loaded(!loaded);
+
                         })
                         .catch(err => console.log(err));
 
             })
             .catch(err => console.log(err));
+        setTimeout(() => { } , 400);
     };
 
     function prepPayload() {
@@ -146,7 +156,6 @@ const ActiveTest = () => {
 
             for (let i = 0; i < chosen_order.length; i++) {
                 answerload.push(Number(chosen_order[i].value));
-                console.log(chosen_order[i].value);//------------------------------------------------------>debug if all works
                 Payload.answer.push({ "id": Number(chosen_order[i].value) });
             }
         }
@@ -159,9 +168,9 @@ const ActiveTest = () => {
                 answerload.push(Number(chosen_matches[i].value));
                 console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].value) });
-
-                console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
+                
                 answerload.push(Number(chosen_matches[i].id));
+                console.log(chosen_matches[i].id);//--------------------------------------------------------->debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].id) });
 
             }
@@ -196,6 +205,19 @@ const ActiveTest = () => {
                 .catch(err => console.log(err));
         }
 
+        if (question_list[question_list.length - 1].id === question_id) {//set first\last
+            set_last(true);
+        }
+        else {
+            set_last(false);
+        }
+        if (question_list[0].id === question_id) {
+            set_first(true);
+        }
+        else {
+            set_first(false);
+        }
+
         //load question
         url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
@@ -208,17 +230,10 @@ const ActiveTest = () => {
             .catch(err => console.log(err));
 
     }
-
     function handleNext() {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    if (question_list[question_list.length - 1].id === question_list[i + 1].id) {
-                        set_last(!is_last);
-                    }
-                    if (is_first) {
-                        set_first(!is_first);
-                    }
                     handleSendOne(question_list[i + 1].id);
                 }
             }
@@ -228,21 +243,11 @@ const ActiveTest = () => {
         if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    if (question_list[0].id === question_list[i - 1].id) {
-                        set_first(!is_first);
-                    }
-                    if (is_last) {
-                        set_last(!is_last);
-                    }
                     handleSendOne(question_list[i - 1].id);
                 }
             }
         }
     }
-
-   // function handleMenu(elem) {
-   //
-   // }
 
     function handleSendAll() {
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
@@ -257,11 +262,20 @@ const ActiveTest = () => {
                 localStorage.setItem("fullTime", response.data.fullTime);
                 localStorage.setItem("grade", response.data.grade);
                 localStorage.setItem("test_name", response.data.test.name);
+                localStorage.setItem("test_author", response.data.test.author.name);
                 set_finished(!finished);
             })
             .catch(err => console.log(err));
         
     }
+
+    /*
+    <div id="test-menu-test">
+                        {started && !is_adaptive_test && loaded && menubtns}
+                        <Button variant="outlined" onClick={() => { console.log(question_list) }}>test</Button>
+                    </div>
+                    {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
+    */
     
     if (finished) {
         return <Navigate to="/result/" />
@@ -285,7 +299,7 @@ const ActiveTest = () => {
 
                 <fieldset>
 
-                    {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
+                    <div id="menu-btns"></div>
 
                     {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}

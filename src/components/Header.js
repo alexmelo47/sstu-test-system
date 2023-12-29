@@ -56,7 +56,7 @@ export default function Header() {
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
             .catch(err => console.log(err));
-        setOpen(false);
+        setOpen(false);//<img src='./img/logo_sstu.png' height="30px" alt="logo"/>
     }
 
   return (
@@ -66,7 +66,7 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                    <div className="logo"><img src='./img/logo_sstu.png' height="30px" alt="logo"/>&nbsp;Система тестирования&nbsp;</div>
+                    <div className="logo">&nbsp;Система тестирования&nbsp;Maile</div>
 
                     <div>
                         <nav>
@@ -95,10 +95,13 @@ export default function Header() {
                                         fullWidth
                                     />
                                 </DialogContent>
+
                                 <DialogActions>
-                                    <Button onClick={handleClose} color="primary">Закрыть</Button>
-                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>
                                     <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
+                                </DialogActions>
+
+                                <DialogActions>     
+                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>  
                                 </DialogActions>
                             </Dialog>
 

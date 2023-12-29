@@ -353,10 +353,6 @@ main {
     flex-wrap: wrap;
 }
 
-.question{
-    margin-left: 20px;
-}
-
 /*input from select*/
 .dropdown {
 
@@ -384,3 +380,48 @@ main {
     margin-right: 20px;
     min-width: 30%;
 }
+ /* select */
+
+fieldset {
+    font-size: 18px;
+    font-weight: bold; 
+    color: #00335e;
+}
+
+.question{
+    margin-left: 20px;    
+}
+
+/* style of matches */
+
+.matches {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+.matches label {
+    width: 50%;
+}
+
+select {
+    font-size: inherit;
+  }
+  
+.select {
+
+    min-width: 20%;
+    height: 4vh;
+
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+
+    cursor: pointer;
+    line-height: 1.1;
+  
+    background-color: #ffffff;
+    background-image: linear-gradient(to top, #AFDAFC, #fff 100%);
+  }
+
+  

@@ -8,6 +8,10 @@ const baseURL ="https://maile.fita.cc"
 const Tests = () => {
   const [tests, setTests] = useState([]);
   const [buttonClick, setButtonClick] = useState(true); 
+  localStorage.removeItem("fullTime");
+  localStorage.removeItem("grade");
+  localStorage.removeItem("test_name");
+  localStorage.removeItem("test_author");
 
   function getTests(){  // Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты
     setButtonClick(!buttonClick)
@@ -20,7 +24,7 @@ const Tests = () => {
       setTests([])
     }
   }
- 
+ //Название Дисциплина Тип Время_до_окончания
     return (
         <main>
             <div className="content-block">
@@ -29,7 +33,7 @@ const Tests = () => {
                 <button className="accordion" onClick={getTests}>Доступные тесты</button> 
                 <div className="panel">
                     <div>
-                        <ul className="test-list examinational">
+                        <ul className="test-list">
                             <li>ИД теста</li>
                             <li>Название</li>
                             <li>Способ</li>
@@ -44,7 +48,7 @@ const Tests = () => {
                     </div>
                 </div>
 
-                <div><Link to="/preview/">Тест для отладки</Link></div> 
+                <div><Link to="/preview/"><h3>Тест для отладки</h3></Link></div> 
             
             </div>
         </main>

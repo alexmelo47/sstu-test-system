@@ -115,7 +115,7 @@ const ActiveTest = () => {
 
             })
             .catch(err => console.log(err));
-        setTimeout(() => { } , 400);
+        //setTimeout(() => { } , 400);
     };
 
     function prepPayload() {

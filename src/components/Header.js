@@ -66,7 +66,7 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                    <div className="logo">&nbsp;Система тестирования&nbsp;ТестИнтел</div>
+                    <div className="logo">&nbsp;Система тестирования&nbsp;Maile</div>
 
                     <div>
                         <nav>

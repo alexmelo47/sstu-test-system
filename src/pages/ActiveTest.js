@@ -29,8 +29,9 @@ const ActiveTest = () => {
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
 
-   // const [menubtns, set_mb] = useState([]);
-   // let menubtns = [];
+    const [menubtns, set_mb] = useState([]);
+
+    //let menubtns = [];
    //
    // for (var i = 0; i < 100; i++) {
    //     menubtns.push(<Button onClick={() => { handleSendOne(i) } } className="menubox" variant="outlined">{i + 1}</Button >);//------>maybe will work somehow
@@ -74,6 +75,39 @@ const ActiveTest = () => {
 
     //question_list[0].id !== Number(localStorage.getItem("question_id"))
     //question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))
+    function getBoxes() {
+        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
+            .then(function (resp_menu) {
+                console.log(resp_menu);
+                setQuestionList(resp_menu.data);
+                localStorage.setItem("question_list", resp_menu.data);
+                if (resp_menu.data.length === 1) {
+                    set_last(!is_last);
+                }
+
+                //for (let i = 0; i < response.data.length; i++) {
+                //set_mb( // Replace the state
+                //    [ // with a new array
+                //        ...menubtns, // that contains all the old items
+                //        //<Button variant="outlined" onClick={() => { handleSendOne(question_list[i].id) }}>{i}</Button> // and one new item at the end
+                //        response.data[i]
+                //    ]
+                //);
+                //    menubtns.push(<Button variant="outlined" onClick={() => { handleSendOne(response.data[i].id) }}>{response.data[i].id}</Button>);
+                //menubtns.push(response.data[i]);
+                //menubtns[i].name = i + 1;
+                //}
+
+                //menubtns.concat(resp_menu.data);
+                let temp_arr = [].concat(resp_menu.data);
+                for (var i = 0; i < resp_menu.data.length; i++) {
+                    resp_menu.data[i].answered ? temp_arr[i].color = "contained" : temp_arr[i].color = "outlined";
+                }
+
+                set_mb(temp_arr);
+            })
+            .catch(err => console.log(err));
+    }
     function handleFirst() {
         
         const Payload = {
@@ -83,35 +117,17 @@ const ActiveTest = () => {
         //console.log(Payload);
         axios.post(baseURL + '/sessions', Payload)//main load
             .then(function (response) {
+
+                getBoxes();
+
                 console.log(response);
                 localStorage.setItem("session_id", response.data.id);
                 localStorage.setItem("question_id", response.data.item.id);
                 setQuestion(response.data.item);
+
+                set_loaded(!loaded);
                 set_started(!started);
                 //console.log(response.data.item);
-
-                    axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
-                        .then(function (response) {
-                            console.log(response);
-                            setQuestionList(response.data);
-                            localStorage.setItem("question_list", question_list);
-                            if (response.data.length === 1) {
-                                set_last(!is_last);
-                            }
-
-                            //for (let i = 0; i < question_list.length; i++) {
-                            //    set_mb( // Replace the state
-                            //        [ // with a new array
-                            //            ...menubtns, // that contains all the old items
-                            //            <Button variant="outlined" onClick={() => { handleSendOne(question_list[i].id) }}>{i}</Button> // and one new item at the end
-                            //        ]
-                            //    );
-                            //    //menubtns.push(<Button variant="outlined" onClick={() => { handleSendOne(response.data[i].id) }}>{response.data[i].id}</Button>);
-                            //}
-                            set_loaded(!loaded);
-
-                        })
-                        .catch(err => console.log(err));
 
             })
             .catch(err => console.log(err));
@@ -218,6 +234,8 @@ const ActiveTest = () => {
             set_first(false);
         }
 
+        getBoxes();
+
         //load question
         url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
@@ -275,6 +293,7 @@ const ActiveTest = () => {
                         <Button variant="outlined" onClick={() => { console.log(question_list) }}>test</Button>
                     </div>
                     {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
+                    <Button onClick={() => { console.log(menubtns) }} color="primary">debug</Button>
     */
     
     if (finished) {
@@ -299,7 +318,13 @@ const ActiveTest = () => {
 
                 <fieldset>
 
-                    <div id="menu-btns"></div>
+                    <div id="menu-btns">
+                        {menubtns && started && loaded &&
+                            menubtns.map(btn => (
+                                <Button variant={btn.color} onClick={() => { handleSendOne(btn.id) }}>{btn.id}</Button>
+                            ))
+                        }
+                    </div>
 
                     {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
                     {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}

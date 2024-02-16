@@ -150,7 +150,7 @@ main {
 
 .content-block {
 
-    width: 66%;
+    width: 60%;
     text-align: left;
     background-color: #fff;
     padding: 20px;
@@ -322,7 +322,7 @@ main {
     outline:none;
     height: 40px;
     text-align: center;
-    width: 11%;
+    width: 200px;
     border-radius:40px;
     background: #fff;
     color: #000000;
@@ -333,9 +333,9 @@ main {
     cursor: pointer;
     transition: all 0.25s ease;
     word-wrap: break-word;
-    position:absolute;
-    top:10%;
-    right:3%;
+    position: absolute;
+    top: 10%;
+    right: 3%;
 }
 
 .btn-fin:hover {
@@ -347,10 +347,68 @@ main {
     background: #b8b8b8;
 }
 
+.btn-fin2 {
+    outline:none;
+    height: 40px;
+    text-align: center;
+    width: 200px;
+    border-radius:40px;
+    background: #fff;
+    color: #000000;
+    border: 2px solid #646464;
+    letter-spacing:1px;
+    font-size: 12px;    
+    font-weight:bold;    
+    cursor: pointer;
+    transition: all 0.25s ease;
+    word-wrap: break-word;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.btn-fin2:hover {
+    background: #646464;
+    color: white;
+}
+
+.btn-fin2:active {
+    background: #b8b8b8;
+}
+
 .quest-btn {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.test-menu {
+    width: 18%;
+    top: 10%;
+    left: 1%;
+    position:absolute;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-menu {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #646464;
+    border-radius: 10px;
+    margin: 3px;
+    font-size: 14px;    
+    font-weight: bold;
+    color: #00335e;
+}
+
+.btn-menu:hover {
+    background: #dcdcdc;
+}
+
+.btn-menu:focus {
+    border: 0.3rem solid #646464;
 }
 
 /*input from select*/

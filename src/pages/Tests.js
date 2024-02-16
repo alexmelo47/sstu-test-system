@@ -49,7 +49,39 @@ const Tests = () => {
                 </div>
 
                 <div><Link to="/preview/"><h3>Тест для отладки</h3></Link></div> 
-            
+
+                  <br/>
+                  <div><ul className="test-list examinational">
+                      <li>Математика</li>
+                      <li>На оценку</li>
+                      <li>Доступ до:</li>
+                      <li><button className="open-test">Открыть тест</button></li>
+                      </ul>
+                  </div>
+
+                  <div><ul className="test-list examinational">
+                      <li>Русский</li>
+                      <li>На оценку</li>
+                      <li>Доступ до:</li>
+                      <li><button className="open-test">Открыть тест</button></li>
+                      </ul>
+                  </div>  
+
+                  <div><ul className="test-list examinational">
+                      <li>Информатика</li>
+                      <li>На оценку</li>
+                      <li>Доступ до:</li>
+                      <li><button className="open-test">Открыть тест</button></li>
+                      </ul>
+                  </div>  
+
+                  <div><ul className="test-list">
+                      <li>Информатика</li>
+                      <li>Пробный</li>
+                      <li>Доступ до:</li>
+                      <li><button className="open-test">Открыть тест</button></li>
+                      </ul>
+                  </div>        
             </div>
         </main>
     )

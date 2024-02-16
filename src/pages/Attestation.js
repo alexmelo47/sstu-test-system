@@ -75,7 +75,32 @@ export default function Attestation() {
             ТЕСТОВАЯ СЕКЦИЯ КОМПОНЕНТ
         */
         <main>
+
+            <div className="test-menu">
+                <button className="btn-menu"><span>1</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>16</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+                <button className="btn-menu"><span>N</span></button>
+            </div>
+
             <input className="btn-fin" type="submit" value="Завершить тестирование"/>
+
         <div className="content-block">
             <fieldset>
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
@@ -370,7 +395,10 @@ export default function Attestation() {
                 <input className="btn btn-1" type="submit" value="Подтвердить"/>
                 <input className="btn btn-2" type="submit" value="Следующий"/>
             </div>
-
+            <div>
+                <input className="btn-fin2" type="submit" value="Завершить тестирование"/>
+            </div>
+                
         </div>
     </main>
     )

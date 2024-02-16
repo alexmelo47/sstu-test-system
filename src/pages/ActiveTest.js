@@ -102,6 +102,7 @@ const ActiveTest = () => {
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
                     resp_menu.data[i].answered ? temp_arr[i].color = "contained" : temp_arr[i].color = "outlined";
+                    temp_arr[i].num = i + 1;
                 }
 
                 set_mb(temp_arr);
@@ -294,6 +295,8 @@ const ActiveTest = () => {
                     </div>
                     {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
                     <Button onClick={() => { console.log(menubtns) }} color="primary">debug</Button>
+
+                    <Button variant={btn.color} onClick={() => { handleSendOne(btn.id) }}>{btn.id}</Button>
     */
     
     if (finished) {
@@ -318,10 +321,12 @@ const ActiveTest = () => {
 
                 <fieldset>
 
-                    <div id="menu-btns">
+                    <div className="test-menu">
                         {menubtns && started && loaded &&
                             menubtns.map(btn => (
-                                <Button variant={btn.color} onClick={() => { handleSendOne(btn.id) }}>{btn.id}</Button>
+                                <button className="btn-menu" onClick={() => { handleSendOne(btn.id) }}>
+                                    <span>{btn.num}</span>
+                                </button>
                             ))
                         }
                     </div>

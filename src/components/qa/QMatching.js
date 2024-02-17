@@ -26,10 +26,10 @@ export default function QMatching({ qname, a_arr, cnt }) {
     console.log(aids);
     for (i = 0; i < cnt; i++) {
         if (a_arr[i].type === "L") {
-            componentsArr.push(<AMatchingL aname={a_arr[i].answer} />);
+            componentsArr.push(<li key={i}><AMatchingL aname={a_arr[i].answer} /></li>);
         }
         else {
-            componentsArr.push(<AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} />);
+            componentsArr.push(<li key={i}><AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} /></li>);
         }
     }
 

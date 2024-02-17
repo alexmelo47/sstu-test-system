@@ -74,34 +74,70 @@ export default function Attestation() {
 
             ТЕСТОВАЯ СЕКЦИЯ КОМПОНЕНТ
         */
-        <main>
+    <main>
 
-            <div className="test-menu">
-                <button className="btn-menu"><span>1</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>16</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-                <button className="btn-menu"><span>N</span></button>
-            </div>
+        <div className="test-menu">
+            <button className="btn-menu"><span>1</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>16</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+        </div>
 
-            <input className="btn-fin" type="submit" value="Завершить тестирование"/>
+        <input className="btn-fin" type="submit" value="Завершить тестирование"/>
 
-        <div className="content-block">
+            <div className="content-block">
+                <br />
+                <div>
+                    <ul className="test-list examinational">
+                        <li>Математика</li>
+                        <li>На оценку</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list examinational">
+                        <li>Русский</li>
+                        <li>На оценку</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list examinational">
+                        <li>Информатика</li>
+                        <li>На оценку</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list">
+                        <li>Информатика</li>
+                        <li>Пробный</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
             <fieldset>
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
 

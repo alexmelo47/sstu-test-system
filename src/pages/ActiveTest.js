@@ -324,7 +324,7 @@ const ActiveTest = () => {
                     <div className="test-menu">
                         {menubtns && started && loaded &&
                             menubtns.map(btn => (
-                                <button className="btn-menu" onClick={() => { handleSendOne(btn.id) }}>
+                                <button key={btn.num} className="btn-menu" onClick={() => { handleSendOne(btn.id) }}>
                                     <span>{btn.num}</span>
                                 </button>
                             ))

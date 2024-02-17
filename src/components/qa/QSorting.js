@@ -16,7 +16,7 @@ export default function QSorting({ qname, cnt, a_arr }) {
         chosen_vals.push(aids[chosen_num[i] - 1]);
     }
     for (i = 0; i < cnt; i++) {
-        componentsArr.push(<ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} />);
+        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} /></li>);
     }
 
     return (

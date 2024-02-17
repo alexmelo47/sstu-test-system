@@ -5,7 +5,7 @@ export default function QMulti_checkbox({ qname, cnt, a_arr }) {
     
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<AMultiCheckbox aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected} />);
+        componentsArr.push(<AMultiCheckbox key={i} aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected} />);
     }
 
     return (

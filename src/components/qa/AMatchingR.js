@@ -4,7 +4,7 @@ export default function AMatchingR({ cnt, aid, aid_arr, aname, anum }) {//dev
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<option value={aid_arr[i]}>{i + 1}</option>);
+        componentsArr.push(<option key={i} value={aid_arr[i]}>{i + 1}</option>);
     }
     
     return (

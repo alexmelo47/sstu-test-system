@@ -24,7 +24,8 @@ const Tests = () => {
       setTests([])
     }
   }
- //Название Дисциплина Тип Время_до_окончания
+ 
+ //СДЕЛАТЬ НОРМАЛЬНЫЙ ПЕРЕХОД К ОПИСАНИЮ ТЕСТА И САМОМУ ТЕСТУ
     return (
         <main>
             <div className="content-block">
@@ -34,16 +35,16 @@ const Tests = () => {
                 <div className="panel">
                     <div>
                         <ul className="test-list">
-                            <li>ИД теста</li>
                             <li>Название</li>
-                            <li>Способ</li>
-                            <li>Статус</li>
+                            <li>Дисциплина</li>
+                            <li>Тип</li>
+                            <li>Время до окончания</li>
                             <li></li>
                         </ul>
-                      {tests &&
-                        tests.map(test => (
-                            <Test key={test.id} tid={test.id} name={test.name} status={test.status} method={test.method}/>
-                        ))   
+                        {tests &&
+                            tests.map(test => (
+                                <Test key={test.id} tid={test.id} name={test.name} discipline={test.disciplines[0].name} status={test.status} time={test.endedAt}/>
+                            ))   
                       }
                     </div>
                 </div>

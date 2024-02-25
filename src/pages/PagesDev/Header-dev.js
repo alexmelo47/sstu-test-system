@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -25,6 +25,19 @@ export default function Header() {
     const [open2, setOpenRemind] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
+    useEffect(() => {
+        if (localStorage.getItem("accessToken"))
+        {
+            document.getElementById("auth").style.display = "none";
+            document.getElementById("unauth").style.display = "inline-block";
+        }
+        else
+        {
+            document.getElementById("auth").style.display = "inline-block";
+            document.getElementById("unauth").style.display = "none";
+        }
+    });
+    
     const handleClickOpen = () => {
         setOpen(true);
     }
@@ -56,6 +69,9 @@ export default function Header() {
                 localStorage.setItem("accessToken", token);
                 console.log(token);
 
+                document.getElementById("auth").style.display = "none";
+                document.getElementById("unauth").style.display = "inline-block";
+
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
@@ -77,7 +93,12 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                            <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
+                              <a style={{ display: "inline-block" }} id="auth" className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
+                              <a style={{ display: "none" }} id="unauth" className="nav-link" onClick={() => {
+                                  localStorage.removeItem("accessToken");
+                                  document.getElementById("auth").style.display = "inline-block";
+                                  document.getElementById("unauth").style.display = "none";
+                              }}> &nbsp;Выйти&nbsp; </a>
                             <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
                                <DialogTitle id="authorization">Авторизация</DialogTitle> 
                                 <DialogContent>

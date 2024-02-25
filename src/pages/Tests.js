@@ -45,7 +45,7 @@ const Tests = () => {
                             tests.map(test => (
                                 <Test key={test.id} tid={test.id} name={test.name} discipline={test.disciplines[0].name} status={test.status} time={test.endedAt}/>
                             ))   
-                      }
+                        }
                     </div>
                 </div>
 

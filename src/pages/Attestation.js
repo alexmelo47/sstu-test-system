@@ -106,34 +106,42 @@ export default function Attestation() {
                 <div>
                     <ul className="test-list examinational">
                         <li>Математика</li>
-                        <li>На оценку</li>
+                        <li>Итоговый</li>
                         <li>Доступ до:</li>
                         <li><button className="open-test">Открыть тест</button></li>
                     </ul>
                 </div>
 
                 <div>
-                    <ul className="test-list examinational">
+                    <ul className="test-list intermediate">
                         <li>Русский</li>
-                        <li>На оценку</li>
+                        <li>Промежуточный</li>
                         <li>Доступ до:</li>
                         <li><button className="open-test">Открыть тест</button></li>
                     </ul>
                 </div>
 
                 <div>
-                    <ul className="test-list examinational">
+                    <ul className="test-list training">
                         <li>Информатика</li>
-                        <li>На оценку</li>
+                        <li>Тренировочный</li>
                         <li>Доступ до:</li>
                         <li><button className="open-test">Открыть тест</button></li>
                     </ul>
                 </div>
 
                 <div>
-                    <ul className="test-list">
+                    <ul className="test-list wip">
                         <li>Информатика</li>
-                        <li>Пробный</li>
+                        <li>В разработке</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul className="test-list debug">
+                        <li>Информатика</li>
+                        <li>Отладка</li>
                         <li>Доступ до:</li>
                         <li><button className="open-test">Открыть тест</button></li>
                     </ul>

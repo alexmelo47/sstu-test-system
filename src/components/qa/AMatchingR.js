@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function AMatchingR({ cnt, aid, aid_arr, aname, anum }) {//dev
+export default function AMatchingR({ cnt, aid, aid_arr, name_arr, anum }) {//dev
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<option key={i} value={aid_arr[i]}>{i + 1}</option>);
+        componentsArr.push(<option key={i} value={aid_arr[i]}>{name_arr[i]}</option>);
     }
     
     return (
@@ -12,9 +12,8 @@ export default function AMatchingR({ cnt, aid, aid_arr, aname, anum }) {//dev
         Правый компонент(выбора) ответа вопроса с соответствием
         */
 
-        <div>
-            <label>{aname}</label>
-            <select className="matchboxes" id={aid} defaultValue={anum}>
+        <div className="matches">
+            <select className="matchboxes select custom-select menuquest_897580_0" id={aid} defaultValue={anum}>
                 {componentsArr}
             </select><br/>
             <br/>

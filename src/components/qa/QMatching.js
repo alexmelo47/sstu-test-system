@@ -7,6 +7,7 @@ export default function QMatching({ qname, a_arr, cnt }) {
     let componentsArr = [];
     let aids = [];
     let chosen_num = [];
+    let chosen_names = [];
     let chosen_vals = [];
     let Lcnt = 0;
     let i;
@@ -18,18 +19,20 @@ export default function QMatching({ qname, a_arr, cnt }) {
         }
         else {
             chosen_num.push(a_arr[i].number);
+            chosen_names.push(a_arr[i].answer);
         }
     }
     for (i = 0; i < Lcnt; i++) {
         chosen_vals.push(aids[chosen_num[i] - 1]);
     }
     console.log(aids);
+    console.log(chosen_names);
     for (i = 0; i < cnt; i++) {
         if (a_arr[i].type === "L") {
             componentsArr.push(<li key={i}><AMatchingL aname={a_arr[i].answer} /></li>);
         }
         else {
-            componentsArr.push(<li key={i}><AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} /></li>);
+            componentsArr.push(<li key={i}><AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} name_arr={chosen_names} anum={chosen_vals[i]} /></li>);
         }
     }
 

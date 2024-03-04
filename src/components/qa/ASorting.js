@@ -12,9 +12,9 @@ export default function ASorting({ cnt, aid_arr, aname, anum }) {
         Компонент выбора ответа вопроса с сортировкой
         */
 
-        <div>
-            <label>{aname}</label>
-            <select className="orderboxes" defaultValue={anum}>
+        <div className="matches">
+            <label className="accesshide">{aname} - </label>
+            <select className="orderboxes select custom-select menuquest_897580_0" defaultValue={anum}>
                 {componentsArr}
             </select><br/>
             <br/>

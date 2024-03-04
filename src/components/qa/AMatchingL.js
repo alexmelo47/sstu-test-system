@@ -6,12 +6,7 @@ export default function AMatchingL({ aname }) {
         /* 
         Левый компонент ответа вопроса с соответствием
         */
-
-        <div>
-            <label>{aname}</label>
-            <br />
-            <br/>
-        </div>
+        <label className="accesshide">{aname} - </label>
 
     )
 }

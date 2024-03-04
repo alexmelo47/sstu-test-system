@@ -404,7 +404,7 @@ export default function Attestation() {
                         </div>
                         
                         <div className="matches">
-                        <label className="accesshide" for="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
+                        <label className="accesshide" htmlFor="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
                         <select id="quest_897580_3" className="select custom-select menuquest_897580_3" name="quest_897580_3">
                             <option value="2">2</option>
                             <option value="1">1</option>

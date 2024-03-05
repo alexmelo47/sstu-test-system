@@ -75,11 +75,11 @@ export default function Attestation() {
             ТЕСТОВАЯ СЕКЦИЯ КОМПОНЕНТ
         */
     <main>
-
+        
         <div className="test-menu">
-            <button className="btn-menu"><span>1</span></button>
-            <button className="btn-menu"><span>N</span></button>
-            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu btn-menu-answered"><span>1</span></button>
+            <button className="btn-menu btn-menu-answered"><span>N</span></button>
+            <button className="btn-menu btn-menu-answered"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
@@ -98,9 +98,7 @@ export default function Attestation() {
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
         </div>
-
-        <input className="btn-fin" type="submit" value="Завершить тестирование"/>
-
+        
             <div className="content-block">
                 <br />
                 <div>
@@ -169,46 +167,72 @@ export default function Attestation() {
                     <form>
                         <div>
                             <input id="var_1" type="radio" name="var" value="1"/> 
-                                <label htmlFor="var_1">&nbsp;Текстовый редактор</label><br/>
+                                <label htmlFor="var_1">&nbsp;Текстовый редактор</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_2" type="radio" name="var" value="1"/>
-                                <label htmlFor="var_2">&nbsp;Табличный редактор</label><br/>
+                                <label htmlFor="var_2">&nbsp;Табличный редактор</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_3" type="radio" name="var" value="3"/>
-                                <label htmlFor="var_3">&nbsp;Редактор презентаций</label><br/>
+                                <label htmlFor="var_3">&nbsp;Редактор презентаций</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_4" type="radio" name="var" value="4"/>
-                                <label htmlFor="var_4">&nbsp;Графический редактор</label><br/>
+                                <label htmlFor="var_4">&nbsp;Графический редактор</label><br/><br/>
                         </div>
                     </form><br/>
                 </div>
 
 
                 <div className="question">
-                    <br/><br/>Из чего состоят функции в среде MS Excel?<br/>
-                    Выберите несколько вариантов ответа (не менее двух)!<br/><br/>
+                    <br/>Вопрос с картинкой: <br/><br/>
+                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                </div>
+
+                <div className="question">
+                    <form>
+                        <div>
+                            <input id="var_1" type="radio" name="var" value="1" /> 
+                                <label htmlFor="var_1">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_2" type="radio" name="var" value="1"/>
+                                <label htmlFor="var_2">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_3" type="radio" name="var" value="3"/>
+                                <label htmlFor="var_3">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_4" type="radio" name="var" value="4"/>
+                                <label htmlFor="var_4">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                    </form><br/>
+                </div>
+
+
+                <div className="question">
+                    <br/><br/>Из чего состоят функции в среде MS Excel? Выберите несколько вариантов ответа (не менее двух)!<br/><br/>
                 </div>
 
                 <div className="question">
                     <form>
                         <div>
                             <input id="var_1" type="checkbox" name="var" value="1"/> 
-                                <label htmlFor="var_1">&nbsp;Названия</label><br/>
+                                <label htmlFor="var_1">&nbsp;Названия</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_2" type="checkbox" name="var" value="1"/>
-                                <label htmlFor="var_2">&nbsp;Константы</label><br/>
+                                <label htmlFor="var_2">&nbsp;Константы</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_3" type="checkbox" name="var" value="3"/>
-                                <label htmlFor="var_3">&nbsp;Переменные</label><br/>
+                                <label htmlFor="var_3">&nbsp;Переменные</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_4" type="checkbox" name="var" value="4"/>
-                                <label htmlFor="var_4">&nbsp;Аргументы</label><br/> 
+                                <label htmlFor="var_4">&nbsp;Аргументы</label><br/><br/>
                         </div>
                     </form><br/>
                 </div>
@@ -221,156 +245,19 @@ export default function Attestation() {
                 <div className="question">
                     <form>
                         <div>
-                            <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var"/><br/>
+                            <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var" placeholder="Введите ответ здесь"/><br/>
                         </div>
                     </form><br/>
                 </div>
 
 
                 <div className="question">
-                    <br/><br/>Установите соответствие:<br/>
-                    Выбранный ответ можно стереть и выбрать заново!<br/><br/>
-                </div>
-                
-                <div className="question">
-                    <form>
-                    <div className="dropdown">
-                        <label htmlFor="var_4">MS Word - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Функция КОРЕНЬ() - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Объекты WordArt - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Функция ОКРУГЛВНИЗ() - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-                    </form>
+                    <br/><br/>Вопрос с выпадающим списком: <br/><br/>
                 </div>
 
-
                 <div className="question">
-                    <br/><br/>Укажите правильный порядок действий для создания нового стиля в MS Excel:<br/>
-                    Выбранный ответ можно стереть и выбрать заново!<br/><br/>
-                </div>
-                
-                <div className="question">
-                    <form>
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Создать стиль ячейки - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value='1'/>
-                            <option value='2'/>
-                            <option value='3'/>
-                            <option value='4'/>
-                        </datalist>
-                    </div><br/>
+                <ul className="match">
 
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Выбрать команду Главная - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Открыть Стили - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Открыть Стили ячеек - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-                    </form>
-                </div>
-
-
-
-                <div className="question">
-                    <br/><br/><p className="questiontext">
-                            <span>
-                                <p>Напишите оператор сравнения НЕРАВНО в среде MS Excel?</p>
-                            </span>
-                    </p><br/><br/>
-                
-
-               
-                    <ul className="multichoice">
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Шара&lt;/span&gt;&lt;/p&gt;" /><label>Названия</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Бублика&lt;/span&gt;&lt;/p&gt;" /><label>Константы</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Блина&lt;/span&gt;&lt;/p&gt;" /><label>Переменные</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Чемодана&lt;/span&gt;&lt;/p&gt;" /><label>Аргументы</label></li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="multichoice">
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Два&lt;/span&gt;&lt;/p&gt;" /><label>Два</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Четыре&lt;/span&gt;&lt;/p&gt;" /><label>Четыре</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Один&lt;/span&gt;&lt;/p&gt;" /><label>Один</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Три&lt;/span&gt;&lt;/p&gt;" /><label>Три</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Пять&lt;/span&gt;&lt;/p&gt;" /><label>Пять</label></li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="shortanswer/numerical">
-                        <li>
-                                <label className="accesshide" htmlFor="quest_897587">Ответ</label>
-                        <input id="quest_897587" name="quest_897587" type="text" />
-                        </li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="match">
                         <form>
 
                         <div className="matches">
@@ -414,9 +301,65 @@ export default function Attestation() {
                         </div>
 
                         </form>
+
                     </ul>
                     <br/>
+                </div>
 
+                <div className="question">
+                    <br/><br/>Вопрос с выпадающим списком c картинкой: <br/><br/>
+                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                </div>
+
+                <div className="question">
+                <ul className="match">
+
+                        <form>
+
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select " name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select" name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select " name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select" name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+
+                        </form>
+                        
+                    </ul>
+                    <br/>
                 </div>
 
 

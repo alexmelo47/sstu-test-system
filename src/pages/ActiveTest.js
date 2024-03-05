@@ -305,7 +305,7 @@ const ActiveTest = () => {
     return (
         <main>
 
-            {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin" type="submit" value="Завершить тестирование" />}
+            
             <div className="content-block">
 
                 <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
@@ -344,6 +344,11 @@ const ActiveTest = () => {
                         {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий" />}
                         {started && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
                 </div>
+                
+                <div>
+                {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
+                </div>
+
             </div>
         </main>
     )

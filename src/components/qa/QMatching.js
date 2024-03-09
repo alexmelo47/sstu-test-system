@@ -1,39 +1,37 @@
 import React from 'react'
-import AMatchingL from './AMatchingL'
-import AMatchingR from './AMatchingR'
+import AMatching from './AMatching'
 
-export default function QMatching({ qname, a_arr, cnt }) {
+export default function QMatching({ qname, a_arr }) {
     
     let componentsArr = [];
-    let aids = [];
-    let chosen_num = [];
-    let chosen_names = [];
-    let chosen_vals = [];
-    let Lcnt = 0;
+
+    let R_cnt = 0;
+    let R_ids = [];
+    let R_names = []; 
+    //let R_chosen = [];
+
+    let L_cnt = 0;
+    let L_ids = [];
+    let L_names = [];
+
     let i;
 
-    for (i = 0; i < cnt; i++) {
+    for (i = 0; i < a_arr.length; i++) {
         if (a_arr[i].type === "L") {
-            aids.push(a_arr[i].id);
-            Lcnt++;
+            L_ids.push(a_arr[i].id);
+            L_names.push(a_arr[i].answer);
+            L_cnt++;
         }
         else {
-            chosen_num.push(a_arr[i].number);
-            chosen_names.push(a_arr[i].answer);
+            R_ids.push(a_arr[i].id);
+            R_names.push(a_arr[i].answer);
+            //R_chosen.push(a_arr[i].selected);
+            R_cnt++;
         }
     }
-    for (i = 0; i < Lcnt; i++) {
-        chosen_vals.push(aids[chosen_num[i] - 1]);
-    }
-    console.log(aids);
-    console.log(chosen_names);
-    for (i = 0; i < cnt; i++) {
-        if (a_arr[i].type === "L") {
-            componentsArr.push(<li key={i}><AMatchingL aname={a_arr[i].answer} /></li>);
-        }
-        else {
-            componentsArr.push(<li key={i}><AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} name_arr={chosen_names} anum={chosen_vals[i]} /></li>);
-        }
+
+    for (i = 0; i < L_cnt; i++) {
+        componentsArr.push(<li key={i}><AMatching cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]} name_arr={R_names} /></li>);
     }
 
     return (
@@ -45,7 +43,7 @@ export default function QMatching({ qname, a_arr, cnt }) {
                 
                 <div className="question">
                     <br/>
-                <p className="questiontext">{qname}</p>
+                    <p className="questiontext">{qname}</p>
                     <br/>
                 
                     <ul className="match">{componentsArr}</ul>

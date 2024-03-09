@@ -78,7 +78,7 @@ const ActiveTest = () => {
     function getBoxes() {
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
             .then(function (resp_menu) {
-                console.log(resp_menu);
+                //console.log(resp_menu);//<--------------------------------------------------------DEBUG MENU
                 setQuestionList(resp_menu.data);
                 localStorage.setItem("question_list", resp_menu.data);
                 if (resp_menu.data.length === 1) {
@@ -101,7 +101,7 @@ const ActiveTest = () => {
                 //menubtns.concat(resp_menu.data);
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
-                    resp_menu.data[i].answered ? temp_arr[i].color = "contained" : temp_arr[i].color = "outlined";
+                    resp_menu.data[i].answered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
                     temp_arr[i].num = i + 1;
                 }
 
@@ -173,6 +173,7 @@ const ActiveTest = () => {
 
             for (let i = 0; i < chosen_order.length; i++) {
                 answerload.push(Number(chosen_order[i].value));
+                //console.log(chosen_order[i].value);//--------------------------------------------------------->debug if all works
                 Payload.answer.push({ "id": Number(chosen_order[i].value) });
             }
         }
@@ -182,13 +183,13 @@ const ActiveTest = () => {
 
             for (let i = 0; i < chosen_matches.length; i++) {
 
-                answerload.push(Number(chosen_matches[i].value));
-                console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
-                Payload.answer.push({ "id": Number(chosen_matches[i].value) });
-                
                 answerload.push(Number(chosen_matches[i].id));
-                console.log(chosen_matches[i].id);//--------------------------------------------------------->debug if all works
+                //console.log(chosen_matches[i].id);//--------------------------------------------------------->debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].id) });
+
+                answerload.push(Number(chosen_matches[i].value));
+                //console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
+                Payload.answer.push({ "id": Number(chosen_matches[i].value) });
 
             }
         }
@@ -324,7 +325,7 @@ const ActiveTest = () => {
                     <div className="test-menu">
                         {menubtns && started && loaded &&
                             menubtns.map(btn => (
-                                <button key={btn.num} className="btn-menu" onClick={() => { handleSendOne(btn.id) }}>
+                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
                                     <span>{btn.num}</span>
                                 </button>
                             ))

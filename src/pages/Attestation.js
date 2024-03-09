@@ -41,20 +41,20 @@ export default function Attestation() {
 
     for (i = 0; i < 3; i++) {
         idrcs = i + "r";
-        answersR.push({ id: idrcs, answer: "answer", selected: 1 });
+        answersR.push({ id: idrcs, answer: "answer" + i, selected: 1 });
         idrcs = i + "c";
-        answersC.push({ id: idrcs, answer: "answer", selected: 1 });
+        answersC.push({ id: idrcs, answer: "answer" + i, selected: 1 });
         idrcs = i + "s";
-        answersS.push({ id: idrcs, answer: "answer", number: 1 });
+        answersS.push({ id: idrcs, answer: "answer" + i, number: 1 });
     }
 
     for (i = 0; i < 5; i++) {
         idrcs = i + "m";
         if (i%2 === 0) {
-            answersM.push({ id: idrcs, answer: "answer", type: "L", number: 1 });
+            answersM.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
         }
         else {
-            answersM.push({ id: idrcs, answer: "answer", type: "R", number: 1 });
+            answersM.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
         }
     }
 

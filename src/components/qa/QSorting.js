@@ -5,18 +5,18 @@ export default function QSorting({ qname, cnt, a_arr }) {
     
     let componentsArr = [];
     let aids = [];
-    let chosen_num = [];
-    let chosen_vals = [];
     let i;
+
     for (i = 0; i < cnt; i++) {
         aids.push(a_arr[i].id);
-        chosen_num.push(a_arr[i].number);
     }
+
+    /*for (i = 0; i < a_arr.length; i++) {
+        console.log(a_arr[i].number);
+    }*/
+
     for (i = 0; i < cnt; i++) {
-        chosen_vals.push(aids[chosen_num[i] - 1]);
-    }
-    for (i = 0; i < cnt; i++) {
-        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} /></li>);
+        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={a_arr[i].number} /></li>);
     }
 
     return (

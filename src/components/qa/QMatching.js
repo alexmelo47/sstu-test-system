@@ -1,7 +1,8 @@
 import React from 'react'
 import AMatching from './AMatching'
+import PictureQ from './PictureQ'
 
-export default function QMatching({ qname, a_arr }) {
+export default function QMatching({ qname, a_arr, Qpic }) {
     
     let componentsArr = [];
 
@@ -37,6 +38,7 @@ export default function QMatching({ qname, a_arr }) {
     return (
         /* 
         Компонент условия вопроса с соответствием
+        ДОБАВИТЬ картинку в ОТВЕТ
         */
 
         <div>
@@ -44,7 +46,9 @@ export default function QMatching({ qname, a_arr }) {
                 <div className="question">
                     <br/>
                     <p className="questiontext">{qname}</p>
-                    <br/>
+                <br />
+                <PictureQ src={Qpic} />
+                <br />
                 
                     <ul className="match">{componentsArr}</ul>
 

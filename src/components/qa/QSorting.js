@@ -1,7 +1,8 @@
 import React from 'react'
 import ASorting from './ASorting'
+import PictureQ from './PictureQ'
 
-export default function QSorting({ qname, cnt, a_arr }) {
+export default function QSorting({ qname, cnt, a_arr, Qpic }) {
     
     let componentsArr = [];
     let aids = [];
@@ -22,6 +23,7 @@ export default function QSorting({ qname, cnt, a_arr }) {
     return (
         /* 
         Компонент условия вопроса с сортировкой
+        ДОБАВИТЬ картинку в ОТВЕТ
         */
 
         <div>
@@ -29,7 +31,9 @@ export default function QSorting({ qname, cnt, a_arr }) {
                 <div className="question">
                     <br/>
                 <p className="questiontext">{qname}</p>
-                    <br/>
+                <br />
+                <PictureQ src={Qpic} />
+                <br />
                 
                     <ul className="match">{componentsArr}</ul>
 

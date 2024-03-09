@@ -5,7 +5,7 @@ export default class Home extends Component {
     return (
         <div className="home">
           <div className="content-block-home">
-            <h1>Портал дистанционного обучения по основным образовательным программам СГТУ имени Гагарина Ю.А.</h1><br/>
+                <h1>Портал дистанционного обучения по основным образовательным программам ТЕСТИНТЕЛ</h1><br/>
             <img src='./img/sstumain.jpg' alt="Home" width="100%" />
             <span>
                 Для входа в систему введите <strong>без указания домена&nbsp;</strong> ваши логин -

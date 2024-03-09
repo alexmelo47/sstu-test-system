@@ -70,7 +70,7 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                    <div className="logo">&nbsp;Система тестирования&nbsp;Maile</div>
+                      <div className="logo">&nbsp;Система тестирования&nbsp;ТЕСТИНТЕЛ</div>
 
                     <div>
                         <nav>

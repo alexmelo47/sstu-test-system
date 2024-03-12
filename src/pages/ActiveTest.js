@@ -298,6 +298,8 @@ const ActiveTest = () => {
                     <Button onClick={() => { console.log(menubtns) }} color="primary">debug</Button>
 
                     <Button variant={btn.color} onClick={() => { handleSendOne(btn.id) }}>{btn.id}</Button>
+
+                    пока в отвентах только картинки у checkbox и radio
     */
     
     if (finished) {
@@ -332,11 +334,11 @@ const ActiveTest = () => {
                         }
                     </div>
 
-                    {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} />}
-                    {question.type === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
-                    {question.type === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} />}
+                    {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} Qpic={question.pictures[0] ?? ""} />}
+                    {question.type === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.type === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
 
                 </fieldset>
 

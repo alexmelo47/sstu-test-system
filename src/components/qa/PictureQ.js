@@ -7,16 +7,14 @@ export default function PictureQ({ src }) {
     */
 
     if (src === null) {
-        return
-        (
+        return (
             <div style={{ display: 'none' }} ></div>
         )
     }
     else
     {
-        return
-        (
-            <img className="question-pic" src={src} />
+        return (
+            <img className="question-pic" src={src} alt={""} />
         )
     }
 }

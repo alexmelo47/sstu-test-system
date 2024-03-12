@@ -7,16 +7,14 @@ export default function PictureA({ src }) {
     */
 
     if (src === null) {
-        return
-        (
+        return (
             <div style={{ display: 'none' }} ></div>
         )
     }
     else
     {
-        return
-        (
-            <label>&nbsp;<img className="answer-pic" src={src} /></label>
+        return (
+            <label>&nbsp;<img className="answer-pic" src={src} alt={""} /></label>
         )
     }
 }

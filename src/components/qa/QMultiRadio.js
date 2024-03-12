@@ -30,6 +30,7 @@ export default function QMulti_radio({ qname, cnt, a_arr, Qpic }) {
                 </div>      
 
             </div>
+            <br />
         </div>
 
     )

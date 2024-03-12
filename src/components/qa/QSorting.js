@@ -38,6 +38,7 @@ export default function QSorting({ qname, cnt, a_arr, Qpic }) {
                     <ul className="match">{componentsArr}</ul>
 
                 </div>
+                <br />
 
         </div>
 

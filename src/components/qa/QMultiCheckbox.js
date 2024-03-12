@@ -28,6 +28,7 @@ export default function QMulti_checkbox({ qname, cnt, a_arr, Qpic }) {
                 <ul className="multichoice">{componentsArr}</ul>           
 
             </div>
+            <br />
         </div>
 
     )

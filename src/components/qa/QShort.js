@@ -22,6 +22,7 @@ export default function QShort({ qname, qa, Qpic }) {
                 <br/><br/>
 
             </div>
+            <br />
 
         </div>
 

@@ -53,6 +53,7 @@ export default function QMatching({ qname, a_arr, Qpic }) {
                     <ul className="match">{componentsArr}</ul>
 
                 </div>
+                <br />
 
         </div>
 

@@ -1,3 +1,4 @@
+/* basic orientation */
 *{
     padding: 0;
     margin: 0;
@@ -5,6 +6,7 @@
     list-style: none;
     box-sizing: border-box;
 }
+
 body{
     height:100%;
     margin: 0;
@@ -12,18 +14,23 @@ body{
     font-family: 'Century Gothic', arial;;
 }
 
-/* #4b5563 */
-
-.header{
-
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+/* orientation and style of home page */
+.content-block-home {
+    width: 90%;
+    text-align: left;
+    background-color: #fff;
+    color: #00335e;
+    padding: 20px;
 }
 
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 5px;
+}
+ /* style of header */
 .container{
     background: #6ad1f1;
     height: 9vh;
@@ -32,7 +39,6 @@ body{
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
 }
 
-
 .header-inner{
     height: 9vh;
     display: flex;
@@ -40,7 +46,6 @@ body{
     justify-content: space-between;
     margin-bottom: 5px;
 }
-
 
 .logo{
     padding: 3px;
@@ -72,7 +77,7 @@ body{
     background: #98dff5;
     transition: .5s;
 }
-
+ /* style of footer */
 footer {
     background: #6ad1f1;
     height: 3vh;
@@ -97,6 +102,7 @@ footer p {
     content:"\f05a";
 }
 
+/* style of headlines */
 h1 {
     display: inherit;
     vertical-align: top;
@@ -123,22 +129,7 @@ h3 {
     padding-bottom: 10px;
 }
 
-.home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    margin-top: 5px;
-}
-
-.content-block-home {
-    width: 90%;
-    text-align: left;
-    background-color: #fff;
-    padding: 20px;
-}
-
-/* Ориентация страниц с контентом в main */
+/* orientation of work pages */
 main {
     display: flex;
     justify-content: center;
@@ -165,8 +156,7 @@ main {
     padding: 4%;
 }
 
-
-/* spisok */
+/* demo list of tests */
 .accordion {
     background-color: #eee;
     color: #444;
@@ -196,6 +186,7 @@ main {
     content: "\2212";
 }
 
+/* button to open test */
 .open-test {
     outline:none;
     height: 35px;
@@ -223,6 +214,7 @@ main {
     top: 2px;
 }
 
+/* style of test list and different types*/
 .test-list {
     color: #00335e;
     width: 100%;
@@ -261,15 +253,6 @@ main {
     border-radius:10px;
 }
 
-/*
-.training {
-    background-color: #8affbd; 
-}
-
-.debugging {
-    background-color: #ffff66; 
-}
-
 /* subject content */
 .link-list {
     list-style-type: none;
@@ -288,7 +271,7 @@ main {
     padding: 5px;
 }
 
-/* button */
+/* button in test */
 .btn {
     border: none;
     border-radius: 10px;
@@ -319,7 +302,6 @@ main {
 .btn-1:hover {
     background: #27ae60;
 }
-
 .btn-1:active {
     background: #27ae60;
     top: 2px;
@@ -333,13 +315,12 @@ main {
 .btn-2:hover {
     background: #00bfff;
 }
-
 .btn-2:active {
     background: #00bfff;
     top: 2px;
 }
 
-.btn-fin {
+/*.btn-fin {
     outline:none;
     height: 40px;
     text-align: center;
@@ -366,8 +347,9 @@ main {
 
 .btn-fin:active {
     background: #b8b8b8;
-}
+}*/
 
+/* fin button */
 .btn-fin2 {
     outline:none;
     height: 40px;
@@ -405,6 +387,7 @@ main {
     flex-wrap: wrap;
 }
 
+/* questions menu */
 .test-menu {
     width: 18%;
     top: 10%;
@@ -438,7 +421,7 @@ main {
     
 }
 
-/*input from select*/
+/*input from select
 .dropdown {
 
     display: flex;
@@ -464,9 +447,9 @@ main {
     flex-wrap: wrap;
     margin-right: 20px;
     min-width: 30%;
-}
- /* select */
+}*/
 
+/* question field */
 fieldset {
     font-size: 18px;
     font-weight: bold; 
@@ -477,20 +460,18 @@ fieldset {
     margin-left: 20px;    
 }
 
-/* style of matches */
-
+/* style of matches question */
 .matches {
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-  }
+}
 
 .matches label {
     width: 50%;
 }
 
-  
 .select {
     font-size: inherit;
     min-width: 20%;
@@ -506,8 +487,7 @@ fieldset {
     /*background-image: linear-gradient(to top, #AFDAFC, #fff 100%);*/
 }
 
-  /*style of input */
-
+/*style of input question */
 input {
     margin-left: 10px;
     margin-right: 10px;
@@ -531,8 +511,7 @@ input[type='text'] {
     width: 50%;
 }
 
-  /*style of pictures*/
-
+/*style of pictures*/
 .question-pic {
     height: 400px;
     margin-left: 10px;

@@ -1,4 +1,4 @@
-import React, { Component, useState} from 'react'
+import React, {useState} from 'react'
 import QShort from '../components/qa/QShort'
 import QMultiRadio from '../components/qa/QMultiRadio'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
@@ -11,6 +11,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+
+import Timer from "../components/Timer";
 
 export default function Attestation() {
 
@@ -31,6 +33,12 @@ export default function Attestation() {
     answersC = [];
     answersS = [];
     answersM = [];
+
+    let answersRpic, answersCpic, answersSpic, answersMpic;
+    answersRpic = [];
+    answersCpic = [];
+    answersSpic = [];
+    answersMpic = [];
 
     let idrcs,i;
     let aidar = [];
@@ -55,6 +63,25 @@ export default function Attestation() {
         }
         else {
             answersM.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
+        }
+    }
+
+    for (i = 0; i < 3; i++) {
+        idrcs = i + "r";
+        answersRpic.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{ "url": "../img/testpic.jpg" } ] });
+        idrcs = i + "c";
+        answersCpic.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{ "url" : "../img/testpic.jpg" } ] });
+        idrcs = i + "s";
+        answersSpic.push({ id: idrcs, answer: "answer" + i, number: 1 });
+    }
+
+    for (i = 0; i < 5; i++) {
+        idrcs = i + "m";
+        if (i % 2 === 0) {
+            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
+        }
+        else {
+            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
         }
     }
 
@@ -148,7 +175,7 @@ export default function Attestation() {
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
 
                 <a className="btn btn-1" onClick={handleClickOpenWarn}> &nbsp;Предупреждение&nbsp; </a>
-                        <Dialog open={open} onClose={handleClose} aria-aria-labelledby="warning">
+                        <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
                            <DialogTitle id="warning">Предупреждение</DialogTitle> 
                             <DialogContent>
                                 <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите продолжить?</DialogContentText>
@@ -382,11 +409,13 @@ export default function Attestation() {
                     <br /><br />
 
                     <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={"../img/testpic.jpg"} />
-                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={"../img/testpic.jpg"} />
-                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={"../img/testpic.jpg"} />
-                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={"../img/testpic.jpg"} />
-                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={"../img/testpic.jpg"} />
+                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={"../img/testpic.jpg"} />
+                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={"../img/testpic.jpg"} />
+                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={"../img/testpic.jpg"} />
+                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={"../img/testpic.jpg"} />
                     <br />
+
+                    <Timer dl={"December, 31, 2022"} />
 
             </fieldset>
 

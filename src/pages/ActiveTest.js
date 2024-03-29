@@ -51,7 +51,7 @@ const ActiveTest = () => {
         let unanswered = false;
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//check answered
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 setQuestionList(response.data);
             })
             .catch(err => console.log(err));
@@ -209,13 +209,13 @@ const ActiveTest = () => {
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + localStorage.getItem("question_id") + '/answer';
 
-        console.log(url);
-        console.log(Payload);
+        //console.log(url);
+        //console.log(Payload);
 
         if (Payload !== "DONOTSEND") {
             axios.post(url, Payload)
                 .then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     //localStorage.setItem("question_id", response.data.item.id);
                     //setQuestion(response.data.item);
                     //console.log(response.data.item);
@@ -243,6 +243,41 @@ const ActiveTest = () => {
 
         axios.get(url)
             .then(function (response) {
+                //console.log(response);
+                localStorage.setItem("question_id", response.data.id);
+                setQuestion(response.data);
+            })
+            .catch(err => console.log(err));
+
+    }
+
+    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev, changes button method
+
+        //send answer/don't send
+        let Payload = prepPayload();
+
+        console.log(Payload);
+
+        if (question_list[question_list.length - 1].id === question_id) {//set first\last
+            set_last(true);
+        }
+        else {
+            set_last(false);
+        }
+        if (question_list[0].id === question_id) {
+            set_first(true);
+        }
+        else {
+            set_first(false);
+        }
+
+        getBoxes();
+
+        //load question
+        let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
+
+        axios.get(url)
+            .then(function (response) {
                 console.log(response);
                 localStorage.setItem("question_id", response.data.id);
                 setQuestion(response.data);
@@ -254,7 +289,7 @@ const ActiveTest = () => {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    handleSendOne(question_list[i + 1].id);
+                    handleSendOne_debug(question_list[i + 1].id);
                 }
             }
         }
@@ -263,7 +298,7 @@ const ActiveTest = () => {
         if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    handleSendOne(question_list[i - 1].id);
+                    handleSendOne_debug(question_list[i - 1].id);
                 }
             }
         }
@@ -274,7 +309,7 @@ const ActiveTest = () => {
 
         axios.patch(url)
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 localStorage.removeItem("session_id");
                 localStorage.removeItem("question_id");
                 localStorage.removeItem("question_list");
@@ -327,7 +362,7 @@ const ActiveTest = () => {
                     <div className="test-menu">
                         {menubtns && started && loaded &&
                             menubtns.map(btn => (
-                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
+                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne_debug(btn.id) }}>
                                     <span>{btn.num}</span>
                                 </button>
                             ))

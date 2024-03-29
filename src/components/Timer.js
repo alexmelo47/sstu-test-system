@@ -29,22 +29,22 @@ const Timer = ({ dl }) => {
 
             <ul className="timer">
                 <li className="">
-                    <span className="text"> Days &nbsp; </span><br/>  
+                    <span className="text"> Дней &nbsp; </span><br/>  
                     <span id="day">{days < 10 ? 0 + days : days }</span>                                      
                 </li>
                     
                 <li className="">
-                    <span className="text"> Hours &nbsp; </span><br/>  
+                    <span className="text"> Часов &nbsp; </span><br/>  
                     <span id="hour">{hours < 10 ? 0 + hours : hours }</span>                                 
                 </li>
                         
                 <li className="">
-                    <span className="text"> Minutes &nbsp; </span><br/>  
+                    <span className="text"> Минут &nbsp; </span><br/>  
                     <span id="minute">{minutes < 10 ? 0 + minutes : minutes }</span>                          
                 </li>
                         
                 <li className=""> 
-                    <span className="text"> Seconds &nbsp; </span><br/>   
+                    <span className="text"> Секунд &nbsp; </span><br/>   
                     <span id="second">{seconds < 10 ? 0 + seconds : seconds }</span>                                  
                 </li>
             </ul>

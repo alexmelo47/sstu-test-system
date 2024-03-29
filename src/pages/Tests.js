@@ -43,7 +43,7 @@ const Tests = () => {
                         </ul>
                         {tests &&
                             tests.map(test => (
-                                <Test key={test.id} tid={test.id} name={test.name} discipline={test.disciplines[0].name} status={test.status} time={test.endedAt}/>
+                                <Test key={test.id} tid={test.id} status={test.status} adaptive={test.adaptive} name={test.name} discipline={test.disciplines[0].name} time={test.endedAt} />
                             ))   
                         }
                     </div>

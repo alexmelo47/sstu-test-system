@@ -6,7 +6,7 @@ export default function PictureQ({ src }) {
     Компонент картинки в вопросе
     */
 
-    if (src === null) {
+    if (src === null || src === "") {
         return (
             <div style={{ display: 'none' }} ></div>
         )

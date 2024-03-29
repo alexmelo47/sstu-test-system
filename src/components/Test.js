@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Test = ({ tid, name, discipline, status, time }) => {
+const Test = ({ tid, status, adaptive, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
     if (status === "WIP"){
         return (
             <div>
@@ -14,6 +14,7 @@ const Test = ({ tid, name, discipline, status, time }) => {
                     </li>
                 </ul>
             </div>
+
         )
     }
     if (status === "TRAINING"){

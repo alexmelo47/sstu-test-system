@@ -513,11 +513,44 @@ input[type='text'] {
 
 /*style of pictures*/
 .question-pic {
-    height: 400px;
+    max-height: 400px;
+    min-height: 200px;
     margin-left: 10px;
 }
 
 .answer-pic {
-    height: 250px;
+    max-height: 250px;
+    min-height: 100px;
     margin-left: 10px;
+}
+
+/* timer */
+.timer-position {
+    width: 18%;
+    top: 10%;
+    left: 1%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    vertical-align: middle;
+}
+
+.timer {
+    color: #00335e;
+
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    display: table;
+    table-layout: fixed;
+    font-weight: bold;  
+    border: 3px solid #00335e;
+    border-radius: 10px;
+}
+
+.timer li {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
 }

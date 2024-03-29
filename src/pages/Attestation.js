@@ -16,13 +16,22 @@ import Timer from "../components/Timer";
 
 export default function Attestation() {
 
-        
+    //тестовая форма предупреждения вопросов без ответов    
     const[open, setOpen] = React.useState(false);
     const handleClickOpenWarn = () => {
       setOpen(true);
     }
     const handleClose = () => {
       setOpen(false);
+    }
+
+    //тестовая форма информации о тесте
+    const [open2, setOpenTest] = React.useState(false);
+    const handleClickOpenTest = () => {
+        setOpenTest(true);
+    }
+    const handleCloseTest = () => {
+        setOpenTest(false);
     }
 
     //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
@@ -125,6 +134,10 @@ export default function Attestation() {
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
         </div>
+
+        <div className="timer-position">
+        <Timer dl={"December, 31, 2022"} />
+        </div>
         
             <div className="content-block">
                 <br />
@@ -133,7 +146,26 @@ export default function Attestation() {
                         <li>Математика</li>
                         <li>Итоговый</li>
                         <li>Доступ до:</li>
-                        <li><button className="open-test">Открыть тест</button></li>
+                        <li><button className="open-test" onClick={handleClickOpenTest}>Открыть тест</button>
+                        <Dialog open={open2} onClose={handleCloseTest} aria-labelledby="test-info">
+                           <DialogTitle id="test-info">Название теста</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText><b>Дисциплина:</b>  /Название дисциплины/</DialogContentText>
+                                <DialogContentText><b>Преподаватель:</b> /ФИО преподавателя/ </DialogContentText>
+                                <DialogContentText><b>Тест доступен до:</b> /Дата закрытия доступа к тесту/ </DialogContentText>
+                                <DialogContentText><b>Время на выполнение теста (минут):</b> /количество/ </DialogContentText>
+                                <DialogContentText><b>Количество попыток:</b> /количество/  </DialogContentText>
+                                <DialogContentText><b>Результаты тестирования:</b>  /Требует уточнений/.</DialogContentText>
+                                <DialogContentText><b>Проверяемые компетенции:</b> /список/</DialogContentText>
+                                <DialogContentText><b>Инструкция к выполнению:</b> <br/>Вам необходимо выполнить /количество/ заданий. Перечень заданий изображен в виде светлых кнопок в правом верхнем углу экрана. Каждое задание вызывается нажатием на соответствующую кнопку. Время, оставшееся до конца тестирования, показано /Уточнить у Влада/.
+                                                  <br/>Вы можете  выполнять задания в любом порядке, возвращаться к уже выполненному заданию и изменять Ваш ответ.  Кнопки, соответствующие уже выполненным заданиям, меняют свой цвет.  Для окончания тестирования нажмите кнопку /Уточнить у Влада/. </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleCloseTest} color="primary">Начать тест</Button>
+                                <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
+                            </DialogActions>
+                        </Dialog>
+                        </li>
                     </ul>
                 </div>
 
@@ -185,6 +217,8 @@ export default function Attestation() {
                                 <Button onClick={handleClose} color="primary">Нет</Button>
                             </DialogActions>
                         </Dialog>
+
+                
 
                 <div className="question">
                     <br/>Microsoft Office Word это ... <br/><br/>
@@ -415,7 +449,7 @@ export default function Attestation() {
                     <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={"../img/testpic.jpg"} />
                     <br />
 
-                    <Timer dl={"December, 31, 2022"} />
+                    
 
             </fieldset>
 

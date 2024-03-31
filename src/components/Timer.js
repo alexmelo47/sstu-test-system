@@ -22,7 +22,7 @@ const Timer = ({ dl }) => {
         const interval = setInterval(() => getTime(deadline), 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    });
 
     return (
         <div className="t" role="timer">

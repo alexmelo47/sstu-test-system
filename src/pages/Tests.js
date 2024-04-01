@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
 import Test from '../components/Test'
 import axios from 'axios'
 
@@ -43,14 +42,11 @@ const Tests = () => {
                         </ul>
                         {tests &&
                             tests.map(test => (
-                                <Test key={test.id} tid={test.id} status={test.status} adaptive={test.adaptive} name={test.name} discipline={test.disciplines[0].name} time={test.endedAt} />
+                                <Test key={test.id} tid={test.id} status={test.status} method={test.method} name={test.name} discipline={test.disciplines[0].name} teacher={test.author} time={test.endedAt} />
                             ))   
                         }
                     </div>
                 </div>
-
-                <div><Link to="/preview/"><h3>Тест для отладки</h3></Link></div> 
-        
             </div>
         </main>
     )

@@ -7,47 +7,15 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
-const Test = ({ tid, status, adaptive, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
+const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
 
-    const [openDescr, setOpenTest] = React.useState(false);//REMINDER - we have only one handler(state) for all forms, will it work?
+    const [openDescr, setOpenTest] = React.useState(false);
     const handleClickOpenTest = () => {
         setOpenTest(true);
     }
     const handleCloseTest = () => {
         setOpenTest(false);
     }
-
-    let descr = [];
-    descr.push(
-        <Dialog open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
-            <DialogTitle id="test-info">Название теста</DialogTitle>
-            <DialogContent>
-                <DialogContentText><b>Дисциплина:</b>  /Название дисциплины/</DialogContentText>
-                <DialogContentText><b>Преподаватель:</b> /ФИО преподавателя/ </DialogContentText>
-                <DialogContentText><b>Тест доступен до:</b> /Дата закрытия доступа к тесту/ </DialogContentText>
-                <DialogContentText><b>Время на выполнение теста (минут):</b> /количество/ </DialogContentText>
-                <DialogContentText><b>Количество попыток:</b> /количество/  </DialogContentText>
-
-                <DialogContentText><b>Проверяемые компетенции:</b> /список/</DialogContentText>
-                {adaptive === null && <DialogContentText>
-                    <b>Инструкция к выполнению:</b> <br />Вам необходимо выполнить /количество/ заданий. Перечень заданий изображен в виде светлых кнопок в правом верхнем углу экрана. Каждое задание вызывается нажатием на соответствующую кнопку. Время, оставшееся до конца тестирования, показано.
-                    <br />Вы можете  выполнять задания в любом порядке, возвращаться к уже выполненному заданию и изменять Ваш ответ.  Кнопки, соответствующие уже выполненным заданиям, меняют свой цвет.  Для окончания тестирования нажмите кнопку “завершить тестирование”.
-                </DialogContentText>}
-                {adaptive === null && <DialogContentText>
-                    Вы выполняете адаптивный тест в диалоге с компьютером. Выполните первое задание, предложенное компьютером. Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
-                    Максимальное количество заданий в тесте /количество/, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
-                </DialogContentText>}
-                {adaptive === null && <DialogContentText>
-                    Вы выполняете адаптивное тестирование, позволяющее оценить уровень сформированности сразу нескольких Ваших компетенций.  Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
-                    Максимальное количество заданий в тесте /количество/, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете. 
-                </DialogContentText>}
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); window.location.href = 'https://maile.fita.cc/activetest/'; }} color="primary">Начать тест</Button>
-                <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
-            </DialogActions>
-        </Dialog>
-    );
 
     let styles = ["test-list wip", "test-list training", "test-list intermediate", "test-list examinational", "test-list debug"];
     let titles = ["В разработке", "Тренировочный", "Промежуточный", "Итоговый", "Отладка"];
@@ -91,12 +59,41 @@ const Test = ({ tid, status, adaptive, name, discipline, teacher, time, try_time
                     <button onClick={handleClickOpenTest} className="open-test">Открыть тест</button>
                 </li>
             </ul>
-            {descr}
+            <Dialog open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
+                <DialogTitle id="test-info">Название теста</DialogTitle>
+                <DialogContent>
+                    <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
+                    <DialogContentText><b>Преподаватель:</b> {teacher.lastName} {teacher.firstName} {teacher.patronymic}</DialogContentText>
+                    <DialogContentText><b>Тест доступен до:</b> {time}</DialogContentText>
+                    <DialogContentText><b>Время на выполнение теста (минут):</b> /количество/ </DialogContentText>
+                    <DialogContentText><b>Количество попыток:</b> /количество/  </DialogContentText>
+
+                    <DialogContentText><b>Проверяемые компетенции:</b> /список/</DialogContentText>
+                    {method === "CLASSIC" && <DialogContentText>
+                        <b>Инструкция к выполнению:</b> <br />Вам необходимо выполнить /количество/ заданий. Перечень заданий изображен в виде светлых кнопок в правом верхнем углу экрана. Каждое задание вызывается нажатием на соответствующую кнопку. Время, оставшееся до конца тестирования, показано.
+                        <br />Вы можете  выполнять задания в любом порядке, возвращаться к уже выполненному заданию и изменять Ваш ответ.  Кнопки, соответствующие уже выполненным заданиям, меняют свой цвет.  Для окончания тестирования нажмите кнопку “завершить тестирование”.
+                    </DialogContentText>}
+                    {method === "ADAPTIVE" && <DialogContentText>
+                        Вы выполняете адаптивный тест в диалоге с компьютером. Выполните первое задание, предложенное компьютером. Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
+                        Максимальное количество заданий в тесте /количество/, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
+                    </DialogContentText>}
+                    {method === null && <DialogContentText>
+                        Вы выполняете адаптивное тестирование, позволяющее оценить уровень сформированности сразу нескольких Ваших компетенций.  Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
+                        Максимальное количество заданий в тесте /количество/, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
+                    </DialogContentText>}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тест</Button>
+                    <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
 
 export default Test
+
+//window.location.href ПОМЕНЯТЬ ПОД РЕЛИЗ
 
 /* адаптивное 1м
 Вы выполняете адаптивный тест в диалоге с компьютером. Выполните первое задание, предложенное компьютером. Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.  

@@ -20,11 +20,11 @@ const baseURL = "https://maile.fita.cc";
 const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
+    let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true; //don't forget to clen up all localstorage items
     const [question, setQuestion] = useState([]);
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
     const [loaded, set_loaded] = useState(false);
-    const [is_adaptive_test] = useState(false);                 //don't forget to clen up all localstorage items ---> localStorage.getItem("adaptive")
     const [is_last, set_last] = useState(false);
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
@@ -360,7 +360,7 @@ const ActiveTest = () => {
                 <fieldset>
 
                     <div className="test-menu">
-                        {menubtns && started && loaded &&
+                        {menubtns && started && loaded && !is_adaptive_test &&
                             menubtns.map(btn => (
                                 <button key={btn.num} className={btn.style} onClick={() => { handleSendOne_debug(btn.id) }}>
                                     <span>{btn.num}</span>

@@ -42,7 +42,13 @@ const Tests = () => {
                         </ul>
                         {tests &&
                             tests.map(test => (
-                                <Test key={test.id} tid={test.id} status={test.status} method={test.method} name={test.name} discipline={test.disciplines[0].name} teacher={test.author} time={test.endedAt} />
+                                <Test
+                                    key={test.id} tid={test.id}
+                                    status={test.status} method={test.method}
+                                    name={test.name} discipline={test.disciplines[0]?.name} teacher={test.author}
+                                    time={new Date(test.endedAt).toString()} try_time={test.duration} try_cnt={test.attempts}
+                                    testing_attr={test.competences} q_cnt={test.count}
+                                />
                             ))   
                         }
                     </div>

@@ -142,7 +142,7 @@ const ActiveTest = () => {
             "text": null
         }
 
-        if (question.type === "MULTIPLE_CHOICE") {
+        if (question.itemType === "MULTIPLE_CHOICE") {
             let chosen_radio = document.getElementsByClassName("radioboxes");
 
             for (let i = 0; i < chosen_radio.length; i++) {
@@ -152,7 +152,7 @@ const ActiveTest = () => {
                 }
             }
         }
-        else if (question.type === "MULTIPLE_ANSWER") {
+        else if (question.itemType === "MULTIPLE_ANSWER") {
             answerload = [];
             let chosen_boxes = document.getElementsByClassName("checkboxes");
 
@@ -163,11 +163,11 @@ const ActiveTest = () => {
                 }
             }
         }
-        else if (question.type === "TEXT" || question.type === "NUMBER") {
+        else if (question.itemType === "TEXT" || question.itemType === "NUMBER") {
             answerload = document.getElementById("AnsShort").value;
             Payload.text = answerload;
         }
-        else if (question.type === "SORTING") {
+        else if (question.itemType === "SORTING") {
             answerload = [];
             let chosen_order = document.getElementsByClassName("orderboxes");
 
@@ -177,7 +177,7 @@ const ActiveTest = () => {
                 Payload.answer.push({ "id": Number(chosen_order[i].value) });
             }
         }
-        else if (question.type === "MATCHING") {
+        else if (question.itemType === "MATCHING") {
             answerload = [];
             let chosen_matches = document.getElementsByClassName("matchboxes");
 
@@ -251,7 +251,7 @@ const ActiveTest = () => {
 
     }
 
-    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev, changes button method
+    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, changes button method
 
         //send answer/don't send
         let Payload = prepPayload();
@@ -305,6 +305,9 @@ const ActiveTest = () => {
     }
 
     function handleSendAll() {
+
+        handleSendOne_debug(question.id);
+
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
 
         axios.patch(url)
@@ -369,11 +372,11 @@ const ActiveTest = () => {
                         }
                     </div>
 
-                    {question.type === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                    {question.type === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                    {(question.type === "TEXT" || question.type === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} Qpic={question.pictures[0] ?? ""} />}
-                    {question.type === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                    {question.type === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {(question.itemType === "TEXT" || question.itemType === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
 
                 </fieldset>
 

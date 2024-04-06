@@ -6,7 +6,6 @@ import QSorting from '../components/qa/QSorting'
 import QMatching from '../components/qa/QMatching'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
-//import MenuBox from '../components/ComponentsDev/MenuBox'
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -119,12 +118,12 @@ const ActiveTest = () => {
         axios.post(baseURL + '/sessions', Payload)//main load
             .then(function (response) {
 
-                getBoxes();
-
                 console.log(response);
                 localStorage.setItem("session_id", response.data.id);
                 localStorage.setItem("question_id", response.data.item.id);
                 setQuestion(response.data.item);
+
+                getBoxes();
 
                 set_loaded(!loaded);
                 set_started(!started);
@@ -244,8 +243,8 @@ const ActiveTest = () => {
         axios.get(url)
             .then(function (response) {
                 //console.log(response);
-                localStorage.setItem("question_id", response.data.id);
-                setQuestion(response.data);
+                localStorage.setItem("question_id", response.data.item.id);
+                setQuestion(response.data.item);
             })
             .catch(err => console.log(err));
 
@@ -279,11 +278,11 @@ const ActiveTest = () => {
         axios.get(url)
             .then(function (response) {
                 console.log(response);
-                localStorage.setItem("question_id", response.data.id);
-                setQuestion(response.data);
+                localStorage.setItem("question_id", response.data.item.id);
+                setQuestion(response.data.item);
+                console.log(question);
             })
             .catch(err => console.log(err));
-
     }
     function handleNext() {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
@@ -352,7 +351,7 @@ const ActiveTest = () => {
                 <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
                     <DialogTitle id="warning">Предупреждение</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите продолжить?</DialogContentText>
+                        <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите завершить тестирование?</DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleAccept} color="primary">Да</Button>
@@ -384,10 +383,11 @@ const ActiveTest = () => {
                         {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}
                         {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий" />}
                         {started && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
+                        {started && is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Подтвердить ответ" />}
                 </div>
                 
                 <div>
-                {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
+                    {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
                 </div>
 
             </div>

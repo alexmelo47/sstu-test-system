@@ -53,14 +53,15 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
             <ul className={this_style} >
                 <li>{name}</li>
                 <li>{discipline}</li>
+                <li>{testing_attr}</li>
                 <li>{this_title}</li>
                 <li>{time}</li>
                 <li>
-                    <button onClick={handleClickOpenTest} className="open-test">Открыть тест</button>
+                    <button onClick={handleClickOpenTest} className="open-test">Выбрать тест</button>
                 </li>
             </ul>
             <Dialog open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
-                <DialogTitle id="test-info">Название теста</DialogTitle>
+                <DialogTitle id="test-info">{name}</DialogTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
                     <DialogContentText><b>Преподаватель:</b> {teacher.name}</DialogContentText>
@@ -83,7 +84,7 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                     </DialogContentText>}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тест</Button>
+                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</Button>
                     <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
                 </DialogActions>
             </Dialog>

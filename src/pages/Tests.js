@@ -24,18 +24,17 @@ const Tests = () => {
     }
   }
  
- //СДЕЛАТЬ НОРМАЛЬНЫЙ ПЕРЕХОД К ОПИСАНИЮ ТЕСТА И САМОМУ ТЕСТУ
     return (
         <main>
             <div className="content-block">
-                <div className="distant"><h2>Тесты текущего семестра</h2></div>
             
                 <button className="accordion" onClick={getTests}>Доступные тесты</button> 
                 <div className="panel">
                     <div>
                         <ul className="test-list">
                             <li>Название</li>
-                            <li>Дисциплина</li>
+                            <li>Дисциплины</li>
+                            <li>Компетенции</li>
                             <li>Тип</li>
                             <li>Время окончания</li>
                             <li></li>

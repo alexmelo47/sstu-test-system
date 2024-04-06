@@ -5,8 +5,9 @@ export default function PictureQ({ src }) {
     /*
     Компонент картинки в вопросе
     */
+    let src2 = src.url;
 
-    if (src === null || src === "") {
+    if (src2 === null || src2 === "" || src2 === undefined) {
         return (
             <div style={{ display: 'none' }} ></div>
         )
@@ -14,7 +15,7 @@ export default function PictureQ({ src }) {
     else
     {
         return (
-            <img className="question-pic" src={src} alt={""} />
+            <img className="question-pic" src={src2} alt={""} />
         )
     }
 }

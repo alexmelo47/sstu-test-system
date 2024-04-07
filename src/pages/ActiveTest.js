@@ -103,7 +103,7 @@ const ActiveTest = () => {
                 //menubtns.concat(resp_menu.data);
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
-                    resp_menu.data[i].answered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
+                    resp_menu.data[i].isAnswered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
                     temp_arr[i].num = i + 1;
                 }
 
@@ -121,7 +121,7 @@ const ActiveTest = () => {
         axios.post(baseURL + '/sessions', Payload)//main load
             .then(function (response) {
 
-                console.log(response);
+                //console.log(response);
                 localStorage.setItem("session_id", response.data.id);
                 localStorage.setItem("question_id", response.data.item.id);
                 setTime(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000));
@@ -284,7 +284,7 @@ const ActiveTest = () => {
                 console.log(response);
                 localStorage.setItem("question_id", response.data.item.id);
                 setQuestion(response.data.item);
-                console.log(question);
+                //console.log(question);
             })
             .catch(err => console.log(err));
     }

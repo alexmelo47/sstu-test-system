@@ -14,6 +14,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
+import Timer from "../components/Timer";
+
 const baseURL = "https://maile.fita.cc";
 
 const ActiveTest = () => {
@@ -21,6 +23,7 @@ const ActiveTest = () => {
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true; //don't forget to clen up all localstorage items
     const [question, setQuestion] = useState([]);
+    const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
     const [loaded, set_loaded] = useState(false);
@@ -121,6 +124,7 @@ const ActiveTest = () => {
                 console.log(response);
                 localStorage.setItem("session_id", response.data.id);
                 localStorage.setItem("question_id", response.data.item.id);
+                setTime(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000));
                 setQuestion(response.data.item);
 
                 getBoxes();
@@ -369,6 +373,10 @@ const ActiveTest = () => {
                                 </button>
                             ))
                         }
+                    </div>
+
+                    <div className="timer-position">
+                        {started && timer && <Timer dl={timer} />}
                     </div>
 
                     {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}

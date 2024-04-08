@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Timer = ({ dl }) => {
 
-    const [days, setDays] = useState(0);
+    //const [days, setDays] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
@@ -12,7 +12,7 @@ const Timer = ({ dl }) => {
     const getTime = () => {
         const time = Date.parse(deadline) - Date.now();
 
-        setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+        //setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
         setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
         setMinutes(Math.floor((time / 1000 / 60) % 60));
         setSeconds(Math.floor((time / 1000) % 60));
@@ -28,11 +28,8 @@ const Timer = ({ dl }) => {
         <div className="t" role="timer">
 
             <ul className="timer">
-                <li className="">
-                    <span className="text"> Дней &nbsp; </span><br/>  
-                    <span id="day">{days < 10 ? 0 + days : days }</span>                                      
-                </li>
-                    
+                
+                <span className="text"> Времени осталось &nbsp; </span><br />
                 <li className="">
                     <span className="text"> Часов &nbsp; </span><br/>  
                     <span id="hour">{hours < 10 ? 0 + hours : hours }</span>                                 
@@ -54,3 +51,10 @@ const Timer = ({ dl }) => {
 };
 
 export default Timer;
+
+/*
+<li className="">
+    <span className="text"> Дней &nbsp; </span><br/>  
+    <span id="day">{days < 10 ? 0 + days : days }</span>                                      
+</li>
+*/

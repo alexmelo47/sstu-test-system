@@ -22,6 +22,7 @@ export default function Header() {
     /* авторизация через модальное окно */ 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpenRemind] = React.useState(false);
+    const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
     const handleClickOpen = () => {
@@ -37,6 +38,15 @@ export default function Header() {
     const handleCloseRemind = () => {
         setOpenRemind(false);
     }
+
+    
+    const handleOpenWrongPass = () => {
+        setOpenWrongPass(true);
+    }
+    const handleCloseWrongPass = () => {
+        setOpenWrongPass(false);
+    }
+
 
     const handleAuth = () => {  //Запрос авторизации
         const loginPayload = {
@@ -105,6 +115,11 @@ export default function Header() {
                                 <DialogActions>     
                                     <Button onClick={handleAuth} color="primary">Авторизация</Button>  
                                 </DialogActions>
+
+                                <DialogActions>     
+                                    <Button onClick={handleOpenWrongPass} color="primary">Неверный ввод</Button>  
+                                </DialogActions>
+
                             </Dialog>
 
                             <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
@@ -124,6 +139,17 @@ export default function Header() {
                                     <Button onClick={handleCloseRemind} color="primary">Напомнить данные</Button>
                                 </DialogActions>
                             </Dialog>
+
+                            <Dialog open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
+                                <DialogTitle id="warning">Ошибка</DialogTitle> 
+                                <DialogContent>
+                                    <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleCloseWrongPass} color="primary">Ввести заново</Button>                           
+                                </DialogActions>
+                            </Dialog>
+
 
                         </nav>
                     </div>

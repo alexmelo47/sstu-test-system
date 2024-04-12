@@ -12,7 +12,7 @@ const Tests = () => {
   localStorage.removeItem("test_name");
   localStorage.removeItem("test_author");
 
-  function getTests(){  // Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты
+  function getTests(){  //Запрос на доступные пользователю тесты
     setButtonClick(!buttonClick)
     if(buttonClick){
         axios.get(baseURL + "/tests").then((tests) => {
@@ -58,6 +58,7 @@ const Tests = () => {
 }
 
 export default Tests
+
 //            <script>
 //               var acc = document.getElementsByclassNameName("accordion");
 //                var i;

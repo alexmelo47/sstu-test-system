@@ -12,7 +12,6 @@ export default function QMulti_checkbox({ qname, cnt, a_arr, Qpic }) {
     return (
         /* 
         Компонент условия вопроса с несколькими правильными вариантами ответа
-        ДОБАВИТЬ картинку в ОТВЕТ
         */
   
         <div>

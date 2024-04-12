@@ -12,7 +12,6 @@ export default function QMulti_radio({ qname, cnt, a_arr, Qpic }) {
     return (
         /* 
         Компонент условия вопроса с одним вариантом ответа
-        ДОБАВИТЬ картинку в ОТВЕТ
         */
   
         <div>

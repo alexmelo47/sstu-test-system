@@ -14,6 +14,7 @@ export default function QMatching({ qname, a_arr, Qpic }) {
     let L_cnt = 0;
     let L_ids = [];
     let L_names = [];
+    let L_pics = [];
 
     let i;
 
@@ -21,6 +22,7 @@ export default function QMatching({ qname, a_arr, Qpic }) {
         if (a_arr[i].type === "L") {
             L_ids.push(a_arr[i].id);
             L_names.push(a_arr[i].answer);
+            L_pics.push(a_arr[i].pictures[0]?.url);
             L_cnt++;
         }
         else {
@@ -32,13 +34,12 @@ export default function QMatching({ qname, a_arr, Qpic }) {
     }
 
     for (i = 0; i < L_cnt; i++) {
-        componentsArr.push(<li key={i}><AMatching cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]} name_arr={R_names} /></li>);
+        componentsArr.push(<li key={i}><AMatching cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]} name_arr={R_names} picture={L_pics[i]} /></li>);
     }
 
     return (
         /* 
         Компонент условия вопроса с соответствием
-        ДОБАВИТЬ картинку в ОТВЕТ
         */
 
         <div>

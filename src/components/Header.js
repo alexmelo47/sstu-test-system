@@ -38,8 +38,7 @@ export default function Header() {
         setOpenRemind(false);
     }
 
-    const handleAuth = () => {
-        //auth development
+    const handleAuth = () => {  //Запрос авторизации
         const loginPayload = {
             "login": document.getElementById("name").value,
             "password": document.getElementById("pass").value
@@ -59,7 +58,7 @@ export default function Header() {
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
             .catch(err => console.log(err));
-        setOpen(false);//<img src='./img/logo_sstu.png' height="30px" alt="logo"/>
+        setOpen(false);
     }
 
   return (

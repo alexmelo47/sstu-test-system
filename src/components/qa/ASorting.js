@@ -1,6 +1,7 @@
 import React from 'react'
+import PictureA from './PictureA'
 
-export default function ASorting({ cnt, aid_arr, aname, anum }) {
+export default function ASorting({ cnt, aid_arr, aname, anum, picture }) {
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
@@ -13,7 +14,8 @@ export default function ASorting({ cnt, aid_arr, aname, anum }) {
         */
 
         <div className="matches">
-            <label className="accesshide">{aname} - </label>
+            <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
+
             <select className="orderboxes select custom-select menuquest_897580_0" defaultValue={anum}>
                 {componentsArr}
             </select><br/>

@@ -1,6 +1,7 @@
 import React from 'react'
+import PictureA from './PictureA'
 
-export default function AMatching({ cnt, aid, aid_arr, aname, name_arr }) {
+export default function AMatching({ cnt, aid, aid_arr, aname, name_arr, picture }) {
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
@@ -14,7 +15,7 @@ export default function AMatching({ cnt, aid, aid_arr, aname, name_arr }) {
         добавить в select конструкцию defaultValue={anum}
         */
         <div className="matches">
-            <label className="accesshide">{aname} - </label>
+            <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
             
             <select className="matchboxes select custom-select menuquest_897580_0" id={aid}>
                 {componentsArr}

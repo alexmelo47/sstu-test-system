@@ -1,4 +1,4 @@
-import React, { useState, /*useEffect*/ } from 'react'
+import React, { useState } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
 import QShort from '../components/qa/QShort'
@@ -21,7 +21,7 @@ const baseURL = "https://maile.fita.cc";
 const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
-    let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true; //don't forget to clen up all localstorage items
+    let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
@@ -32,26 +32,11 @@ const ActiveTest = () => {
     const [finished, set_finished] = useState(false);
 
     const [menubtns, set_mb] = useState([]);
-
-    //let menubtns = [];
-   //
-   // for (var i = 0; i < 100; i++) {
-   //     menubtns.push(<Button onClick={() => { handleSendOne(i) } } className="menubox" variant="outlined">{i + 1}</Button >);//------>maybe will work somehow
-   // }
-
-    /*const [menustate, set_menustate] = useState(0);
-    useEffect(() => {
-        if (loaded) {
-            let id = question_list[menustate].id;
-            handleSendOne(id);
-        }
-        return () => {};
-    }, [menustate]);*/
     
     const [open, setOpen] = useState(false);
-    const handleClickOpenWarn = () => {
+    const handleClickOpenWarn = () => { //предупреждение о неотвеченных
         let unanswered = false;
-        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//check answered
+        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
             .then(function (response) {
                 //console.log(response);
                 setQuestionList(response.data);
@@ -75,18 +60,17 @@ const ActiveTest = () => {
         handleSendAll();
     }
 
-    //question_list[0].id !== Number(localStorage.getItem("question_id"))
-    //question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))
-    function getBoxes() {
-        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')//load boxes
+    function getBoxes() {  
+        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')   //загрузка меню
             .then(function (resp_menu) {
-                //console.log(resp_menu);//<--------------------------------------------------------DEBUG MENU
+                //console.log(resp_menu);
                 setQuestionList(resp_menu.data);
                 localStorage.setItem("question_list", resp_menu.data);
                 if (resp_menu.data.length === 1) {
                     set_last(!is_last);
                 }
 
+                //прототип нового способа
                 //for (let i = 0; i < response.data.length; i++) {
                 //set_mb( // Replace the state
                 //    [ // with a new array
@@ -99,8 +83,9 @@ const ActiveTest = () => {
                 //menubtns.push(response.data[i]);
                 //menubtns[i].name = i + 1;
                 //}
-
+                //
                 //menubtns.concat(resp_menu.data);
+
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
                     resp_menu.data[i].isAnswered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
@@ -118,7 +103,7 @@ const ActiveTest = () => {
         }
 
         //console.log(Payload);
-        axios.post(baseURL + '/sessions', Payload)//main load
+        axios.post(baseURL + '/sessions', Payload)
             .then(function (response) {
 
                 //console.log(response);
@@ -135,10 +120,9 @@ const ActiveTest = () => {
 
             })
             .catch(err => console.log(err));
-        //setTimeout(() => { } , 400);
     };
 
-    function prepPayload() {
+    function prepPayload() {    //подготовка ответов
         let answerload, Payload;
         Payload = {
             "answer": [],
@@ -205,9 +189,8 @@ const ActiveTest = () => {
         }
     }
 
-    function handleSendOne(question_id) {//move to question by id
+    function handleSendOne(question_id) {//переход к вопросу по id, отправка старого и загрузка нового
 
-        //send answer/don't send
         let Payload = prepPayload();
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + localStorage.getItem("question_id") + '/answer';
@@ -241,7 +224,7 @@ const ActiveTest = () => {
 
         getBoxes();
 
-        //load question
+        //load
         url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
         axios.get(url)
@@ -256,7 +239,6 @@ const ActiveTest = () => {
 
     function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, changes button method
 
-        //send answer/don't send
         let Payload = prepPayload();
 
         console.log(Payload);
@@ -307,7 +289,7 @@ const ActiveTest = () => {
         }
     }
 
-    function handleSendAll() {
+    function handleSendAll() {  //завершение
 
         handleSendOne_debug(question.id);
 
@@ -329,19 +311,6 @@ const ActiveTest = () => {
             .catch(err => console.log(err));
         
     }
-
-    /*
-    <div id="test-menu-test">
-                        {started && !is_adaptive_test && loaded && menubtns}
-                        <Button variant="outlined" onClick={() => { console.log(question_list) }}>test</Button>
-                    </div>
-                    {started && !is_adaptive_test && loaded && <MenuBox cnt={question_list.length} />}
-                    <Button onClick={() => { console.log(menubtns) }} color="primary">debug</Button>
-
-                    <Button variant={btn.color} onClick={() => { handleSendOne(btn.id) }}>{btn.id}</Button>
-
-                    пока в отвентах только картинки у checkbox и radio
-    */
     
     if (finished) {
         return <Navigate to="/result/" />
@@ -390,8 +359,8 @@ const ActiveTest = () => {
                 <div className="quest-btn">
                         {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}
                         {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий" />}
-                        {started && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
-                        {started && is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Подтвердить ответ" />}
+                        {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
+                        {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-2" type="submit" value="Подтвердить ответ" />}
                 </div>
                 
                 <div>

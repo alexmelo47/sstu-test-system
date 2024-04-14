@@ -52,7 +52,7 @@ export default function Header() {
                 //console.log(response);
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
-                console.log(token);
+                //console.log(token);
 
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false

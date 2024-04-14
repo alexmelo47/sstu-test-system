@@ -16,7 +16,7 @@ const Tests = () => {
     setButtonClick(!buttonClick)
     if(buttonClick){
         axios.get(baseURL + "/tests").then((tests) => {
-            console.log(tests);
+            //console.log(tests);
         setTests(tests.data)
       })
     }else{

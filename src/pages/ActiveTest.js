@@ -22,6 +22,7 @@ const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
+    let timerEject, timerReminder;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
@@ -118,6 +119,9 @@ const ActiveTest = () => {
                 set_started(!started);
                 //console.log(response.data.item);
 
+                //timerReminder = setTimeout(setOpenTimeReminder, milliseconds);
+                //timerEject = setTimeout(handleSendAll, 5000);//5 seconds
+
             })
             .catch(err => console.log(err));
     };
@@ -160,7 +164,6 @@ const ActiveTest = () => {
 
             for (let i = 0; i < chosen_order.length; i++) {
                 answerload.push(Number(chosen_order[i].value));
-                //console.log(chosen_order[i].value);//--------------------------------------------------------->debug if all works
                 Payload.answer.push({ "id": Number(chosen_order[i].value) });
             }
         }
@@ -171,11 +174,9 @@ const ActiveTest = () => {
             for (let i = 0; i < chosen_matches.length; i++) {
 
                 answerload.push(Number(chosen_matches[i].id));
-                //console.log(chosen_matches[i].id);//--------------------------------------------------------->debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].id) });
 
                 answerload.push(Number(chosen_matches[i].value));
-                //console.log(chosen_matches[i].value);//------------------------------------------------------>debug if all works
                 Payload.answer.push({ "id": Number(chosen_matches[i].value) });
 
             }
@@ -237,7 +238,7 @@ const ActiveTest = () => {
 
     }
 
-    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, changes button method
+    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, button method
 
         let Payload = prepPayload();
 
@@ -258,7 +259,7 @@ const ActiveTest = () => {
 
         getBoxes();
 
-        //load question
+        //load
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
         axios.get(url)
@@ -274,7 +275,7 @@ const ActiveTest = () => {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    handleSendOne_debug(question_list[i + 1].id);
+                    handleSendOne(question_list[i + 1].id);
                 }
             }
         }
@@ -283,7 +284,7 @@ const ActiveTest = () => {
         if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
-                    handleSendOne_debug(question_list[i - 1].id);
+                    handleSendOne(question_list[i - 1].id);
                 }
             }
         }
@@ -291,7 +292,7 @@ const ActiveTest = () => {
 
     function handleSendAll() {  //завершение
 
-        handleSendOne_debug(question.id);
+        handleSendOne(question.id);
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
 
@@ -337,7 +338,7 @@ const ActiveTest = () => {
                     <div className="test-menu">
                         {menubtns && started && loaded && !is_adaptive_test &&
                             menubtns.map(btn => (
-                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne_debug(btn.id) }}>
+                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
                                     <span>{btn.num}</span>
                                 </button>
                             ))

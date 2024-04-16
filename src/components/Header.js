@@ -17,6 +17,8 @@ import ActiveTest from '../pages/ActiveTest';
 import Result from '../pages/Result';
 import Guid from '../pages/Guid';
 
+import setAuthTokenStored from '../components/setTokenStored';
+
 export default function Header() {
 
     /* авторизация через модальное окно */ 
@@ -39,10 +41,6 @@ export default function Header() {
         setOpenRemind(false);
     }
 
-    
-    const handleOpenWrongPass = () => {
-        setOpenWrongPass(true);
-    }
     const handleCloseWrongPass = () => {
         setOpenWrongPass(false);
     }
@@ -62,6 +60,7 @@ export default function Header() {
                 //console.log(response);
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
+                setAuthTokenStored();
                 //console.log(token);
 
                 //setAuthToken(token);

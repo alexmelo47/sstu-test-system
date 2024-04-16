@@ -67,7 +67,12 @@ export default function Header() {
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                if (err.toJSON().status === 500) {
+                    setOpenWrongPass(true);
+                }
+                console.log(err);
+            });
         setOpen(false);
     }
 
@@ -116,10 +121,6 @@ export default function Header() {
                                     <Button onClick={handleAuth} color="primary">Авторизация</Button>  
                                 </DialogActions>
 
-                                <DialogActions>     
-                                    <Button onClick={handleOpenWrongPass} color="primary">Неверный ввод</Button>  
-                                </DialogActions>
-
                             </Dialog>
 
                             <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
@@ -146,7 +147,7 @@ export default function Header() {
                                     <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleCloseWrongPass} color="primary">Ввести заново</Button>                           
+                                      <Button onClick={() => { setOpenWrongPass(false); setOpen(true); } } color="primary">Ввести заново</Button>                           
                                 </DialogActions>
                             </Dialog>
 

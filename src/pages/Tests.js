@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
 import Test from '../components/Test'
 import axios from 'axios'
 
@@ -13,49 +12,53 @@ const Tests = () => {
   localStorage.removeItem("test_name");
   localStorage.removeItem("test_author");
 
-  function getTests(){  // Функция  запрашивающая по нажатию кнопки с сервера доступные пользователю тесты
+  function getTests(){  //Запрос на доступные пользователю тесты
     setButtonClick(!buttonClick)
     if(buttonClick){
         axios.get(baseURL + "/tests").then((tests) => {
-            console.log(tests);
+            //console.log(tests);
         setTests(tests.data)
       })
     }else{
       setTests([])
     }
   }
- //Название Дисциплина Тип Время_до_окончания
+ 
     return (
         <main>
             <div className="content-block">
-                <div className="distant"><h2>Тесты текущего семестра</h2></div>
             
                 <button className="accordion" onClick={getTests}>Доступные тесты</button> 
                 <div className="panel">
                     <div>
                         <ul className="test-list">
-                            <li>ИД теста</li>
                             <li>Название</li>
-                            <li>Способ</li>
-                            <li>Статус</li>
+                            <li>Дисциплины</li>
+                            <li>Компетенции</li>
+                            <li>Тип</li>
+                            <li>Время окончания</li>
                             <li></li>
                         </ul>
-                      {tests &&
-                        tests.map(test => (
-                            <Test tid={test.id} name={test.name} status={test.status} method={test.method}/>
-                        ))   
-                      }
+                        {tests &&
+                            tests.map(test => (
+                                <Test
+                                    key={test.id} tid={test.id}
+                                    status={test.status} method={test.method}
+                                    name={test.name} discipline={test.disciplines[0]?.name} teacher={test.author}
+                                    time={new Date(test.endedAt).toString()} try_time={test.duration} try_cnt={test.attempts}
+                                    testing_attr={test.competences} q_cnt={test.count}
+                                />
+                            ))   
+                        }
                     </div>
                 </div>
-
-                <div><Link to="/preview/"><h3>Тест для отладки</h3></Link></div> 
-            
             </div>
         </main>
     )
 }
 
 export default Tests
+
 //            <script>
 //               var acc = document.getElementsByclassNameName("accordion");
 //                var i;

@@ -1,3 +1,4 @@
+/* basic orientation */
 *{
     padding: 0;
     margin: 0;
@@ -5,6 +6,7 @@
     list-style: none;
     box-sizing: border-box;
 }
+
 body{
     height:100%;
     margin: 0;
@@ -12,18 +14,23 @@ body{
     font-family: 'Century Gothic', arial;;
 }
 
-/* #4b5563 */
-
-.header{
-
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+/* orientation and style of home page */
+.content-block-home {
+    width: 90%;
+    text-align: left;
+    background-color: #fff;
+    color: #00335e;
+    padding: 20px;
 }
 
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 5px;
+}
+ /* style of header */
 .container{
     background: #6ad1f1;
     height: 9vh;
@@ -32,7 +39,6 @@ body{
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
 }
 
-
 .header-inner{
     height: 9vh;
     display: flex;
@@ -40,7 +46,6 @@ body{
     justify-content: space-between;
     margin-bottom: 5px;
 }
-
 
 .logo{
     padding: 3px;
@@ -72,7 +77,7 @@ body{
     background: #98dff5;
     transition: .5s;
 }
-
+ /* style of footer */
 footer {
     background: #6ad1f1;
     height: 3vh;
@@ -97,6 +102,7 @@ footer p {
     content:"\f05a";
 }
 
+/* style of headlines */
 h1 {
     display: inherit;
     vertical-align: top;
@@ -123,22 +129,7 @@ h3 {
     padding-bottom: 10px;
 }
 
-.home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    margin-top: 5px;
-}
-
-.content-block-home {
-    width: 90%;
-    text-align: left;
-    background-color: #fff;
-    padding: 20px;
-}
-
-/* Ориентация страниц с контентом в main */
+/* orientation of work pages */
 main {
     display: flex;
     justify-content: center;
@@ -150,7 +141,7 @@ main {
 
 .content-block {
 
-    width: 66%;
+    width: 60%;
     text-align: left;
     background-color: #fff;
     padding: 20px;
@@ -165,8 +156,7 @@ main {
     padding: 4%;
 }
 
-
-/* spisok */
+/* demo list of tests */
 .accordion {
     background-color: #eee;
     color: #444;
@@ -196,34 +186,40 @@ main {
     content: "\2212";
 }
 
+/* button to open test */
 .open-test {
     outline:none;
     height: 35px;
     text-align: center;
-    width: 130px;
-    border-radius:40px;
+    width: 140px;
+    border-radius:10px;
     background: green;
-    border: 2px solid green;
+    border: 3px solid green;
     color:white;
-    letter-spacing:1px;
-    font-size: 12px;    
-    font-weight:bold;    
+    letter-spacing: 1px;
+    font-family: 'Century Gothic', arial;
+    font-size: 15px;      
     cursor: pointer;
     transition: all 0.25s ease;
     }    
+
 .open-test:hover {
+    font-size: 16px; 
     color:green;
     background: white;
 }
+
 .open-test:active {
     letter-spacing: 2px ;
     top: 2px;
 }
 
+/* style of test list and different types*/
 .test-list {
+    color: #00335e;
     width: 100%;
-    height: 45px;
-    margin: 3px;
+    height: 50px;
+    margin-top: 10px;
     display: table;
     table-layout: fixed;
     font-weight:bold;  
@@ -237,17 +233,24 @@ main {
 }
 
 .examinational {
-    border: 2px solid green;
+    border: 3px solid #1FAB89;
     border-radius:10px;
 }
-
-/*
-.training {
-    background-color: #8affbd; 
+.intermediate {
+    border: 3px solid #62D2A2;
+    border-radius:10px;
 }
-
-.debugging {
-    background-color: #ffff66; 
+.training {
+    border: 3px solid #9DF3C4;
+    border-radius:10px;
+}
+.wip {
+    border: 3px solid #005691;
+    border-radius:10px;
+}
+.debug {
+    border: 3px solid #769FCD;
+    border-radius:10px;
 }
 
 /* subject content */
@@ -268,9 +271,10 @@ main {
     padding: 5px;
 }
 
-/* button */
+/* button in test */
 .btn {
     border: none;
+    border-radius: 10px;
     font-family: 'Century Gothic', arial;;
     font-size: inherit;
     color: inherit;
@@ -298,7 +302,6 @@ main {
 .btn-1:hover {
     background: #27ae60;
 }
-
 .btn-1:active {
     background: #27ae60;
     top: 2px;
@@ -312,18 +315,17 @@ main {
 .btn-2:hover {
     background: #00bfff;
 }
-
 .btn-2:active {
     background: #00bfff;
     top: 2px;
 }
 
-.btn-fin {
+/*.btn-fin {
     outline:none;
     height: 40px;
     text-align: center;
-    width: 11%;
-    border-radius:40px;
+    width: 200px;
+    border-radius:10px;
     background: #fff;
     color: #000000;
     border: 2px solid #646464;
@@ -333,9 +335,9 @@ main {
     cursor: pointer;
     transition: all 0.25s ease;
     word-wrap: break-word;
-    position:absolute;
-    top:10%;
-    right:3%;
+    position: absolute;
+    top: 10%;
+    right: 3%;
 }
 
 .btn-fin:hover {
@@ -345,6 +347,38 @@ main {
 
 .btn-fin:active {
     background: #b8b8b8;
+}*/
+
+/* fin button */
+.btn-fin2 {
+    outline:none;
+    height: 40px;
+    text-align: center;
+    width: 200px;
+    border-radius:40px;
+    background: #fff;
+    color: #000000;
+    border-radius: 10px;
+    border: 2px solid #646464;
+    letter-spacing:1px;
+    font-size: 12px;    
+    font-weight:bold;    
+    cursor: pointer;
+    transition: all 0.25s ease;
+    word-wrap: break-word;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.btn-fin2:hover {
+    background: #646464;
+    color: white;
+}
+
+.btn-fin2:active {
+    background: #b8b8b8;
 }
 
 .quest-btn {
@@ -353,7 +387,41 @@ main {
     flex-wrap: wrap;
 }
 
-/*input from select*/
+/* questions menu */
+.test-menu {
+    width: 18%;
+    top: 10%;
+    right: 1%;
+    position:absolute;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-menu {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #646464;
+    border-radius: 10px;
+    margin: 3px;
+    font-size: 14px;    
+    font-weight: bold;
+    color: #00335e;
+}
+
+.btn-menu:hover {
+    background: #dcdcdc;
+}
+
+.btn-menu:focus {
+    border: 0.3rem solid #646464;
+}
+
+.btn-menu-answered {
+    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0) 34%, #808080 66%);
+    
+}
+
+/*input from select
 .dropdown {
 
     display: flex;
@@ -379,38 +447,33 @@ main {
     flex-wrap: wrap;
     margin-right: 20px;
     min-width: 30%;
-}
- /* select */
+}*/
 
+/* question field */
 fieldset {
     font-size: 18px;
     font-weight: bold; 
     color: #00335e;
 }
 
-.question{
+.question {
     margin-left: 20px;    
 }
 
-/* style of matches */
-
+/* style of matches question */
 .matches {
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-  }
+}
 
 .matches label {
     width: 50%;
 }
 
-select {
-    font-size: inherit;
-  }
-  
 .select {
-
+    font-size: inherit;
     min-width: 20%;
     height: 4vh;
 
@@ -421,7 +484,73 @@ select {
     line-height: 1.1;
   
     background-color: #ffffff;
-    background-image: linear-gradient(to top, #AFDAFC, #fff 100%);
-  }
+    /*background-image: linear-gradient(to top, #AFDAFC, #fff 100%);*/
+}
 
+/*style of input question */
+input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input[type='radio'] {
+    width: 1.3em;
+    height: 1.3em;
+}
   
+input[type='checkbox'] {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+input[type='text'] {
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;
+    padding-left: 10px;
+    height: 2em;
+    width: 50%;
+}
+
+/*style of pictures*/
+.question-pic {
+    max-height: 400px;
+    min-height: 200px;
+    margin-left: 10px;
+}
+
+.answer-pic {
+    max-height: 250px;
+    min-height: 100px;
+    margin-left: 10px;
+}
+
+/* timer */
+.timer-position {
+    width: 18%;
+    top: 10%;
+    left: 1%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    vertical-align: middle;
+}
+
+.timer {
+    color: #00335e;
+
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    display: table;
+    table-layout: fixed;
+    font-weight: bold;  
+    border: 3px solid #00335e;
+    border-radius: 10px;
+}
+
+.timer li {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}

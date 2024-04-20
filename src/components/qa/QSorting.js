@@ -1,22 +1,14 @@
 import React from 'react'
 import ASorting from './ASorting'
+import PictureQ from './PictureQ'
 
-export default function QSorting({ qname, cnt, a_arr }) {
+export default function QSorting({ qname, cnt, a_arr, Qpic }) {
     
     let componentsArr = [];
-    let aids = [];
-    let chosen_num = [];
-    let chosen_vals = [];
     let i;
+
     for (i = 0; i < cnt; i++) {
-        aids.push(a_arr[i].id);
-        chosen_num.push(a_arr[i].number);
-    }
-    for (i = 0; i < cnt; i++) {
-        chosen_vals.push(aids[chosen_num[i] - 1]);
-    }
-    for (i = 0; i < cnt; i++) {
-        componentsArr.push(<ASorting cnt={cnt} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} />);
+        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid_arr={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} picture={a_arr[i].pictures[0]?.url} /></li>);
     }
 
     return (
@@ -29,11 +21,14 @@ export default function QSorting({ qname, cnt, a_arr }) {
                 <div className="question">
                     <br/>
                 <p className="questiontext">{qname}</p>
-                    <br/>
+                <br />
+                <PictureQ src={Qpic} />
+                <br />
                 
                     <ul className="match">{componentsArr}</ul>
 
                 </div>
+                <br />
 
         </div>
 

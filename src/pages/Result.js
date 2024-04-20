@@ -11,12 +11,12 @@ export default class Result extends Component {
         <main>
           <div className="content-preview">
                 <h1>
-                    <i>{tname}(Преп. {author})</i>
+                    <i>{tname} (Преп. {author})</i>
                 </h1>
               <span>
-                    <br /><br /><i>Ваша оценка:{grade}<br/><br/>
+                    <br /><br /><i>Ваша оценка: {grade}<br/><br/>
                     Метод оценивания: Последняя попытка<br/><br/>   
-                    Ваше время:{time}</i><br/><br/>                
+                    Ваше время: {time}</i><br/><br/>                
               </span>
               <Link className="btn btn-1" to="/tests/">Закрыть</Link>
           </div>

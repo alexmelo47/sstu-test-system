@@ -1,6 +1,7 @@
 import React from 'react'
+import PictureA from './PictureA'
 
-export default function AMultiCheckbox({ aid, aname, selected }) {
+export default function AMultiCheckbox({ aid, aname, selected, picture }) {
     
     return (
         /* 
@@ -11,6 +12,7 @@ export default function AMultiCheckbox({ aid, aname, selected }) {
             <li>
                 <input className="checkboxes" name="quest_897582" type="checkbox" value={aid} defaultChecked={selected} />
                 <label>{aname}</label>
+                <PictureA src={picture} />
             </li>
 
             <br/>

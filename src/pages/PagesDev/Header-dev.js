@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -12,21 +12,32 @@ import Button from "@material-ui/core/Button";
 
 import Home from '../pages/Home';
 import Tests from '../pages/Tests';
+import Preview from '../pages/Preview';
 import Attestation from '../pages/Attestation';
 import ActiveTest from '../pages/ActiveTest';
 import Result from '../pages/Result';
 import Guid from '../pages/Guid';
-
-import setAuthTokenStored from '../components/setTokenStored';
 
 export default function Header() {
 
     /* авторизация через модальное окно */ 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpenRemind] = React.useState(false);
-    const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
+    useEffect(() => {
+        if (localStorage.getItem("accessToken"))
+        {
+            document.getElementById("auth").style.display = "none";
+            document.getElementById("unauth").style.display = "inline-block";
+        }
+        else
+        {
+            document.getElementById("auth").style.display = "inline-block";
+            document.getElementById("unauth").style.display = "none";
+        }
+    });
+    
     const handleClickOpen = () => {
         setOpen(true);
     }
@@ -41,12 +52,8 @@ export default function Header() {
         setOpenRemind(false);
     }
 
-    const handleCloseWrongPass = () => {
-        setOpenWrongPass(false);
-    }
-
-
-    const handleAuth = () => {  //Запрос авторизации
+    const handleAuth = () => {
+        //auth development
         const loginPayload = {
             "login": document.getElementById("name").value,
             "password": document.getElementById("pass").value
@@ -60,19 +67,16 @@ export default function Header() {
                 //console.log(response);
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
-                setAuthTokenStored();
-                //console.log(token);
+                console.log(token);
+
+                document.getElementById("auth").style.display = "none";
+                document.getElementById("unauth").style.display = "inline-block";
 
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
-            .catch((err) => {
-                if (err.toJSON().status === 500) {
-                    setOpenWrongPass(true);
-                }
-                console.log(err);
-            });
-        setOpen(false);
+            .catch(err => console.log(err));
+        setOpen(false);//<img src='./img/logo_sstu.png' height="30px" alt="logo"/>
     }
 
   return (
@@ -82,14 +86,19 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                      <div className="logo">&nbsp;Система тестирования&nbsp;АИСТ</div>
+                    <div className="logo">&nbsp;Система тестирования&nbsp;Maile</div>
 
                     <div>
                         <nav>
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                            <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
+                              <a style={{ display: "inline-block" }} id="auth" className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
+                              <a style={{ display: "none" }} id="unauth" className="nav-link" onClick={() => {
+                                  localStorage.removeItem("accessToken");
+                                  document.getElementById("auth").style.display = "inline-block";
+                                  document.getElementById("unauth").style.display = "none";
+                              }}> &nbsp;Выйти&nbsp; </a>
                             <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
                                <DialogTitle id="authorization">Авторизация</DialogTitle> 
                                 <DialogContent>
@@ -119,7 +128,6 @@ export default function Header() {
                                 <DialogActions>     
                                     <Button onClick={handleAuth} color="primary">Авторизация</Button>  
                                 </DialogActions>
-
                             </Dialog>
 
                             <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
@@ -140,17 +148,6 @@ export default function Header() {
                                 </DialogActions>
                             </Dialog>
 
-                            <Dialog open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
-                                <DialogTitle id="warning">Ошибка</DialogTitle> 
-                                <DialogContent>
-                                    <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                      <Button onClick={() => { setOpenWrongPass(false); setOpen(true); } } color="primary">Ввести заново</Button>                           
-                                </DialogActions>
-                            </Dialog>
-
-
                         </nav>
                     </div>
                 </div>
@@ -161,6 +158,7 @@ export default function Header() {
             <Routes>
                 <Route exact path="/" element={<Home/>} />
                 <Route exact path="/tests" element={<Tests/>} />
+                <Route exact path="/preview" element={<Preview/>} />
                 <Route exact path="/attestation" element={<Attestation/>} />
                 <Route exact path="/activetest" element={<ActiveTest/>} />
                 <Route exact path="/Result" element={<Result/>} />

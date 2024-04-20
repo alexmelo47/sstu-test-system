@@ -8,8 +8,8 @@ export default function AnsShort(props) {
         */
         <ul className="shortanswer/numerical">
             <li>
-                <label className="accesshide" htmlFor="AnsShort">Ответ</label>
-                <input id="AnsShort" name="answer-input" type="text" value={input} onInput={e => setInput(e.target.value)} />
+                <label className="accesshide" htmlFor="AnsShort">Ответ:</label>
+                <input id="AnsShort" name="answer-input" type="text" placeholder="Введите ответ здесь" value={input} onInput={e => setInput(e.target.value)} />
             </li>
         </ul>
 

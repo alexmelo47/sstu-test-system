@@ -1,4 +1,4 @@
-import React, { Component, useState} from 'react'
+import React, {useState} from 'react'
 import QShort from '../components/qa/QShort'
 import QMultiRadio from '../components/qa/QMultiRadio'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
@@ -12,15 +12,26 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
+import Timer from "../components/Timer";
+
 export default function Attestation() {
 
-        
+    //тестовая форма предупреждения вопросов без ответов    
     const[open, setOpen] = React.useState(false);
     const handleClickOpenWarn = () => {
       setOpen(true);
     }
     const handleClose = () => {
       setOpen(false);
+    }
+
+    //тестовая форма информации о тесте
+    const [open2, setOpenTest] = React.useState(false);
+    const handleClickOpenTest = () => {
+        setOpenTest(true);
+    }
+    const handleCloseTest = () => {
+        setOpenTest(false);
     }
 
     //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
@@ -32,6 +43,12 @@ export default function Attestation() {
     answersS = [];
     answersM = [];
 
+    let answersRpic, answersCpic, answersSpic, answersMpic;
+    answersRpic = [];
+    answersCpic = [];
+    answersSpic = [];
+    answersMpic = [];
+
     let idrcs,i;
     let aidar = [];
 
@@ -41,20 +58,39 @@ export default function Attestation() {
 
     for (i = 0; i < 3; i++) {
         idrcs = i + "r";
-        answersR.push({ id: idrcs, answer: "answer", selected: 1 });
+        answersR.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: {} });
         idrcs = i + "c";
-        answersC.push({ id: idrcs, answer: "answer", selected: 1 });
+        answersC.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: {} });
         idrcs = i + "s";
-        answersS.push({ id: idrcs, answer: "answer", number: 1 });
+        answersS.push({ id: idrcs, answer: "answer" + i, number: 1 });
     }
 
     for (i = 0; i < 5; i++) {
         idrcs = i + "m";
         if (i%2 === 0) {
-            answersM.push({ id: idrcs, answer: "answer", type: "L", number: 1 });
+            answersM.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
         }
         else {
-            answersM.push({ id: idrcs, answer: "answer", type: "R", number: 1 });
+            answersM.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
+        }
+    }
+
+    for (i = 0; i < 3; i++) {
+        idrcs = i + "r";
+        answersRpic.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{ "url": "../img/testpic.jpg" } ] });
+        idrcs = i + "c";
+        answersCpic.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{ "url" : "../img/testpic.jpg" } ] });
+        idrcs = i + "s";
+        answersSpic.push({ id: idrcs, answer: "answer" + i, number: 1 });
+    }
+
+    for (i = 0; i < 5; i++) {
+        idrcs = i + "m";
+        if (i % 2 === 0) {
+            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
+        }
+        else {
+            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
         }
     }
 
@@ -74,14 +110,104 @@ export default function Attestation() {
 
             ТЕСТОВАЯ СЕКЦИЯ КОМПОНЕНТ
         */
-        <main>
-            <input className="btn-fin" type="submit" value="Завершить тестирование"/>
-        <div className="content-block">
+    <main>
+        
+        <div className="test-menu">
+            <button className="btn-menu btn-menu-answered"><span>1</span></button>
+            <button className="btn-menu btn-menu-answered"><span>N</span></button>
+            <button className="btn-menu btn-menu-answered"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>16</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu"><span>N</span></button>
+        </div>
+
+        <div className="timer-position">
+            <Timer dl={"December, 31, 2024"} />
+        </div>
+        
+            <div className="content-block">
+                <br />
+                <div>
+                    <ul className="test-list examinational">
+                        <li>Математика</li>
+                        <li>Итоговый</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test" onClick={handleClickOpenTest}>Открыть тест</button>
+                        <Dialog open={open2} onClose={handleCloseTest} aria-labelledby="test-info">
+                           <DialogTitle id="test-info">Название теста</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText><b>Дисциплина:</b>  /Название дисциплины/</DialogContentText>
+                                <DialogContentText><b>Преподаватель:</b> /ФИО преподавателя/ </DialogContentText>
+                                <DialogContentText><b>Тест доступен до:</b> /Дата закрытия доступа к тесту/ </DialogContentText>
+                                <DialogContentText><b>Время на выполнение теста (минут):</b> /количество/ </DialogContentText>
+                                <DialogContentText><b>Количество попыток:</b> /количество/  </DialogContentText>
+                                
+                                <DialogContentText><b>Проверяемые компетенции:</b> /список/</DialogContentText>
+                                <DialogContentText><b>Инструкция к выполнению:</b> <br/>Вам необходимо выполнить /количество/ заданий. Перечень заданий изображен в виде светлых кнопок в правом верхнем углу экрана. Каждое задание вызывается нажатием на соответствующую кнопку. Время, оставшееся до конца тестирования, показано.
+                                        <br />Вы можете  выполнять задания в любом порядке, возвращаться к уже выполненному заданию и изменять Ваш ответ.  Кнопки, соответствующие уже выполненным заданиям, меняют свой цвет.  Для окончания тестирования нажмите кнопку “завершить тестирование”.</DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleCloseTest} color="primary">Начать тест</Button>
+                                <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
+                            </DialogActions>
+                        </Dialog>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list intermediate">
+                        <li>Русский</li>
+                        <li>Промежуточный</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list training">
+                        <li>Информатика</li>
+                        <li>Тренировочный</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className="test-list wip">
+                        <li>Информатика</li>
+                        <li>В разработке</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul className="test-list debug">
+                        <li>Информатика</li>
+                        <li>Отладка</li>
+                        <li>Доступ до:</li>
+                        <li><button className="open-test">Открыть тест</button></li>
+                    </ul>
+                </div>
             <fieldset>
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
 
                 <a className="btn btn-1" onClick={handleClickOpenWarn}> &nbsp;Предупреждение&nbsp; </a>
-                        <Dialog open={open} onClose={handleClose} aria-aria-labelledby="warning">
+                        <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
                            <DialogTitle id="warning">Предупреждение</DialogTitle> 
                             <DialogContent>
                                 <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите продолжить?</DialogContentText>
@@ -92,6 +218,8 @@ export default function Attestation() {
                             </DialogActions>
                         </Dialog>
 
+                
+
                 <div className="question">
                     <br/>Microsoft Office Word это ... <br/><br/>
                 </div>
@@ -100,46 +228,72 @@ export default function Attestation() {
                     <form>
                         <div>
                             <input id="var_1" type="radio" name="var" value="1"/> 
-                                <label htmlFor="var_1">&nbsp;Текстовый редактор</label><br/>
+                                <label htmlFor="var_1">&nbsp;Текстовый редактор</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_2" type="radio" name="var" value="1"/>
-                                <label htmlFor="var_2">&nbsp;Табличный редактор</label><br/>
+                                <label htmlFor="var_2">&nbsp;Табличный редактор</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_3" type="radio" name="var" value="3"/>
-                                <label htmlFor="var_3">&nbsp;Редактор презентаций</label><br/>
+                                <label htmlFor="var_3">&nbsp;Редактор презентаций</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_4" type="radio" name="var" value="4"/>
-                                <label htmlFor="var_4">&nbsp;Графический редактор</label><br/>
+                                <label htmlFor="var_4">&nbsp;Графический редактор</label><br/><br/>
                         </div>
                     </form><br/>
                 </div>
 
 
                 <div className="question">
-                    <br/><br/>Из чего состоят функции в среде MS Excel?<br/>
-                    Выберите несколько вариантов ответа (не менее двух)!<br/><br/>
+                    <br/>Вопрос с картинкой: <br/><br/>
+                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                </div>
+
+                <div className="question">
+                    <form>
+                        <div>
+                            <input id="var_1" type="radio" name="var" value="1" /> 
+                                <label htmlFor="var_1">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_2" type="radio" name="var" value="1"/>
+                                <label htmlFor="var_2">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_3" type="radio" name="var" value="3"/>
+                                <label htmlFor="var_3">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                        <div>
+                            <input id="var_4" type="radio" name="var" value="4"/>
+                                <label htmlFor="var_4">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                        </div>
+                    </form><br/>
+                </div>
+
+
+                <div className="question">
+                    <br/><br/>Из чего состоят функции в среде MS Excel? Выберите несколько вариантов ответа (не менее двух)!<br/><br/>
                 </div>
 
                 <div className="question">
                     <form>
                         <div>
                             <input id="var_1" type="checkbox" name="var" value="1"/> 
-                                <label htmlFor="var_1">&nbsp;Названия</label><br/>
+                                <label htmlFor="var_1">&nbsp;Названия</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_2" type="checkbox" name="var" value="1"/>
-                                <label htmlFor="var_2">&nbsp;Константы</label><br/>
+                                <label htmlFor="var_2">&nbsp;Константы</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_3" type="checkbox" name="var" value="3"/>
-                                <label htmlFor="var_3">&nbsp;Переменные</label><br/>
+                                <label htmlFor="var_3">&nbsp;Переменные</label><br/><br/>
                         </div>
                         <div>
                             <input id="var_4" type="checkbox" name="var" value="4"/>
-                                <label htmlFor="var_4">&nbsp;Аргументы</label><br/> 
+                                <label htmlFor="var_4">&nbsp;Аргументы</label><br/><br/>
                         </div>
                     </form><br/>
                 </div>
@@ -152,156 +306,19 @@ export default function Attestation() {
                 <div className="question">
                     <form>
                         <div>
-                            <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var"/><br/>
+                            <label htmlFor="var_1">Ответ:</label><input id="var_1" type="text" name="var" placeholder="Введите ответ здесь"/><br/>
                         </div>
                     </form><br/>
                 </div>
 
 
                 <div className="question">
-                    <br/><br/>Установите соответствие:<br/>
-                    Выбранный ответ можно стереть и выбрать заново!<br/><br/>
-                </div>
-                
-                <div className="question">
-                    <form>
-                    <div className="dropdown">
-                        <label htmlFor="var_4">MS Word - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Функция КОРЕНЬ() - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Объекты WordArt - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_4">Функция ОКРУГЛВНИЗ() - &nbsp;</label>
-                        <input  type="text" list="browsers"/>
-                        <datalist id="browsers">
-                            <option value="Текстовый редактор"/>
-                            <option value="Округляет значения вниз (с недостатком)"/>
-                            <option value="Возвращает положительный квадратный корень из числа"/>
-                            <option value="Красиво оформленный текст с возможностью редактирования"/>
-                        </datalist>
-                    </div><br/>
-                    </form>
+                    <br/><br/>Вопрос с выпадающим списком: <br/><br/>
                 </div>
 
-
                 <div className="question">
-                    <br/><br/>Укажите правильный порядок действий для создания нового стиля в MS Excel:<br/>
-                    Выбранный ответ можно стереть и выбрать заново!<br/><br/>
-                </div>
-                
-                <div className="question">
-                    <form>
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Создать стиль ячейки - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value='1'/>
-                            <option value='2'/>
-                            <option value='3'/>
-                            <option value='4'/>
-                        </datalist>
-                    </div><br/>
+                <ul className="match">
 
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Выбрать команду Главная - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Открыть Стили - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-
-                    <div className="dropdown">
-                        <label htmlFor="var_5">Открыть Стили ячеек - &nbsp;</label>
-                        <input  type="text" list="browsers2"/>
-                        <datalist id="browsers2">
-                            <option value="1"/>
-                            <option value="2"/>
-                            <option value="3"/>
-                            <option value="4"/>
-                        </datalist>
-                    </div><br/>
-                    </form>
-                </div>
-
-
-
-                <div className="question">
-                    <br/><br/><p className="questiontext">
-                            <span>
-                                <p>Напишите оператор сравнения НЕРАВНО в среде MS Excel?</p>
-                            </span>
-                    </p><br/><br/>
-                
-
-               
-                    <ul className="multichoice">
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Шара&lt;/span&gt;&lt;/p&gt;" /><label>Названия</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Бублика&lt;/span&gt;&lt;/p&gt;" /><label>Константы</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Блина&lt;/span&gt;&lt;/p&gt;" /><label>Переменные</label></li>
-                        <li><input name="quest_897582" type="radio" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Чемодана&lt;/span&gt;&lt;/p&gt;" /><label>Аргументы</label></li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="multichoice">
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Два&lt;/span&gt;&lt;/p&gt;" /><label>Два</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Четыре&lt;/span&gt;&lt;/p&gt;" /><label>Четыре</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Один&lt;/span&gt;&lt;/p&gt;" /><label>Один</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Три&lt;/span&gt;&lt;/p&gt;" /><label>Три</label></li>
-                        <li><input name="quest_897581" type="checkbox" value="&lt;p&gt;&lt;span style=&#039;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;&#039;&gt;Пять&lt;/span&gt;&lt;/p&gt;" /><label>Пять</label></li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="shortanswer/numerical">
-                        <li>
-                                <label className="accesshide" htmlFor="quest_897587">Ответ</label>
-                        <input id="quest_897587" name="quest_897587" type="text" />
-                        </li>
-                    </ul>
-                    <br/><br/>
-
-                    <ul className="match">
                         <form>
 
                         <div className="matches">
@@ -335,7 +352,7 @@ export default function Attestation() {
                         </div>
                         
                         <div className="matches">
-                        <label className="accesshide" for="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
+                        <label className="accesshide" htmlFor="quest_897580_3" >Открыть Стили ячеек - &nbsp;</label>
                         <select id="quest_897580_3" className="select custom-select menuquest_897580_3" name="quest_897580_3">
                             <option value="2">2</option>
                             <option value="1">1</option>
@@ -345,9 +362,65 @@ export default function Attestation() {
                         </div>
 
                         </form>
+
                     </ul>
                     <br/>
+                </div>
 
+                <div className="question">
+                    <br/><br/>Вопрос с выпадающим списком c картинкой: <br/><br/>
+                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                </div>
+
+                <div className="question">
+                <ul className="match">
+
+                        <form>
+
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select " name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select" name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select " name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+                        
+                        <div className="matches">
+                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <select id="" className="select" name="">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </select><br/>
+                        </div>
+
+                        </form>
+                        
+                    </ul>
+                    <br/>
                 </div>
 
 
@@ -357,11 +430,26 @@ export default function Attestation() {
                     </span>
                     <br /><br />
                     
-                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" />
-                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} />
-                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} />
-                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} />
-                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} />
+                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={""} />
+                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={""} />
+                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={""} />
+                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={""} />
+                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={""} />
+                    <br />
+
+                    <span>
+                        <p>ТЕСТ КОМПОНЕНТОВ С КАРТИНКАМИ</p>
+                    </span>
+                    <br /><br />
+
+                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={"../img/testpic.jpg"} />
+                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={"../img/testpic.jpg"} />
+                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={"../img/testpic.jpg"} />
+                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={"../img/testpic.jpg"} />
+                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={"../img/testpic.jpg"} />
+                    <br />
+
+                    
 
             </fieldset>
 
@@ -370,7 +458,10 @@ export default function Attestation() {
                 <input className="btn btn-1" type="submit" value="Подтвердить"/>
                 <input className="btn btn-2" type="submit" value="Следующий"/>
             </div>
-
+            <div>
+                <input className="btn-fin2" type="submit" value="Завершить тестирование"/>
+            </div>
+                
         </div>
     </main>
     )

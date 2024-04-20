@@ -1,36 +1,40 @@
 import React from 'react'
-import AMatchingL from './AMatchingL'
-import AMatchingR from './AMatchingR'
+import AMatching from './AMatching'
+import PictureQ from './PictureQ'
 
-export default function QMatching({ qname, a_arr, cnt }) {
+export default function QMatching({ qname, a_arr, Qpic }) {
     
     let componentsArr = [];
-    let aids = [];
-    let chosen_num = [];
-    let chosen_vals = [];
-    let Lcnt = 0;
+
+    let R_cnt = 0;
+    let R_ids = [];
+    let R_names = []; 
+    //let R_chosen = [];
+
+    let L_cnt = 0;
+    let L_ids = [];
+    let L_names = [];
+    let L_pics = [];
+
     let i;
 
-    for (i = 0; i < cnt; i++) {
+    for (i = 0; i < a_arr.length; i++) {
         if (a_arr[i].type === "L") {
-            aids.push(a_arr[i].id);
-            Lcnt++;
+            L_ids.push(a_arr[i].id);
+            L_names.push(a_arr[i].answer);
+            L_pics.push(a_arr[i].pictures[0]?.url);
+            L_cnt++;
         }
         else {
-            chosen_num.push(a_arr[i].number);
+            R_ids.push(a_arr[i].id);
+            R_names.push(a_arr[i].answer);
+            //R_chosen.push(a_arr[i].selected);
+            R_cnt++;
         }
     }
-    for (i = 0; i < Lcnt; i++) {
-        chosen_vals.push(aids[chosen_num[i] - 1]);
-    }
-    console.log(aids);
-    for (i = 0; i < cnt; i++) {
-        if (a_arr[i].type === "L") {
-            componentsArr.push(<AMatchingL aname={a_arr[i].answer} />);
-        }
-        else {
-            componentsArr.push(<AMatchingR cnt={Lcnt} aid={a_arr[i].id} aid_arr={aids} aname={a_arr[i].answer} anum={chosen_vals[i]} />);
-        }
+
+    for (i = 0; i < L_cnt; i++) {
+        componentsArr.push(<li key={i}><AMatching cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]} name_arr={R_names} picture={L_pics[i]} /></li>);
     }
 
     return (
@@ -42,12 +46,15 @@ export default function QMatching({ qname, a_arr, cnt }) {
                 
                 <div className="question">
                     <br/>
-                <p className="questiontext">{qname}</p>
-                    <br/>
+                    <p className="questiontext">{qname}</p>
+                <br />
+                <PictureQ src={Qpic} />
+                <br />
                 
                     <ul className="match">{componentsArr}</ul>
 
                 </div>
+                <br />
 
         </div>
 

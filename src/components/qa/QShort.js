@@ -1,7 +1,8 @@
 import React from 'react'
-import AShort from './AShort';
+import AShort from './AShort'
+import PictureQ from './PictureQ'
 
-export default function QShort({ qname, qa }) {
+export default function QShort({ qname, qa, Qpic }) {
     
     return (
         /* 
@@ -13,12 +14,15 @@ export default function QShort({ qname, qa }) {
             <div className="question">
                 <br/>
                 <p className="questiontext">{qname}</p>
-                <br/>
+                <br />
+                <PictureQ src={Qpic} />
+                <br />
 
                 <AShort value={qa} />
                 <br/><br/>
 
             </div>
+            <br />
 
         </div>
 

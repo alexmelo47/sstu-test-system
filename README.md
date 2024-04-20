@@ -1,4 +1,6 @@
 Основная ветка, для запуска требуется Node.js
+основная ветка предназначается для загрузки на сервер, для запуска у себя используется ветка dev.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

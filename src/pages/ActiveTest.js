@@ -71,22 +71,6 @@ const ActiveTest = () => {
                     set_last(!is_last);
                 }
 
-                //прототип нового способа
-                //for (let i = 0; i < response.data.length; i++) {
-                //set_mb( // Replace the state
-                //    [ // with a new array
-                //        ...menubtns, // that contains all the old items
-                //        //<Button variant="outlined" onClick={() => { handleSendOne(question_list[i].id) }}>{i}</Button> // and one new item at the end
-                //        response.data[i]
-                //    ]
-                //);
-                //    menubtns.push(<Button variant="outlined" onClick={() => { handleSendOne(response.data[i].id) }}>{response.data[i].id}</Button>);
-                //menubtns.push(response.data[i]);
-                //menubtns[i].name = i + 1;
-                //}
-                //
-                //menubtns.concat(resp_menu.data);
-
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
                     resp_menu.data[i].isAnswered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
@@ -202,10 +186,7 @@ const ActiveTest = () => {
         if (Payload !== "DONOTSEND") {
             axios.post(url, Payload)
                 .then(function (response) {
-                    //console.log(response);
-                    //localStorage.setItem("question_id", response.data.item.id);
-                    //setQuestion(response.data.item);
-                    //console.log(response.data.item);
+
                 })
                 .catch(err => console.log(err));
         }
@@ -240,39 +221,6 @@ const ActiveTest = () => {
 
     }
 
-    function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, button method
-
-        let Payload = prepPayload();
-
-        console.log(Payload);
-
-        if (question_list[question_list.length - 1].id === question_id) {//set first\last
-            set_last(true);
-        }
-        else {
-            set_last(false);
-        }
-        if (question_list[0].id === question_id) {
-            set_first(true);
-        }
-        else {
-            set_first(false);
-        }
-
-        getBoxes();
-
-        //load
-        let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
-
-        axios.get(url)
-            .then(function (response) {
-                console.log(response);
-                localStorage.setItem("question_id", response.data.item.id);
-                setQuestion(response.data.item);
-                //console.log(question);
-            })
-            .catch(err => console.log(err));
-    }
     function handleNext() {
         if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {

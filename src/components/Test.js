@@ -86,7 +86,7 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                     </DialogContentText>}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</Button>
+                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'https://web.fita.cc/activetest/'; }} color="primary">Начать тестирование</Button>
                     <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
                 </DialogActions>
             </Dialog>
@@ -95,5 +95,3 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
 }
 
 export default Test
-
-//window.location.href ПОМЕНЯТЬ ПОД РЕЛИЗ на актуальный домен

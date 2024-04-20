@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 
 import Home from '../pages/Home';
 import Tests from '../pages/Tests';
-import Attestation from '../pages/Attestation';
 import ActiveTest from '../pages/ActiveTest';
 import Result from '../pages/Result';
 import Guid from '../pages/Guid';
@@ -161,7 +160,6 @@ export default function Header() {
             <Routes>
                 <Route exact path="/" element={<Home/>} />
                 <Route exact path="/tests" element={<Tests/>} />
-                <Route exact path="/attestation" element={<Attestation/>} />
                 <Route exact path="/activetest" element={<ActiveTest/>} />
                 <Route exact path="/Result" element={<Result/>} />
                 <Route exact path="/Guid" element={<Guid/>} />

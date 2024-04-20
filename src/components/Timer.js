@@ -60,10 +60,3 @@ const Timer = ({ dl }) => {
 };
 
 export default Timer;
-
-/*
-<li className="">
-    <span className="text"> Дней &nbsp; </span><br/>  
-    <span id="day">{days < 10 ? 0 + days : days }</span>                                      
-</li>
-*/

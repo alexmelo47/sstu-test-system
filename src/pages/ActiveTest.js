@@ -22,7 +22,7 @@ const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
-    let timerEject, timerReminder;
+    let timerEject;//, timerReminder;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
@@ -120,7 +120,7 @@ const ActiveTest = () => {
                 //console.log(response.data.item);
 
                 //timerReminder = setTimeout(setOpenTimeReminder, milliseconds);
-                //timerEject = setTimeout(handleSendAll, 5000);//5 seconds
+                timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
 
             })
             .catch(err => console.log(err));
@@ -210,17 +210,19 @@ const ActiveTest = () => {
                 .catch(err => console.log(err));
         }
 
-        if (question_list[question_list.length - 1].id === question_id) {//set first\last
-            set_last(true);
-        }
-        else {
-            set_last(false);
-        }
-        if (question_list[0].id === question_id) {
-            set_first(true);
-        }
-        else {
-            set_first(false);
+        if (question_list.length > 0) {//set first\last
+            if (question_list[question_list.length - 1].id === question_id) {
+                set_last(true);
+            }
+            else {
+                set_last(false);
+            }
+            if (question_list[0].id === question_id) {
+                set_first(true);
+            }
+            else {
+                set_first(false);
+            }
         }
 
         getBoxes();
@@ -292,7 +294,8 @@ const ActiveTest = () => {
 
     function handleSendAll() {  //завершение
 
-        handleSendOne(question.id);
+        //console.log(localStorage.getItem("question_id"));
+        handleSendOne(localStorage.getItem("question_id"));
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
 

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  aist-front:
+    build: .
+    image: aist-front-auto:latest
+    container_name: aist-front-auto-${ENV}
+    restart: always
+    ports:
+      - "${PORT}:3000"

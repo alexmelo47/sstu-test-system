@@ -13,11 +13,11 @@ jobs:
     runs-on: web-self-hosted
 
     steps:
-    - name: checkout repo
+    - name: Checkout repo
       uses: actions/checkout@v3
       
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag aist-front-auto:latest
-      
-    - name: Run image
-      run: docker run -dp 127.0.0.1:3000:3000 aist-front-auto:latest
+    - name: Down compose
+      run: docker compose down
+
+    - name: Build and up compose
+      run: docker compose up -d --build aist-front

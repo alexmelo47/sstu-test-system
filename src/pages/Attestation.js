@@ -34,6 +34,23 @@ export default function Attestation() {
         setOpenTest(false);
     }
 
+    const [open3, setTimeWarn] = React.useState(false);
+    const handleClickOpenTimeWarn = () => {
+        setTimeWarn(true);
+    }
+    const handleCloseTimeWarn = () => {
+        setTimeWarn(false);
+    }
+
+    const [open4, setAccessWarn] = React.useState(false);
+    const handleClickOpenAccessWarn = () => {
+        setAccessWarn(true);
+    }
+    const handleCloseAccessWarn = () => {
+        setAccessWarn(false);
+    }
+
+
     //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
     //aid={a_arr[i].id} aname={a_arr[i].answer} selected={a_arr[i].selected}
     //aid_arr={aids} aname={a_arr[i].answer} anum={a_arr[i].number}
@@ -218,6 +235,30 @@ export default function Attestation() {
                             </DialogActions>
                         </Dialog>
 
+                <a className="btn btn-1" onClick={handleClickOpenTimeWarn}> &nbsp;Предупреждение&nbsp; </a>
+                        <Dialog open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
+                           <DialogTitle id="time-warning">Предупреждение</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleCloseTimeWarn} color="primary">Закрыть</Button>                                
+                            </DialogActions>
+                        </Dialog>
+
+                <a className="btn btn-1" onClick={handleClickOpenAccessWarn}> &nbsp;Предупреждение&nbsp; </a>
+                        <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
+                           <DialogTitle id="access-warning">Предупреждение</DialogTitle> 
+                            <DialogContent>
+                                <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleCloseAccessWarn} color="primary">Авторизоваться</Button>                                
+                            </DialogActions>
+                            <DialogActions>
+                                <Button onClick={handleCloseAccessWarn} color="primary">Закрыть</Button>                                
+                            </DialogActions>
+                        </Dialog>
                 
 
                 <div className="question">

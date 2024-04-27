@@ -75,17 +75,17 @@ export default function Attestation() {
 
     for (i = 0; i < 3; i++) {
         idrcs = i + "r";
-        answersR.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: {} });
+        answersR.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{}] });
         idrcs = i + "c";
-        answersC.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: {} });
+        answersC.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{}] });
         idrcs = i + "s";
-        answersS.push({ id: idrcs, answer: "answer" + i, number: 1 });
+        answersS.push({ id: idrcs, answer: "answer" + i, number: 1, pictures: [{}] });
     }
 
     for (i = 0; i < 5; i++) {
         idrcs = i + "m";
         if (i%2 === 0) {
-            answersM.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
+            answersM.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1, pictures: [{}] });
         }
         else {
             answersM.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
@@ -98,13 +98,13 @@ export default function Attestation() {
         idrcs = i + "c";
         answersCpic.push({ id: idrcs, answer: "answer" + i, selected: 1, pictures: [{ "url" : "../img/testpic.jpg" } ] });
         idrcs = i + "s";
-        answersSpic.push({ id: idrcs, answer: "answer" + i, number: 1 });
+        answersSpic.push({ id: idrcs, answer: "answer" + i, number: 1, pictures: [{ "url": "../img/testpic.jpg" }] });
     }
 
     for (i = 0; i < 5; i++) {
         idrcs = i + "m";
         if (i % 2 === 0) {
-            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1 });
+            answersMpic.push({ id: idrcs, answer: "answer" + i, type: "L", number: 1, pictures: [{ "url": "../img/testpic.jpg" }] });
         }
         else {
             answersMpic.push({ id: idrcs, answer: "answer" + i, type: "R", number: 1 });
@@ -223,7 +223,7 @@ export default function Attestation() {
             <fieldset>
                 <legend><h3>&nbsp;Информатика 2 курс&nbsp;</h3></legend> 
 
-                <a className="btn btn-1" onClick={handleClickOpenWarn}> &nbsp;Предупреждение&nbsp; </a>
+                    <a className="btn btn-1" onClick={handleClickOpenWarn}> &nbsp;Предупреждение&nbsp; Вы не ответили</a>
                         <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
                            <DialogTitle id="warning">Предупреждение</DialogTitle> 
                             <DialogContent>
@@ -235,7 +235,7 @@ export default function Attestation() {
                             </DialogActions>
                         </Dialog>
 
-                <a className="btn btn-1" onClick={handleClickOpenTimeWarn}> &nbsp;Предупреждение&nbsp; </a>
+                    <a className="btn btn-1" onClick={handleClickOpenTimeWarn}> &nbsp;Предупреждение&nbsp; Время на прохождение</a>
                         <Dialog open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
                            <DialogTitle id="time-warning">Предупреждение</DialogTitle> 
                             <DialogContent>
@@ -246,7 +246,7 @@ export default function Attestation() {
                             </DialogActions>
                         </Dialog>
 
-                <a className="btn btn-1" onClick={handleClickOpenAccessWarn}> &nbsp;Предупреждение&nbsp; </a>
+                    <a className="btn btn-1" onClick={handleClickOpenAccessWarn}> &nbsp;Предупреждение&nbsp; необходимо авторизоваться</a>
                         <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
                            <DialogTitle id="access-warning">Предупреждение</DialogTitle> 
                             <DialogContent>

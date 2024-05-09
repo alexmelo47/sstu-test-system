@@ -21,16 +21,16 @@ import setAuthTokenStored from '../components/setTokenStored';
 export default function Header() {
 
     /* авторизация через модальное окно */ 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpenAuthorization] = React.useState(false);
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickOpenAuthorization = () => {
+        setOpenAuthorization(true);
     }
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseAuthorization = () => {
+        setOpenAuthorization(false);
     }
 
     const handleClickOpenRemind = () => {
@@ -71,7 +71,7 @@ export default function Header() {
                 }
                 console.log(err);
             });
-        setOpen(false);
+        setOpenAuthorization(false);
     }
 
   return (
@@ -88,8 +88,8 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                            <a className="nav-link" onClick={handleClickOpen}> &nbsp;Авторизация&nbsp; </a>
-                            <Dialog open={open} onClose={handleClose} aria-labelledby="authorization">
+                            <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>
+                            <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
                                <DialogTitle id="authorization">Авторизация</DialogTitle> 
                                 <DialogContent>
                                     <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
@@ -145,7 +145,7 @@ export default function Header() {
                                     <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                      <Button onClick={() => { setOpenWrongPass(false); setOpen(true); } } color="primary">Ввести заново</Button>                           
+                                      <Button onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } color="primary">Ввести заново</Button>                           
                                 </DialogActions>
                             </Dialog>
 

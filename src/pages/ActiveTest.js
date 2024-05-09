@@ -22,7 +22,7 @@ const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
-    let timerEject;//, timerReminder;
+    let timerEject, timerReminder;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
@@ -59,6 +59,14 @@ const ActiveTest = () => {
     const handleAccept = () => {
         setOpen(false);
         handleSendAll();
+    }
+
+    const [open3, setTimeWarn] = React.useState(false);
+    const handleClickOpenTimeWarn = () => {
+        setTimeWarn(true);
+    }
+    const handleCloseTimeWarn = () => {
+        setTimeWarn(false);
     }
 
     function getBoxes() {  
@@ -103,7 +111,7 @@ const ActiveTest = () => {
                 set_started(!started);
                 //console.log(response.data.item);
 
-                //timerReminder = setTimeout(setOpenTimeReminder, milliseconds);
+                timerReminder = setTimeout(handleClickOpenTimeWarn, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 20000);//за 20с до конца
                 timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
 
             })
@@ -147,8 +155,10 @@ const ActiveTest = () => {
             let chosen_order = document.getElementsByClassName("orderboxes");
 
             for (let i = 0; i < chosen_order.length; i++) {
-                answerload.push(Number(chosen_order[i].value));
-                Payload.answer.push({ "id": Number(chosen_order[i].value) });
+                answerload[chosen_order[i].value] = Number(chosen_order[i].id);
+            }
+            for (let i = 0; i < answerload.length; i++) {
+                Payload.answer.push({ "id": Number(answerload[i]) });
             }
         }
         else if (question.itemType === "MATCHING") {
@@ -281,6 +291,16 @@ const ActiveTest = () => {
                     <DialogActions>
                         <Button onClick={handleAccept} color="primary">Да</Button>
                         <Button onClick={handleClose} color="primary">Нет</Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
+                    <DialogTitle id="time-warning">Предупреждение</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseTimeWarn} color="primary">Закрыть</Button>
                     </DialogActions>
                 </Dialog>
 

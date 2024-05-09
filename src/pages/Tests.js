@@ -2,6 +2,13 @@ import React, { useState } from 'react'
 import Test from '../components/Test'
 import axios from 'axios'
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
+
 const baseURL ="https://maile.fita.cc"
 
 const Tests = () => {
@@ -12,13 +19,26 @@ const Tests = () => {
   localStorage.removeItem("test_name");
   localStorage.removeItem("test_author");
 
+    const [open4, setAccessWarn] = React.useState(false);
+    const handleClickOpenAccessWarn = () => {
+        setAccessWarn(true);
+    }
+    const handleCloseAccessWarn = () => {
+        setAccessWarn(false);
+    }
+
   function getTests(){  //Запрос на доступные пользователю тесты
     setButtonClick(!buttonClick)
     if(buttonClick){
         axios.get(baseURL + "/tests").then((tests) => {
             //console.log(tests);
         setTests(tests.data)
-      })
+        }).catch((err) => {
+            if (err.toJSON().status === 403) {
+                setAccessWarn(true);
+            }
+            console.log(err);
+        })
     }else{
       setTests([])
     }
@@ -27,6 +47,16 @@ const Tests = () => {
     return (
         <main>
             <div className="content-block">
+
+                <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
+                    <DialogTitle id="access-warning">Предупреждение</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseAccessWarn} color="primary">Закрыть</Button>
+                    </DialogActions>
+                </Dialog>
             
                 <button className="accordion" onClick={getTests}>Доступные тесты</button> 
                 <div className="panel">

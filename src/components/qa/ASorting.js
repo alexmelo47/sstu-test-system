@@ -1,11 +1,11 @@
 import React from 'react'
 import PictureA from './PictureA'
 
-export default function ASorting({ cnt, aid_arr, aname, anum, picture }) {
+export default function ASorting({ cnt, aid, aname, anum, picture }) {
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
-        componentsArr.push(<option key={i} value={aid_arr[i]}>{i + 1}</option>);
+        componentsArr.push(<option key={i} value={i}>{i + 1}</option>);
     }
     
     return (
@@ -16,7 +16,7 @@ export default function ASorting({ cnt, aid_arr, aname, anum, picture }) {
         <div className="matches">
             <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
 
-            <select className="orderboxes select custom-select menuquest_897580_0" defaultValue={anum}>
+            <select className="orderboxes select custom-select menuquest_897580_0" defaultValue={anum} id={aid}>
                 {componentsArr}
             </select><br/>
             <br/>

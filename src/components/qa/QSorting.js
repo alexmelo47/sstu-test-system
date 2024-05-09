@@ -8,7 +8,7 @@ export default function QSorting({ qname, cnt, a_arr, Qpic }) {
     let i;
 
     for (i = 0; i < cnt; i++) {
-        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid_arr={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} picture={a_arr[i].pictures[0]?.url} /></li>);
+        componentsArr.push(<li key={i}><ASorting cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number} picture={a_arr[i].pictures[0]?.url} /></li>);
     }
 
     return (

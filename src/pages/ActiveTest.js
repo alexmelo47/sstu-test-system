@@ -171,8 +171,10 @@ const ActiveTest = () => {
             let chosen_order = document.getElementsByClassName("orderboxes");
 
             for (let i = 0; i < chosen_order.length; i++) {
-                answerload.push(Number(chosen_order[i].value));
-                Payload.answer.push({ "id": Number(chosen_order[i].value) });
+                answerload[chosen_order[i].value] = Number(chosen_order[i].id);
+            }
+            for (let i = 0; i < answerload.length; i++) {
+                Payload.answer.push({ "id": Number(answerload[i]) });
             }
         }
         else if (question.itemType === "MATCHING") {

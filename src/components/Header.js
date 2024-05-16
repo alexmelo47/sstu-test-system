@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -21,11 +21,18 @@ import setAuthTokenStored from '../components/setTokenStored';
 
 export default function Header() {
 
-    /* авторизация через модальное окно */ 
+    setAuthTokenStored();
+
+    /* авторизация через модальное окно */
+    const [auth, setAuth] = React.useState(false);
     const [open, setOpenAuthorization] = React.useState(false);
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
+
+    useEffect(() => {
+        localStorage.getItem("accessToken") ? setAuth(true) : setAuth(false);
+    }, []);
 
     const handleClickOpenAuthorization = () => {
         setOpenAuthorization(true);
@@ -51,7 +58,7 @@ export default function Header() {
             "login": document.getElementById("name").value,
             "password": document.getElementById("pass").value
         }
-        console.log(loginPayload);
+        //console.log(loginPayload);
         localStorage.removeItem("accessToken");
         delete axios.defaults.headers.common["Authorization"];
 
@@ -61,6 +68,7 @@ export default function Header() {
                 const token = response.data.accessToken;
                 localStorage.setItem("accessToken", token);
                 setAuthTokenStored();
+                setAuth(true);
                 //console.log(token);
 
                 //setAuthToken(token);
@@ -89,7 +97,8 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                            <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>
+                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>}
+                              {auth && <a className="nav-link" onClick={() => { localStorage.removeItem("accessToken"); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                             <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
                                <DialogTitle id="authorization">Авторизация</DialogTitle> 
                                 <DialogContent>

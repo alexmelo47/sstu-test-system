@@ -36,6 +36,7 @@ const ActiveTest = () => {
     
     const [open, setOpen] = useState(false);
     const handleClickOpenWarn = () => { //предупреждение о неотвеченных
+        handleSendOne(localStorage.getItem("question_id"));
         let unanswered = false;
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
             .then(function (response) {

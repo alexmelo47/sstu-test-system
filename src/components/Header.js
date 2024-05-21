@@ -53,7 +53,7 @@ export default function Header() {
     }
 
 
-    const handleAuth = () => {  //Запрос авторизации
+    const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ
         const loginPayload = {
             "login": document.getElementById("name").value,
             "password": document.getElementById("pass").value

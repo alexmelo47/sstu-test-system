@@ -15,7 +15,7 @@ export default function PictureQ({ src }) {
     else
     {
         return (
-            <img className="question-pic" src={src2} alt={""} />
+            <img className="question-pic" src={src2} alt="картинка вопроса" />
         )
     }
 }

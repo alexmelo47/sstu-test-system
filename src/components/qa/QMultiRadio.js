@@ -2,7 +2,7 @@ import React from 'react'
 import AMultiRadio from './AMultiRadio'
 import PictureQ from './PictureQ'
 
-export default function QMulti_radio({ qname, cnt, a_arr, Qpic }) {
+export default function QMultiRadio({ qname, cnt, a_arr, Qpic }) {
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {

@@ -132,8 +132,8 @@ export default function Attestation() {
         <div className="test-menu">
             <button className="btn-menu btn-menu-answered"><span>1</span></button>
             <button className="btn-menu btn-menu-answered"><span>N</span></button>
-            <button className="btn-menu btn-menu-answered"><span>N</span></button>
-            <button className="btn-menu"><span>N</span></button>
+            <button className="btn-menu btn-menu-answered btn-menu-focus"><span>N</span></button>
+            <button className="btn-menu btn-menu-focus"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>
             <button className="btn-menu"><span>N</span></button>

@@ -70,7 +70,7 @@ const ActiveTest = () => {
         setTimeWarn(false);
     }
 
-    function getBoxes() {  
+    function getBoxes(current_index) {  
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')   //загрузка меню
             .then(function (resp_menu) {
                 //console.log(resp_menu);
@@ -99,6 +99,9 @@ const ActiveTest = () => {
                 let temp_arr = [].concat(resp_menu.data);
                 for (var i = 0; i < resp_menu.data.length; i++) {
                     resp_menu.data[i].isAnswered ? temp_arr[i].style = "btn-menu btn-menu-answered" : temp_arr[i].style = "btn-menu";
+                    if (i === current_index) {
+                        temp_arr[i].style += " btn-menu-focus";
+                    }
                     temp_arr[i].num = i + 1;
                 }
 
@@ -122,7 +125,7 @@ const ActiveTest = () => {
                 setTime(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000));
                 setQuestion(response.data.item);
 
-                getBoxes();
+                getBoxes(0);
 
                 set_loaded(!loaded);
                 set_started(!started);
@@ -236,8 +239,6 @@ const ActiveTest = () => {
             }
         }
 
-        getBoxes();
-
         //load
         url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
@@ -248,6 +249,8 @@ const ActiveTest = () => {
                 setQuestion(response.data.item);
             })
             .catch(err => console.log(err));
+
+        getBoxes(question_list.findIndex((el) => el.id === question_id));
 
     }
 
@@ -270,7 +273,7 @@ const ActiveTest = () => {
             set_first(false);
         }
 
-        getBoxes();
+        getBoxes(question_list.findIndex((el) => el.id === question_id));
 
         //load
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;

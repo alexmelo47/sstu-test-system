@@ -46,7 +46,7 @@ const Tests = () => {
  
     return (
         <main>
-            <div className="content-block">
+            <div className="content-list">
 
                 <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
                     <DialogTitle id="access-warning">Предупреждение</DialogTitle>

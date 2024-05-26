@@ -14,7 +14,7 @@ export default function PictureA({ src }) {
     else
     {
         return (
-            <label>&nbsp;<img className="answer-pic" src={src} alt={""} /></label>
+            <label>&nbsp;<img className="answer-pic" src={src} alt="картинка ответа" /></label>
         )
     }
 }

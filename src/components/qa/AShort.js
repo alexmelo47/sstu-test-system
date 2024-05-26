@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AnsShort(props) {
+export default function AShort(props) {
     const [input, setInput] = useState(props?.value ?? '');
     return (
         /*

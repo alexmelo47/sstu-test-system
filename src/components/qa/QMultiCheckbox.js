@@ -2,7 +2,7 @@ import React from 'react'
 import AMultiCheckbox from './AMultiCheckbox'
 import PictureQ from './PictureQ'
 
-export default function QMulti_checkbox({ qname, cnt, a_arr, Qpic }) {
+export default function QMultiCheckbox({ qname, cnt, a_arr, Qpic }) {
     
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {

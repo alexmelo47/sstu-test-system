@@ -442,7 +442,7 @@ main {
 
 }
 
-.btn-menu:focus {
+.btn-menu-focus {
     border: 0.3rem solid #00335e;
 }
 

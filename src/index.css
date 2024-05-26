@@ -428,12 +428,13 @@ main {
 .btn-menu {
     width: 35px;
     height: 35px;
-    border: 2px solid #00335e;
+    border: 2px solid #0059a8;
     border-radius: 10px;
     margin: 3px;
     font-size: 14px;    
     font-weight: bold;
     color: #00335e;
+    background-color: #ffffff;
 }
 
 .btn-menu:hover {
@@ -575,7 +576,7 @@ input[type='text'] {
     margin: 10px;
     display: table;
     table-layout: fixed;
-    
+    background-color: #FFFFFF;
     border: 3px solid #00335e;
     border-radius: 10px;
     flex-direction: column;

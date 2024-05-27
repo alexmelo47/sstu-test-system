@@ -288,27 +288,27 @@ export default function Attestation() {
 
 
                 <div className="question">
-                    <br/>Вопрос с картинкой: <br/><br/>
-                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                    <br />Вопрос с картинкой: <br /><br />
+                    <img className="question-pic" alt="" src='../img/testpic.jpg' /><br /><br />
                 </div>
 
                 <div className="question">
                     <form>
                         <div>
-                            <input id="var_1" type="radio" name="var" value="1" /> 
-                                <label htmlFor="var_1">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                            <input id="var_1" type="radio" name="var" value="1" />
+                                <label htmlFor="var_1">&nbsp;<img alt="" className="answer-pic" src='../img/testpic.jpg' /></label><br /><br />
                         </div>
                         <div>
                             <input id="var_2" type="radio" name="var" value="1"/>
-                                <label htmlFor="var_2">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                                <label htmlFor="var_2">&nbsp;<img alt="" className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
                         </div>
                         <div>
                             <input id="var_3" type="radio" name="var" value="3"/>
-                                <label htmlFor="var_3">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                                <label htmlFor="var_3">&nbsp;<img alt="" className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
                         </div>
                         <div>
                             <input id="var_4" type="radio" name="var" value="4"/>
-                                <label htmlFor="var_4">&nbsp;<img className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
+                                <label htmlFor="var_4">&nbsp;<img alt="" className="answer-pic" src='../img/testpic.jpg' /></label><br/><br/>
                         </div>
                     </form><br/>
                 </div>
@@ -410,7 +410,7 @@ export default function Attestation() {
 
                 <div className="question">
                     <br/><br/>Вопрос с выпадающим списком c картинкой: <br/><br/>
-                    <img className="question-pic" src='../img/testpic.jpg' /><br/><br/>
+                    <img alt="" className="question-pic" src='../img/testpic.jpg' /><br/><br/>
                 </div>
 
                 <div className="question">
@@ -419,7 +419,7 @@ export default function Attestation() {
                         <form>
 
                         <div className="matches">
-                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <label><img alt="" className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
                         <select id="" className="select " name="">
                             <option value="2">2</option>
                             <option value="1">1</option>
@@ -429,7 +429,7 @@ export default function Attestation() {
                         </div>
                         
                         <div className="matches">
-                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <label><img alt="" className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
                         <select id="" className="select" name="">
                             <option value="2">2</option>
                             <option value="1">1</option>
@@ -439,7 +439,7 @@ export default function Attestation() {
                         </div>
                         
                         <div className="matches">
-                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <label><img alt="" className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
                         <select id="" className="select " name="">
                             <option value="2">2</option>
                             <option value="1">1</option>
@@ -449,7 +449,7 @@ export default function Attestation() {
                         </div>
                         
                         <div className="matches">
-                        <label><img className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
+                        <label><img alt="" className="answer-pic" src='../img/testpic.jpg' />&nbsp;</label>
                         <select id="" className="select" name="">
                             <option value="2">2</option>
                             <option value="1">1</option>
@@ -483,7 +483,7 @@ export default function Attestation() {
                     </span>
                     <br /><br />
 
-                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={"../img/testpic.jpg"} />
+                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} />
                     <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={"../img/testpic.jpg"} />
                     <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={"../img/testpic.jpg"} />
                     <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={"../img/testpic.jpg"} />

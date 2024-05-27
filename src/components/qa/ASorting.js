@@ -16,7 +16,7 @@ export default function ASorting({ cnt, aid, aname, anum, picture }) {
         <div className="matches">
             <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
 
-            <select className="orderboxes select custom-select menuquest_897580_0" defaultValue={anum} id={aid}>
+            <select className="orderboxes select custom-select" defaultValue={anum} id={aid}>
                 {componentsArr}
             </select><br/>
             <br/>

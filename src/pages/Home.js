@@ -8,8 +8,8 @@ export default class Home extends Component {
                 <h1>Адаптивная интеллектуальная система тестирования АИСТ</h1><br/>
             <img src='./img/sstumain.jpg' alt="Home" width="100%" />
             <span>
-                Для входа в систему введите <strong>без указания домена&nbsp;</strong> ваши логин -
-                <strong>номер зачетной книжки</strong> и <strong>пароль для локальной сети</strong> СГТУ.
+                Для входа в систему введите <strong>без указания домена </strong> ваши 
+                <strong> логин</strong> и <strong>пароль </strong>для локальной сети.
             </span>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function AMatching({ cnt, aid, aid_arr, aname, name_arr, picture 
         <div className="matches">
             <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
             
-            <select className="matchboxes select custom-select menuquest_897580_0" id={aid}>
+            <select className="matchboxes select custom-select" id={aid}>
                 {componentsArr}
             </select>
             <br/>

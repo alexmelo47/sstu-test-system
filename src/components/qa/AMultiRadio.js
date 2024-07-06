@@ -1,7 +1,7 @@
 import React from 'react'
 import PictureA from './PictureA'
 
-export default function AMultiRadio({ aid, aname, selected, picture }) {
+export default function AMultiRadio({ aid, aname, rname, selected, picture }) {
     
     return (
         /* 
@@ -10,7 +10,7 @@ export default function AMultiRadio({ aid, aname, selected, picture }) {
   
         <div>                         
             <li>
-                <input className="radioboxes" name="quest_897582" type="radio" value={aid} defaultChecked={selected} />
+                <input className="radioboxes" name={rname} type="radio" value={aid} defaultChecked={selected} autoComplete="off" />
                 <label>{aname}</label>
                 <PictureA src={picture} />
             </li>

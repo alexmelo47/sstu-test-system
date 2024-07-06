@@ -93,7 +93,7 @@ footer {
     left: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 footer p {
@@ -547,13 +547,13 @@ input[type='text'] {
 /*style of pictures*/
 .question-pic {
     max-height: 400px;
-    min-height: 200px;
+    min-height: 100px;
     margin-left: 10px;
 }
 
 .answer-pic {
     max-height: 250px;
-    min-height: 100px;
+    min-height: 80px;
     margin-left: 10px;
 }
 

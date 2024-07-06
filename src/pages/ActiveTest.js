@@ -38,14 +38,8 @@ const ActiveTest = () => {
     const handleClickOpenWarn = () => { //предупреждение о неотвеченных
         handleSendOne(localStorage.getItem("question_id"));
         let unanswered = false;
-        axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')
-            .then(function (response) {
-                //console.log(response);
-                setQuestionList(response.data);
-            })
-            .catch(err => console.log(err));
         for (var i = 0; i < question_list.length; i++) {
-            if (!question_list[i].answered) {
+            if (!question_list[i].isAnswered) {
                 unanswered = true;
                 setOpen(true);
             }
@@ -206,13 +200,15 @@ const ActiveTest = () => {
         }
 
         if (question_list.length > 0) {//set first\last
-            if (question_list[question_list.length - 1].id === question_id) {
+            // eslint-disable-next-line eqeqeq
+            if (question_list[question_list.length - 1].id == question_id) {
                 set_last(true);
             }
             else {
                 set_last(false);
             }
-            if (question_list[0].id === question_id) {
+            // eslint-disable-next-line eqeqeq
+            if (question_list[0].id == question_id) {
                 set_first(true);
             }
             else {

@@ -20,9 +20,6 @@ const Tests = () => {
   localStorage.removeItem("test_author");
 
     const [open4, setAccessWarn] = React.useState(false);
-    const handleClickOpenAccessWarn = () => {
-        setAccessWarn(true);
-    }
     const handleCloseAccessWarn = () => {
         setAccessWarn(false);
     }

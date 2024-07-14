@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
+
 import QShort from '../components/qa/QShort'
 import QSorting from '../components/qa/QSorting'
 import QMatching from '../components/qa/QMatching'
@@ -22,12 +23,12 @@ const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
+    // eslint-disable-next-line no-unused-vars
     let timerEject, timerReminder;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
-    const [loaded, set_loaded] = useState(false);
     const [is_last, set_last] = useState(false);
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
@@ -121,7 +122,6 @@ const ActiveTest = () => {
 
                 getBoxes(0);
 
-                set_loaded(!loaded);
                 set_started(!started);
                 //console.log(response.data.item);
 
@@ -139,7 +139,61 @@ const ActiveTest = () => {
             "text": null
         }
 
-        if (question.itemType === "MULTIPLE_CHOICE") {  //Why not switch?
+        switch (question.itemType) {
+            case "MULTIPLE_CHOICE":
+                let chosen_radio = document.getElementsByClassName("radioboxes");
+
+                for (let i = 0; i < chosen_radio.length; i++) {
+                    if (chosen_radio[i].checked) {
+                        answerload = Number(chosen_radio[i].value);
+                        Payload.answer.push({ "id": answerload });
+                    }
+                }
+                break;
+            case "MULTIPLE_ANSWER":
+                answerload = [];
+                let chosen_boxes = document.getElementsByClassName("checkboxes");
+
+                for (let i = 0; i < chosen_boxes.length; i++) {
+                    if (chosen_boxes[i].checked) {
+                        answerload.push(Number(chosen_boxes[i].value));
+                        Payload.answer.push({ "id": Number(chosen_boxes[i].value) });
+                    }
+                }
+                break;
+            case "SORTING":
+                answerload = [];
+                let chosen_order = document.getElementsByClassName("orderboxes");
+
+                for (let i = 0; i < chosen_order.length; i++) {
+                    answerload[chosen_order[i].value] = Number(chosen_order[i].id);
+                }
+                for (let i = 0; i < answerload.length; i++) {
+                    Payload.answer.push({ "id": Number(answerload[i]) });
+                }
+                break;
+            case "MATCHING":
+                answerload = [];
+                let chosen_matches = document.getElementsByClassName("matchboxes");
+
+                for (let i = 0; i < chosen_matches.length; i++) {
+
+                    answerload.push(Number(chosen_matches[i].id));
+                    Payload.answer.push({ "id": Number(chosen_matches[i].id) });
+
+                    answerload.push(Number(chosen_matches[i].value));
+                    Payload.answer.push({ "id": Number(chosen_matches[i].value) });
+
+                }
+                break;
+            case "TEXT":
+            case "NUMBER":
+                answerload = document.getElementById("AnsShort").value;
+                Payload.text = answerload;
+            // eslint-disable-next-line no-fallthrough
+            default: break;
+        }
+        /*if (question.itemType === "MULTIPLE_CHOICE") {  //Why not switch?
             let chosen_radio = document.getElementsByClassName("radioboxes");
 
             for (let i = 0; i < chosen_radio.length; i++) {
@@ -188,7 +242,7 @@ const ActiveTest = () => {
                 Payload.answer.push({ "id": Number(chosen_matches[i].value) });
 
             }
-        }
+        }*/
 
         if (answerload === undefined || answerload.length === 0) {//не отправляем ничего, просто переход
             return "DONOTSEND";
@@ -250,6 +304,7 @@ const ActiveTest = () => {
 
     }
 
+    // eslint-disable-next-line no-unused-vars
     function handleSendOne_debug(question_id) {//debug sent answer data, changes handle next and prev and all, button method
 
         let Payload = prepPayload();
@@ -312,14 +367,19 @@ const ActiveTest = () => {
         axios.patch(url)
             .then(function (response) {
                 //console.log(response);
+
                 localStorage.removeItem("session_id");
                 localStorage.removeItem("question_id");
                 localStorage.removeItem("question_list");
                 localStorage.removeItem("tid");
+
+                localStorage.setItem("Result", response.data);
+                /*
                 localStorage.setItem("fullTime", response.data.fullTime);
                 localStorage.setItem("grade", response.data.grade);
                 localStorage.setItem("test_name", response.data.test.name);
                 localStorage.setItem("test_author", response.data.test.author.name);
+                */
                 set_finished(!finished);
             })
             .catch(err => console.log(err));
@@ -359,7 +419,7 @@ const ActiveTest = () => {
                 <fieldset>
 
                     <div className="test-menu">
-                        {menubtns && started && loaded && !is_adaptive_test &&
+                        {menubtns && started && !is_adaptive_test &&
                             menubtns.map(btn => (
                                 <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
                                     <span>{btn.num}</span>

@@ -37,16 +37,21 @@ const ActiveTest = () => {
     
     const [open, setOpen] = useState(false);
     const handleClickOpenWarn = () => { //предупреждение о неотвеченных
-        handleSendOne(localStorage.getItem("question_id"));
-        let unanswered = false;
-        for (var i = 0; i < question_list.length; i++) {
-            if (!question_list[i].isAnswered) {
-                unanswered = true;
-                setOpen(true);
+        if (!is_adaptive_test) {
+            handleSendOne(localStorage.getItem("question_id"));
+            let unanswered = false;
+            for (var i = 0; i < question_list.length; i++) {
+                if (!question_list[i].isAnswered) {
+                    unanswered = true;
+                    setOpen(true);
+                }
+            }
+            if (!unanswered) {
+                handleSendAll();
             }
         }
-        if (!unanswered) {
-            handleSendAll();
+        else {
+            setOpen(true);
         }
     }
     const handleClose = () => {
@@ -120,8 +125,9 @@ const ActiveTest = () => {
                 setTime(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000));
                 setQuestion(response.data.item);
 
-                getBoxes(0);
-
+                if (!is_adaptive_test) {
+                    getBoxes(0);
+                }
                 set_started(!started);
                 //console.log(response.data.item);
 
@@ -129,7 +135,14 @@ const ActiveTest = () => {
                 timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
 
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                if (err.toJSON().status === 310) {
+                    handleSendAll();
+                }
+                else {
+                    console.log(err);
+                }
+            });
     };
 
     function prepPayload() {    //подготовка ответов
@@ -264,44 +277,56 @@ const ActiveTest = () => {
         if (Payload !== "DONOTSEND") {
             axios.post(url, Payload)
                 .then(function (response) {
+                    if (is_adaptive_test) {
+                        localStorage.setItem("question_id", response.data.item.id);
+                        setQuestion(response.data.item);
+                    }
                     //console.log(response);
                     //localStorage.setItem("question_id", response.data.item.id);
                     //setQuestion(response.data.item);
                     //console.log(response.data.item);
                 })
+                .catch(err => {
+                    if (err.toJSON().status === 310) {
+                        handleSendAll();
+                    }
+                    else {
+                        console.log(err);
+                    }
+                });
+        }
+
+        if (!is_adaptive_test) {
+            if (question_list.length > 0) {//set first\last
+                // eslint-disable-next-line eqeqeq
+                if (question_list[question_list.length - 1].id == question_id) {
+                    set_last(true);
+                }
+                else {
+                    set_last(false);
+                }
+                // eslint-disable-next-line eqeqeq
+                if (question_list[0].id == question_id) {
+                    set_first(true);
+                }
+                else {
+                    set_first(false);
+                }
+            }
+
+            //load
+            url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
+
+            axios.get(url)
+                .then(function (response) {
+                    //console.log(response);
+                    localStorage.setItem("question_id", response.data.item.id);
+                    setQuestion(response.data.item);
+                })
                 .catch(err => console.log(err));
+
+            getBoxes(question_list.findIndex((el) => el.id === question_id));
         }
-
-        if (question_list.length > 0) {//set first\last
-            // eslint-disable-next-line eqeqeq
-            if (question_list[question_list.length - 1].id == question_id) {
-                set_last(true);
-            }
-            else {
-                set_last(false);
-            }
-            // eslint-disable-next-line eqeqeq
-            if (question_list[0].id == question_id) {
-                set_first(true);
-            }
-            else {
-                set_first(false);
-            }
-        }
-
-        //load
-        url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
-
-        axios.get(url)
-            .then(function (response) {
-                //console.log(response);
-                localStorage.setItem("question_id", response.data.item.id);
-                setQuestion(response.data.item);
-            })
-            .catch(err => console.log(err));
-
-        getBoxes(question_list.findIndex((el) => el.id === question_id));
-
     }
 
     // eslint-disable-next-line no-unused-vars
@@ -310,36 +335,43 @@ const ActiveTest = () => {
         let Payload = prepPayload();
 
         console.log(Payload);
+        if (is_adaptive_test) {
 
-        if (question_list[question_list.length - 1].id === question_id) {//set first\last
-            set_last(true);
         }
         else {
-            set_last(false);
-        }
-        if (question_list[0].id === question_id) {
-            set_first(true);
-        }
-        else {
-            set_first(false);
-        }
+            if (question_list[question_list.length - 1].id === question_id) {//set first\last
+                set_last(true);
+            }
+            else {
+                set_last(false);
+            }
+            if (question_list[0].id === question_id) {
+                set_first(true);
+            }
+            else {
+                set_first(false);
+            }
 
-        getBoxes(question_list.findIndex((el) => el.id === question_id));
+            getBoxes(question_list.findIndex((el) => el.id === question_id));
 
-        //load
-        let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
+            //load
+            let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
-        axios.get(url)
-            .then(function (response) {
-                console.log(response);
-                localStorage.setItem("question_id", response.data.item.id);
-                setQuestion(response.data.item);
-                //console.log(question);
-            })
-            .catch(err => console.log(err));
+            axios.get(url)
+                .then(function (response) {
+                    console.log(response);
+                    localStorage.setItem("question_id", response.data.item.id);
+                    setQuestion(response.data.item);
+                    //console.log(question);
+                })
+                .catch(err => console.log(err));
+        }
     }
     function handleNext() {
-        if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
+        if (is_adaptive_test) {
+            handleSendOne(0);
+        }
+        else if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
                     handleSendOne(question_list[i + 1].id);
@@ -348,7 +380,7 @@ const ActiveTest = () => {
         }
     }
     function handlePrev() {
-        if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
+        if (!is_adaptive_test && question_list[0].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
                     handleSendOne(question_list[i - 1].id);
@@ -359,8 +391,10 @@ const ActiveTest = () => {
 
     function handleSendAll() {  //завершение
 
+        if (!is_adaptive_test) {
+            handleSendOne(localStorage.getItem("question_id"));
+        }
         //console.log(localStorage.getItem("question_id"));
-        handleSendOne(localStorage.getItem("question_id"));
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
 
@@ -370,10 +404,11 @@ const ActiveTest = () => {
 
                 localStorage.removeItem("session_id");
                 localStorage.removeItem("question_id");
-                localStorage.removeItem("question_list");
+                if (!is_adaptive_test) {
+                    localStorage.removeItem("question_list");
+                }
                 localStorage.removeItem("tid");
-
-                localStorage.setItem("Result", response.data);
+                localStorage.setItem("Result", JSON.stringify(response.data));
                 /*
                 localStorage.setItem("fullTime", response.data.fullTime);
                 localStorage.setItem("grade", response.data.grade);
@@ -448,7 +483,7 @@ const ActiveTest = () => {
                 </div>
                 
                 <div>
-                    {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
+                    {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
                 </div>
 
             </div>

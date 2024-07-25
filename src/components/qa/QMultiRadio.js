@@ -18,7 +18,7 @@ export default function QMultiRadio({ qname, cnt, a_arr, Qpic }) {
   
         <div>
             <div className="question">
-                <br/><br/><p className="questiontext">
+                <br/><p className="questiontext">
                     <span>
                         {qname}
                     </span>

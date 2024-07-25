@@ -55,23 +55,26 @@ export default function Result() {
 
     return (
         <main>
-            <div className="content-preview">
-            {res_type != "HIDDEN" &&
-                <>
-                    <h1>
-                        <i>{tname} (Преп. {author})</i>
-                    </h1>
-                    <span>
-                        <br /><br /><i>Ваша оценка: {grade}<br /><br />
-                            Метод оценивания: Последняя попытка<br /><br />
-                            Ваше время: {time}</i><br /><br />
-                    </span>
-                </>
-            }
-                <Link className="btn btn-1" to="/tests/">Закрыть</Link>
+            <div className="content-block">
+                <div className="result-info">
+                    {res_type != "HIDDEN" &&
+                    <>
+                        <h1>
+                            <i>{tname} (Преп. {author})</i>
+                        </h1>
+                        <span>
+                            <br /><br /><i>Ваша оценка: {grade}<br /><br />
+                                Метод оценивания: Последняя попытка<br /><br />
+                                Ваше время: {time}</i><br /><br />
+                        </span>
+                    </>
+                    }
+                    <Link className="btn btn-1" to="/tests/">Закрыть</Link>
+                </div>
+                {q_elements && q_elements}
             </div>
 
-            {q_elements && q_elements}
+            
         </main>
     )
 }

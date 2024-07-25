@@ -169,6 +169,8 @@ main {
 }
 
 .content-block {
+    font-weight: bold;
+    color: #00335e;
     width: 60%;
     text-align: left;
     background-color: #fff;
@@ -488,8 +490,42 @@ fieldset {
 }
 
 .question {
-    margin-left: 20px;    
+    margin: 10px 10px 0px 10px;
+    padding: 0px 10px 0px 10px;   
 }
+
+ .questiontext{
+    text-align: justify;
+ }
+
+.q-true{
+    background-color: #bcf5bc;    /*добавить к классу question ПОСЛЕ завершения теста*/
+    border-radius: 10px;
+}
+
+.q-false{
+    background-color: #ffc2cc;
+    border-radius: 10px;
+}
+
+.a-true{
+    background-color: #addfad;  /*добавить в соответствующую <li> ПОСЛЕ завершения теста*/
+    border-radius: 5px;
+    margin-bottom: 3px;
+    padding: 2px;
+    line-height: 1.5;
+ }
+
+ .a-false{
+    background-color: #ff9ead;
+    border-radius: 5px;
+    padding: 2px;
+    line-height: 1.5;
+ }
+
+ .result-info{
+    text-align: center;
+ }
 
 /* style of matches question */
 .matches {

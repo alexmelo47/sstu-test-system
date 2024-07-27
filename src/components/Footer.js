@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default function Footer() {
-  return (
+    return (
     <footer>
-          <p>&copy; 2024 ТЕСТИНТЕЛ</p> <a href="/guid" className='info'>&#10004;о проекте</a>
+        <p>&copy; 2024 ТЕСТИНТЕЛ</p> <span>Версия: 5</span> <a href="/guid" className='info'>&#10004;о проекте</a>
     </footer>
-  )
+    )
 }

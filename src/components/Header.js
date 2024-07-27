@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from 'axios';
 
 import Dialog from "@material-ui/core/Dialog";
@@ -97,7 +97,7 @@ export default function Header() {
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
                               {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>}
-                              {auth && <a className="nav-link" onClick={() => { localStorage.removeItem("accessToken"); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
+                              {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                             <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
                                <DialogTitle id="authorization">Авторизация</DialogTitle> 
                                 <DialogContent>
@@ -178,5 +178,3 @@ export default function Header() {
     </>
   )
 }
-
-//

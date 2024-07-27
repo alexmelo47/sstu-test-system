@@ -12,37 +12,31 @@ import Button from "@material-ui/core/Button";
 const baseURL ="https://maile.fita.cc"
 
 const Tests = () => {
-  const [tests, setTests] = useState([]);
-  const [buttonClick, setButtonClick] = useState(true); 
-  localStorage.removeItem("fullTime");
-  localStorage.removeItem("grade");
-  localStorage.removeItem("test_name");
-  localStorage.removeItem("test_author");
+    const [tests, setTests] = useState([]);
+    const [buttonClick, setButtonClick] = useState(true); 
+    localStorage.removeItem("Result");
 
     const [open4, setAccessWarn] = React.useState(false);
-    const handleClickOpenAccessWarn = () => {
-        setAccessWarn(true);
-    }
     const handleCloseAccessWarn = () => {
         setAccessWarn(false);
     }
 
-  function getTests(){  //Запрос на доступные пользователю тесты
-    setButtonClick(!buttonClick)
-    if(buttonClick){
-        axios.get(baseURL + "/tests").then((tests) => {
-            //console.log(tests);
-        setTests(tests.data)
-        }).catch((err) => {
-            if (err.toJSON().status === 403) {
-                setAccessWarn(true);
-            }
-            console.log(err);
-        })
-    }else{
-      setTests([])
+    function getTests(){  //Запрос на доступные пользователю тесты
+        setButtonClick(!buttonClick)
+        if(buttonClick){
+            axios.get(baseURL + "/tests").then((tests) => {
+                //console.log(tests);
+            setTests(tests.data)
+            }).catch((err) => {
+                if (err.toJSON().status === 403) {
+                    setAccessWarn(true);
+                }
+                console.log(err);
+            })
+        }else{
+            setTests([])
+        }
     }
-  }
  
     return (
         <main>

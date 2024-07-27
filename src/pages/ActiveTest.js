@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
+
 import QShort from '../components/qa/QShort'
 import QSorting from '../components/qa/QSorting'
 import QMatching from '../components/qa/QMatching'
@@ -22,12 +23,12 @@ const ActiveTest = () => {
 
     let testid = Number(localStorage.getItem("tid"));
     let is_adaptive_test = localStorage.getItem("method") === "CLASSIC" ? false : true;
+    // eslint-disable-next-line no-unused-vars
     let timerEject, timerReminder;
     const [question, setQuestion] = useState([]);
     const [timer, setTime] = useState();
     const [question_list, setQuestionList] = useState([]);
     const [started, set_started] = useState(false);
-    const [loaded, set_loaded] = useState(false);
     const [is_last, set_last] = useState(false);
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
@@ -36,16 +37,21 @@ const ActiveTest = () => {
     
     const [open, setOpen] = useState(false);
     const handleClickOpenWarn = () => { //предупреждение о неотвеченных
-        handleSendOne(localStorage.getItem("question_id"));
-        let unanswered = false;
-        for (var i = 0; i < question_list.length; i++) {
-            if (!question_list[i].isAnswered) {
-                unanswered = true;
-                setOpen(true);
+        if (!is_adaptive_test) {
+            handleSendOne(localStorage.getItem("question_id"));
+            let unanswered = false;
+            for (var i = 0; i < question_list.length; i++) {
+                if (!question_list[i].isAnswered) {
+                    unanswered = true;
+                    setOpen(true);
+                }
+            }
+            if (!unanswered) {
+                handleSendAll();
             }
         }
-        if (!unanswered) {
-            handleSendAll();
+        else {
+            setOpen(true);
         }
     }
     const handleClose = () => {
@@ -103,9 +109,9 @@ const ActiveTest = () => {
                 setTime(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000));
                 setQuestion(response.data.item);
 
-                getBoxes(0);
-
-                set_loaded(!loaded);
+                if (!is_adaptive_test) {
+                    getBoxes(0);
+                }
                 set_started(!started);
                 //console.log(response.data.item);
 
@@ -113,7 +119,14 @@ const ActiveTest = () => {
                 timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
 
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                if (err.toJSON().status === 310) {
+                    handleSendAll();
+                }
+                else {
+                    console.log(err);
+                }
+            });
     };
 
     function prepPayload() {    //подготовка ответов
@@ -123,55 +136,59 @@ const ActiveTest = () => {
             "text": null
         }
 
-        if (question.itemType === "MULTIPLE_CHOICE") {
-            let chosen_radio = document.getElementsByClassName("radioboxes");
+        switch (question.itemType) {
+            case "MULTIPLE_CHOICE":
+                let chosen_radio = document.getElementsByClassName("radioboxes");
 
-            for (let i = 0; i < chosen_radio.length; i++) {
-                if (chosen_radio[i].checked) {
-                    answerload = Number(chosen_radio[i].value);
-                    Payload.answer.push({ "id": answerload });
+                for (let i = 0; i < chosen_radio.length; i++) {
+                    if (chosen_radio[i].checked) {
+                        answerload = Number(chosen_radio[i].value);
+                        Payload.answer.push({ "id": answerload });
+                    }
                 }
-            }
-        }
-        else if (question.itemType === "MULTIPLE_ANSWER") {
-            answerload = [];
-            let chosen_boxes = document.getElementsByClassName("checkboxes");
+                break;
+            case "MULTIPLE_ANSWER":
+                answerload = [];
+                let chosen_boxes = document.getElementsByClassName("checkboxes");
 
-            for (let i = 0; i < chosen_boxes.length; i++) {
-                if (chosen_boxes[i].checked) {
-                    answerload.push(Number(chosen_boxes[i].value));
-                    Payload.answer.push({ "id": Number(chosen_boxes[i].value) });
+                for (let i = 0; i < chosen_boxes.length; i++) {
+                    if (chosen_boxes[i].checked) {
+                        answerload.push(Number(chosen_boxes[i].value));
+                        Payload.answer.push({ "id": Number(chosen_boxes[i].value) });
+                    }
                 }
-            }
-        }
-        else if (question.itemType === "TEXT" || question.itemType === "NUMBER") {
-            answerload = document.getElementById("AnsShort").value;
-            Payload.text = answerload;
-        }
-        else if (question.itemType === "SORTING") {
-            answerload = [];
-            let chosen_order = document.getElementsByClassName("orderboxes");
+                break;
+            case "SORTING":
+                answerload = [];
+                let chosen_order = document.getElementsByClassName("orderboxes");
 
-            for (let i = 0; i < chosen_order.length; i++) {
-                answerload[chosen_order[i].value] = Number(chosen_order[i].id);
-            }
-            for (let i = 0; i < answerload.length; i++) {
-                Payload.answer.push({ "id": Number(answerload[i]) });
-            }
-        }
-        else if (question.itemType === "MATCHING") {
-            answerload = [];
-            let chosen_matches = document.getElementsByClassName("matchboxes");
+                for (let i = 0; i < chosen_order.length; i++) {
+                    answerload[chosen_order[i].value] = Number(chosen_order[i].id);
+                }
+                for (let i = 0; i < answerload.length; i++) {
+                    Payload.answer.push({ "id": Number(answerload[i]) });
+                }
+                break;
+            case "MATCHING":
+                answerload = [];
+                let chosen_matches = document.getElementsByClassName("matchboxes");
 
-            for (let i = 0; i < chosen_matches.length; i++) {
+                for (let i = 0; i < chosen_matches.length; i++) {
 
-                answerload.push(Number(chosen_matches[i].id));
-                Payload.answer.push({ "id": Number(chosen_matches[i].id) });
+                    answerload.push(Number(chosen_matches[i].id));
+                    Payload.answer.push({ "id": Number(chosen_matches[i].id) });
 
-                answerload.push(Number(chosen_matches[i].value));
-                Payload.answer.push({ "id": Number(chosen_matches[i].value) });
+                    answerload.push(Number(chosen_matches[i].value));
+                    Payload.answer.push({ "id": Number(chosen_matches[i].value) });
 
-            }
+                }
+                break;
+            case "TEXT":
+            case "NUMBER":
+                answerload = document.getElementById("AnsShort").value;
+                Payload.text = answerload;
+            // eslint-disable-next-line no-fallthrough
+            default: break;
         }
 
         if (answerload === undefined || answerload.length === 0) {//не отправляем ничего, просто переход
@@ -194,45 +211,58 @@ const ActiveTest = () => {
         if (Payload !== "DONOTSEND") {
             axios.post(url, Payload)
                 .then(function (response) {
+                    if (is_adaptive_test) {
+                        localStorage.setItem("question_id", response.data.item.id);
+                        setQuestion(response.data.item);
+                    }
+                })
+                .catch(err => {
+                    if (err.toJSON().status === 310) {
+                        handleSendAll();
+                    }
+                    else {
+                        console.log(err);
+                    }
+                });
+        }
 
+        if (!is_adaptive_test) {
+            if (question_list.length > 0) {//set first\last
+                // eslint-disable-next-line eqeqeq
+                if (question_list[question_list.length - 1].id == question_id) {
+                    set_last(true);
+                }
+                else {
+                    set_last(false);
+                }
+                // eslint-disable-next-line eqeqeq
+                if (question_list[0].id == question_id) {
+                    set_first(true);
+                }
+                else {
+                    set_first(false);
+                }
+            }
+
+            //load
+            url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
+
+            axios.get(url)
+                .then(function (response) {
+                    localStorage.setItem("question_id", response.data.item.id);
+                    setQuestion(response.data.item);
                 })
                 .catch(err => console.log(err));
+
+            getBoxes(question_list.findIndex((el) => el.id === question_id));
         }
-
-        if (question_list.length > 0) {//set first\last
-            // eslint-disable-next-line eqeqeq
-            if (question_list[question_list.length - 1].id == question_id) {
-                set_last(true);
-            }
-            else {
-                set_last(false);
-            }
-            // eslint-disable-next-line eqeqeq
-            if (question_list[0].id == question_id) {
-                set_first(true);
-            }
-            else {
-                set_first(false);
-            }
-        }
-
-        //load
-        url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
-
-        axios.get(url)
-            .then(function (response) {
-                //console.log(response);
-                localStorage.setItem("question_id", response.data.item.id);
-                setQuestion(response.data.item);
-            })
-            .catch(err => console.log(err));
-
-        getBoxes(question_list.findIndex((el) => el.id === question_id));
-
     }
 
     function handleNext() {
-        if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
+        if (is_adaptive_test) {
+            handleSendOne(0);
+        }
+        else if (question_list[question_list.length - 1].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
                     handleSendOne(question_list[i + 1].id);
@@ -241,7 +271,7 @@ const ActiveTest = () => {
         }
     }
     function handlePrev() {
-        if (question_list[0].id !== Number(localStorage.getItem("question_id"))) {
+        if (!is_adaptive_test && question_list[0].id !== Number(localStorage.getItem("question_id"))) {
             for (var i = 0; i < question_list.length; i++) {
                 if (question_list[i].id === Number(localStorage.getItem("question_id"))) {
                     handleSendOne(question_list[i - 1].id);
@@ -252,22 +282,22 @@ const ActiveTest = () => {
 
     function handleSendAll() {  //завершение
 
+        if (!is_adaptive_test) {
+            handleSendOne(localStorage.getItem("question_id"));
+        }
         //console.log(localStorage.getItem("question_id"));
-        handleSendOne(localStorage.getItem("question_id"));
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/complete';
 
         axios.patch(url)
             .then(function (response) {
-                //console.log(response);
                 localStorage.removeItem("session_id");
                 localStorage.removeItem("question_id");
-                localStorage.removeItem("question_list");
+                if (!is_adaptive_test) {
+                    localStorage.removeItem("question_list");
+                }
                 localStorage.removeItem("tid");
-                localStorage.setItem("fullTime", response.data.fullTime);
-                localStorage.setItem("grade", response.data.grade);
-                localStorage.setItem("test_name", response.data.test.name);
-                localStorage.setItem("test_author", response.data.test.author.name);
+                localStorage.setItem("Result", JSON.stringify(response.data));
                 set_finished(!finished);
             })
             .catch(err => console.log(err));
@@ -307,7 +337,7 @@ const ActiveTest = () => {
                 <fieldset>
 
                     <div className="test-menu">
-                        {menubtns && started && loaded && !is_adaptive_test &&
+                        {menubtns && started && !is_adaptive_test &&
                             menubtns.map(btn => (
                                 <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
                                     <span>{btn.num}</span>
@@ -336,7 +366,7 @@ const ActiveTest = () => {
                 </div>
                 
                 <div>
-                    {started && !is_adaptive_test && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
+                    {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
                 </div>
 
             </div>

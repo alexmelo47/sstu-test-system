@@ -12,14 +12,14 @@ import QMultiRadio from '../components/qa/QMultiRadio'
 export default function Result() {
     let res = JSON.parse(localStorage.getItem("Result"));
     console.log(res);
-    let res_type = "CORRECT";//res.type;
+    let res_type = "GRADE_ONLY";//res.type;
 
     let questions, grade, time, tname, sname, author;
     let q_elements = [];
 
     switch (res_type) {
-        case "CORRECT": 
-        case "SELECTED": 
+        case "CORRECT":
+        case "SELECTED":
         case "INCORRECT":
             questions = res.items;
             for (var i = 0; i < questions.length; i++) {

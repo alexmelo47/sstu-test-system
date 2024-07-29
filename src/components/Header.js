@@ -8,6 +8,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
 
 import Home from '../pages/Home';
@@ -26,6 +29,8 @@ export default function Header() {
     /* авторизация через модальное окно */
     const [auth, setAuth] = React.useState(false);
     const [open, setOpenAuthorization] = React.useState(false);
+    const [open1, setOpenRegistration] = React.useState(false);
+    const [status, setStatus] = React.useState('External');
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
@@ -40,6 +45,12 @@ export default function Header() {
     const handleCloseAuthorization = () => {
         setOpenAuthorization(false);
     }
+    const handleClickOpenRegistration = () => {
+        setOpenRegistration(true);
+    }
+    const handleCloseRegistration = () => {
+        setOpenRegistration(false);
+    }
 
     const handleClickOpenRemind = () => {
         setOpenRemind(true);
@@ -52,6 +63,13 @@ export default function Header() {
         setOpenWrongPass(false);
     }
 
+    const handleStatusChange = (event) => {
+        setStatus(event.target.value);
+      }
+
+    const handleRegistr = () => {
+        setOpenRegistration(false); //для запроса регистрации
+    }
 
     const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ
         const loginPayload = {
@@ -97,12 +115,12 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>}
+                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти в систему&nbsp; </a>}
                               {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                             <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
-                               <DialogTitle id="authorization">Авторизация</DialogTitle> 
+                               <DialogTitle id="authorization">Вход в систему</DialogTitle> 
                                 <DialogContent>
-                                    <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
+                                    <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
                                     <TextField
                                         autoFocus
                                         margin="dense"
@@ -126,7 +144,7 @@ export default function Header() {
                                 </DialogActions>
 
                                 <DialogActions>     
-                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>  
+                                    <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Зарегистрироваться</Button>   
                                 </DialogActions>
 
                             </Dialog>
@@ -157,6 +175,90 @@ export default function Header() {
                                 <DialogActions>
                                       <Button onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } color="primary">Ввести заново</Button>                           
                                 </DialogActions>
+                            </Dialog>
+
+                            <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
+                               <DialogTitle id="registration">Регистрация</DialogTitle> 
+                                <DialogContent>
+                                    <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name1"
+                                        label="Имя"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name2"
+                                        label="Фамилия"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name3"
+                                        label="Отчество"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name"
+                                        label="Почта"
+                                        type="email"
+                                        fullWidth
+                                    /><br /><br />
+
+                                    <InputLabel htmlFor="date">Дата рождения</InputLabel>
+                                    <TextField
+                                        margin="dense"
+                                        id="date"
+                                        label=""
+                                        type="date"                                   
+                                    /><br /><br />
+
+                                    <InputLabel htmlFor="status">Статус в системе</InputLabel> 
+                                    <Select
+                                        autoFocus
+                                        value={status}
+                                        onChange={handleStatusChange}
+                                        inputProps={{
+                                        name: 'status',
+                                        id: 'status',
+                                        }}
+                                    >
+                                        <MenuItem value="Employee">Сотрудник СГТУ</MenuItem>
+                                        <MenuItem value="Student">Студент СГТУ</MenuItem>
+                                        <MenuItem value="External">Внешний испытуемый</MenuItem>
+                                    </Select><br />
+                                    
+                                    
+
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="pass"
+                                        label="Пароль"
+                                        type="password"   
+                                    /><br />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="pass"
+                                        label="Повторите пароль"
+                                        type="password"
+                                    />
+                                </DialogContent>
+
+                                <DialogActions>     
+                                    <Button onClick={handleRegistr} color="primary">Зарегистрироваться</Button> 
+                                </DialogActions>
+
                             </Dialog>
 
 

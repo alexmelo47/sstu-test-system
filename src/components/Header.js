@@ -146,7 +146,7 @@ export default function Header() {
                                 <DialogActions>     
                                     <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Зарегистрироваться</Button>   
                                 </DialogActions>
-
+                                
                             </Dialog>
 
                             <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
@@ -184,27 +184,11 @@ export default function Header() {
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="name1"
-                                        label="Имя"
+                                        id="fullname"
+                                        label="ФИО"
                                         type="text"
                                         fullWidth
-                                    />
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="name2"
-                                        label="Фамилия"
-                                        type="text"
-                                        fullWidth
-                                    />
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="name3"
-                                        label="Отчество"
-                                        type="text"
-                                        fullWidth
-                                    />
+                                    />                                    
                                     <TextField
                                         autoFocus
                                         margin="dense"

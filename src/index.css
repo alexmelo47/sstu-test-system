@@ -576,7 +576,9 @@ input[type='text'] {
     font-family: 'Century Gothic', arial;
     font-size: inherit;
     padding-left: 10px;
-    height: 2em;
+    height: 2em; 
+}
+.q-input-text{
     width: 50%;
 }
 

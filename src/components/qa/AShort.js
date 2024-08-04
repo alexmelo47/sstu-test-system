@@ -13,7 +13,7 @@ export default function AShort(props) {
         <ul className="shortanswer/numerical">
             <li>
                 <label className="accesshide" htmlFor="AnsShort">Ответ:</label>
-                <input id="AnsShort" name={rname} type="text" placeholder="Введите ответ здесь" value={input} onInput={e => setInput(e.target.value)} autoComplete="off" />
+                <input className="q-input-text" id="AnsShort" name={rname} type="text" placeholder="Введите ответ здесь" value={input} onInput={e => setInput(e.target.value)} autoComplete="off" />
             </li>
         </ul>
 

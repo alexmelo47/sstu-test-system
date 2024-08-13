@@ -1,7 +1,14 @@
 import React from 'react'
 import PictureA from './PictureA'
 
-export default function ASorting({ cnt, aid, aname, anum, picture }) {
+export default function ASorting({ cnt, aid, aname, anum, picture, rtype = 0, status = false }) {
+
+    //for result start
+    let classes = "";
+    if (rtype === 2) {
+        status ? classes += " a-true" : classes += " a-false";
+    }
+    //for result end
 
     let componentsArr = [];
     for (let i = 0; i < cnt; i++) {
@@ -10,17 +17,21 @@ export default function ASorting({ cnt, aid, aname, anum, picture }) {
     
     return (
         /* 
-        Компонент выбора ответа вопроса с сортировкой
+        Компонент выбора ответа вопроса с сортировкой (обе части)
+
+        ПЕРЕСМОТРЕТЬ в select конструкцию defaultValue={anum}
         */
 
-        <div className="matches">
-            <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
+        <li className={classes}>
+            <div className="matches">
+                <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
 
-            <select className="orderboxes select custom-select" defaultValue={anum} id={aid}>
-                {componentsArr}
-            </select><br/>
-            <br/>
-        </div>
+                <select className="orderboxes select custom-select" defaultValue={anum} id={aid} disabled={rtype > 0}>
+                    {componentsArr}
+                </select>
 
+                <br/>
+            </div>
+        </li>
     )
 }

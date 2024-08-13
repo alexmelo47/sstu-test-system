@@ -14,31 +14,51 @@ export default function Result() {
     console.log(res);
     let res_type = "GRADE_ONLY";//res.type;
 
-    let questions, grade, time, tname, sname, author;
+    let questions, grade, time, tname, sname, author, sw_cnt = 0, status_en;
     let q_elements = [];
 
     switch (res_type) {
         case "CORRECT":
+            //sw_cnt++;
         case "SELECTED":
+            //sw_cnt++;
         case "INCORRECT":
+            sw_cnt++;
             questions = res.items;
             for (var i = 0; i < questions.length; i++) {
+                switch (questions[i].status) {
+                    case "pass":
+                        status_en = true;
+                        break;
+                    case "failed":
+                        status_en = false;
+                        break;
+                    default:
+                        status_en = false;
+                        break;
+                }
                 switch (questions[i].itemType) {
                     case "MULTIPLE_CHOICE":
-                        q_elements.push(<QMultiRadio qname={questions[i].question} cnt={questions[i].answers.length} a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} />);
+                        q_elements.push(<div key={i}><QMultiRadio qname={questions[i].question} cnt={questions[i].answers.length}
+                            a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} rtype={sw_cnt} status={status_en} /></div>);
                         break;
                     case "MULTIPLE_ANSWER":
-                        q_elements.push(<QMultiCheckbox qname={questions[i].question} cnt={questions[i].answers.length} a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} />);
+                        q_elements.push(<div key={i}><QMultiCheckbox qname={questions[i].question} cnt={questions[i].answers.length}
+                            a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} rtype={sw_cnt} status={status_en} /></div>);
                         break;
                     case "SORTING":
-                        q_elements.push(<QSorting qname={questions[i].question} cnt={questions[i].answers.length} a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} />);
+                        q_elements.push(<div key={i}><QSorting qname={questions[i].question} cnt={questions[i].answers.length}
+                            a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} rtype={sw_cnt} status={status_en} /></div>);
                         break;
                     case "MATCHING":
-                        q_elements.push(<QMatching qname={questions[i].question} cnt={questions[i].answers.length} a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} />);
+                        q_elements.push(<div key={i}><QMatching qname={questions[i].question} cnt={questions[i].answers.length}
+                            a_arr={questions[i].answers} Qpic={questions[i].pictures[0] ?? ""} rtype={sw_cnt} status={status_en} /></div>);
                         break;
                     case "TEXT":
                     case "NUMBER":
-                        q_elements.push(<QShort qname={questions[i].question} qa={questions[i].answers[0]?.answer ?? ""} Qpic={questions[i].pictures[0] ?? ""} />);
+                        q_elements.push(<div key={i}><QShort qname={questions[i].question} qa={questions[i].answers[0]?.answer ?? ""}
+                            correctN={questions[i].answers[0]?.correctNumber ?? ""} correctT={questions[i].answers[0]?.correctAnswer ?? ""}
+                            Qpic={questions[i].pictures[0] ?? ""} rtype={sw_cnt} status={status_en} /></div>);
                     default: break;
                 }
             }

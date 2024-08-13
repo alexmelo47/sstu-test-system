@@ -30,7 +30,7 @@ export default function Header() {
     const [auth, setAuth] = React.useState(false);
     const [open, setOpenAuthorization] = React.useState(false);
     const [open1, setOpenRegistration] = React.useState(false);
-    const [status, setStatus] = React.useState('External');
+    const [status, setStatus] = React.useState('EXTERNAL');
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
@@ -67,14 +67,34 @@ export default function Header() {
         setStatus(event.target.value);
       }
 
-    const handleRegistr = () => {
-        setOpenRegistration(false); //для запроса регистрации
+    const handleRegistr = () => {   //Запрос регистрации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
+        const regPayload = {
+            "firstName": document.getElementById("name1_reg").value,
+            "lastName": document.getElementById("name2_reg").value,
+            "patronymic": document.getElementById("name3_reg").value,
+            "birthdate": document.getElementById("date_reg").value,
+            "email": document.getElementById("mail_reg").value,
+            "status": document.getElementById("status_reg").value,
+            "workPlace": document.getElementById("status_reg").value
+        }
+        console.log(regPayload);
+
+        axios.post(baseURL + '/waitlist', regPayload)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch((err) => {
+                /*if (err.toJSON().status === 500) { //пользователь существует
+                }*/
+                console.log(err);
+            });
+        setOpenRegistration(false);
     }
 
-    const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ
+    const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
         const loginPayload = {
-            "login": document.getElementById("name").value,
-            "password": document.getElementById("pass").value
+            "login": document.getElementById("name_login").value,
+            "password": document.getElementById("pass_login").value
         }
         //console.log(loginPayload);
         localStorage.removeItem("accessToken");
@@ -124,7 +144,7 @@ export default function Header() {
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="name"
+                                        id="name_login"
                                         label="Логин"
                                         type="text"
                                         fullWidth
@@ -132,7 +152,7 @@ export default function Header() {
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="pass"
+                                        id="pass_login"
                                         label="Пароль"
                                         type="password"
                                         fullWidth
@@ -156,7 +176,7 @@ export default function Header() {
                                     <TextField
                                     autoFocus
                                     margin="dense"
-                                    id="name"
+                                    id="mail_remind"
                                     label="Почта"
                                     type="email"
                                     fullWidth
@@ -178,21 +198,37 @@ export default function Header() {
                             </Dialog>
 
                             <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
-                               <DialogTitle id="registration">Регистрация</DialogTitle> 
+                               <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
                                 <DialogContent>
                                     <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name1_reg"
+                                          label="Имя"
+                                          type="text"
+                                          fullWidth
+                                      />
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name2_reg"
+                                          label="Фамилия"
+                                          type="text"
+                                          fullWidth
+                                      />
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name3_reg"
+                                          label="Отчество"
+                                          type="text"
+                                          fullWidth
+                                      />
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="fullname"
-                                        label="ФИО"
-                                        type="text"
-                                        fullWidth
-                                    />                                    
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="name"
+                                        id="mail_reg"
                                         label="Почта"
                                         type="email"
                                         fullWidth
@@ -201,7 +237,7 @@ export default function Header() {
                                     <InputLabel htmlFor="date">Дата рождения</InputLabel>
                                     <TextField
                                         margin="dense"
-                                        id="date"
+                                        id="date_reg"
                                         label=""
                                         type="date"                                   
                                     /><br /><br />
@@ -213,34 +249,17 @@ export default function Header() {
                                         onChange={handleStatusChange}
                                         inputProps={{
                                         name: 'status',
-                                        id: 'status',
+                                        id: 'status_reg',
                                         }}
                                     >
-                                        <MenuItem value="Employee">Сотрудник СГТУ</MenuItem>
-                                        <MenuItem value="Student">Студент СГТУ</MenuItem>
-                                        <MenuItem value="External">Внешний испытуемый</MenuItem>
+                                        <MenuItem value="EMPLOYEE">Сотрудник СГТУ</MenuItem>
+                                        <MenuItem value="STUDENT">Студент СГТУ</MenuItem>
+                                        <MenuItem value="EXTERNAL">Внешний испытуемый</MenuItem>
                                     </Select><br />
-                                    
-                                    
-
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="pass"
-                                        label="Пароль"
-                                        type="password"   
-                                    /><br />
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="pass"
-                                        label="Повторите пароль"
-                                        type="password"
-                                    />
                                 </DialogContent>
 
                                 <DialogActions>     
-                                    <Button onClick={handleRegistr} color="primary">Зарегистрироваться</Button> 
+                                    <Button onClick={handleRegistr} color="primary">Отправить заявку</Button> 
                                 </DialogActions>
 
                             </Dialog>

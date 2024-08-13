@@ -339,17 +339,21 @@ const ActiveTest = () => {
 
         }
         else {
-            if (question_list[question_list.length - 1].id === question_id) {//set first\last
-                set_last(true);
-            }
-            else {
-                set_last(false);
-            }
-            if (question_list[0].id === question_id) {
-                set_first(true);
-            }
-            else {
-                set_first(false);
+            if (question_list.length > 0) {//set first\last
+                // eslint-disable-next-line eqeqeq
+                if (question_list[question_list.length - 1].id == question_id) {
+                    set_last(true);
+                }
+                else {
+                    set_last(false);
+                }
+                // eslint-disable-next-line eqeqeq
+                if (question_list[0].id == question_id) {
+                    set_first(true);
+                }
+                else {
+                    set_first(false);
+                }
             }
 
             getBoxes(question_list.findIndex((el) => el.id === question_id));
@@ -469,7 +473,10 @@ const ActiveTest = () => {
 
                     {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                     {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                    {(question.itemType === "TEXT" || question.itemType === "NUMBER") && <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""} Qpic={question.pictures[0] ?? ""} />}
+                    {(question.itemType === "TEXT" || question.itemType === "NUMBER") &&
+                        <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""}
+                            correctN={question.answers[0]?.correctNumber ?? ""} correctT={question.answers[0]?.correctAnswer ?? ""} Qpic={question.pictures[0] ?? ""}
+                        />}
                     {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                     {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
 

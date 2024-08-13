@@ -21,7 +21,7 @@ const Tests = () => {
         setAccessWarn(false);
     }
 
-    function getTests(){  //Запрос на доступные пользователю тесты
+    function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
         setButtonClick(!buttonClick)
         if(buttonClick){
             axios.get(baseURL + "/tests").then((tests) => {

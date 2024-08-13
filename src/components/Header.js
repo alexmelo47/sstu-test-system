@@ -8,6 +8,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
 
 import Home from '../pages/Home';
@@ -25,6 +28,8 @@ export default function Header() {
     /* авторизация через модальное окно */
     const [auth, setAuth] = React.useState(false);
     const [open, setOpenAuthorization] = React.useState(false);
+    const [open1, setOpenRegistration] = React.useState(false);
+    const [status, setStatus] = React.useState('EXTERNAL');
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
@@ -39,6 +44,12 @@ export default function Header() {
     const handleCloseAuthorization = () => {
         setOpenAuthorization(false);
     }
+    const handleClickOpenRegistration = () => {
+        setOpenRegistration(true);
+    }
+    const handleCloseRegistration = () => {
+        setOpenRegistration(false);
+    }
 
     const handleClickOpenRemind = () => {
         setOpenRemind(true);
@@ -51,11 +62,37 @@ export default function Header() {
         setOpenWrongPass(false);
     }
 
+    const handleStatusChange = (event) => {
+        setStatus(event.target.value);
+      }
+
+    const handleRegistr = () => {   //Запрос регистрации
+        const regPayload = {
+            "firstName": document.getElementById("name1_reg").value,
+            "lastName": document.getElementById("name2_reg").value,
+            "patronymic": document.getElementById("name3_reg").value,
+            "birthdate": document.getElementById("date_reg").value,
+            "email": document.getElementById("mail_reg").value,
+            "status": document.getElementById("status_reg").value,
+            "workPlace": document.getElementById("status_reg").value
+        }
+
+        axios.post(baseURL + '/waitlist', regPayload)
+            .then(function (response) {
+                //console.log(response);
+            })
+            .catch((err) => {
+                /*if (err.toJSON().status === 500) { //пользователь существует
+                }*/
+                console.log(err);
+            });
+        setOpenRegistration(false);
+    }
 
     const handleAuth = () => {  //Запрос авторизации
         const loginPayload = {
-            "login": document.getElementById("name").value,
-            "password": document.getElementById("pass").value
+            "login": document.getElementById("name_login").value,
+            "password": document.getElementById("pass_login").value
         }
         //console.log(loginPayload);
         localStorage.removeItem("accessToken");
@@ -96,16 +133,16 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
 
-                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Авторизация&nbsp; </a>}
+                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти в систему&nbsp; </a>}
                               {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                             <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
-                               <DialogTitle id="authorization">Авторизация</DialogTitle> 
+                               <DialogTitle id="authorization">Вход в систему</DialogTitle> 
                                 <DialogContent>
-                                    <DialogContentText>Авторизуйтесь для работы в системе</DialogContentText>
+                                    <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="name"
+                                        id="name_login"
                                         label="Логин"
                                         type="text"
                                         fullWidth
@@ -113,7 +150,7 @@ export default function Header() {
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="pass"
+                                        id="pass_login"
                                         label="Пароль"
                                         type="password"
                                         fullWidth
@@ -125,9 +162,9 @@ export default function Header() {
                                 </DialogActions>
 
                                 <DialogActions>     
-                                    <Button onClick={handleAuth} color="primary">Авторизация</Button>  
+                                    <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Зарегистрироваться</Button>   
                                 </DialogActions>
-
+                                
                             </Dialog>
 
                             <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
@@ -137,7 +174,7 @@ export default function Header() {
                                     <TextField
                                     autoFocus
                                     margin="dense"
-                                    id="name"
+                                    id="mail_remind"
                                     label="Почта"
                                     type="email"
                                     fullWidth
@@ -156,6 +193,73 @@ export default function Header() {
                                 <DialogActions>
                                       <Button onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } color="primary">Ввести заново</Button>                           
                                 </DialogActions>
+                            </Dialog>
+
+                            <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
+                               <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
+                                <DialogContent>
+                                    <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name1_reg"
+                                          label="Имя"
+                                          type="text"
+                                          fullWidth
+                                      />
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name2_reg"
+                                          label="Фамилия"
+                                          type="text"
+                                          fullWidth
+                                      />
+                                      <TextField
+                                          autoFocus
+                                          margin="dense"
+                                          id="name3_reg"
+                                          label="Отчество"
+                                          type="text"
+                                          fullWidth
+                                      />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="mail_reg"
+                                        label="Почта"
+                                        type="email"
+                                        fullWidth
+                                    /><br /><br />
+
+                                    <InputLabel htmlFor="date">Дата рождения</InputLabel>
+                                    <TextField
+                                        margin="dense"
+                                        id="date_reg"
+                                        label=""
+                                        type="date"                                   
+                                    /><br /><br />
+
+                                    <InputLabel htmlFor="status">Статус в системе</InputLabel> 
+                                    <Select
+                                        autoFocus
+                                        value={status}
+                                        onChange={handleStatusChange}
+                                        inputProps={{
+                                        name: 'status',
+                                        id: 'status_reg',
+                                        }}
+                                    >
+                                        <MenuItem value="EMPLOYEE">Сотрудник СГТУ</MenuItem>
+                                        <MenuItem value="STUDENT">Студент СГТУ</MenuItem>
+                                        <MenuItem value="EXTERNAL">Внешний испытуемый</MenuItem>
+                                    </Select><br />
+                                </DialogContent>
+
+                                <DialogActions>     
+                                    <Button onClick={handleRegistr} color="primary">Отправить заявку</Button> 
+                                </DialogActions>
+
                             </Dialog>
 
 

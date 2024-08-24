@@ -31,7 +31,7 @@ export default function QMultiRadio({ qname, cnt, a_arr, Qpic, rtype = 0, status
                     <span>
                         {qname}
                     </span>
-                </p><br />
+                </p>
                 <PictureQ src={Qpic} />
                 <br />
                 

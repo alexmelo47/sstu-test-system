@@ -484,11 +484,10 @@ const ActiveTest = () => {
 
                 
 
-                <div dir="rtl">
                 <div className="quest-btn">
                     {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий &#9668;" />}
+                    {started && !is_adaptive_test && (is_first || is_last) && <div className="btn btn-2" />}
                     {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="&#9658; Следующий" />}
-                </div>
                 </div>
 
                 <div className="quest-btn">

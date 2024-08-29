@@ -482,17 +482,21 @@ const ActiveTest = () => {
 
                 </fieldset>
 
-                <div className="quest-btn">
-                        {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}
-                        {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий" />}
-                        {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий" />}
-                        {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-2" type="submit" value="Подтвердить ответ" />}
-                </div>
                 
-                <div>
-                    {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить тестирование" />}
+
+                <div dir="rtl">
+                <div className="quest-btn">
+                    {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий &#9668;" />}
+                    {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="&#9658; Следующий" />}
+                </div>
                 </div>
 
+                <div className="quest-btn">
+                    {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
+                    {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#9660;" />}
+                    {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}
+                </div>
+           
             </div>
         </main>
     )

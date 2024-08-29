@@ -316,50 +316,48 @@ main {
 
 /* button in test */
 .btn {
-    border: none;
-    border-radius: 10px;
-    font-family: 'Century Gothic', arial;;
-    font-size: inherit;
-    color: inherit;
-    background: none;
-    cursor: pointer;
-    width: 25vh;
-    padding: 2vh 3vh;
-    display: inline-block;
-    margin: 2vh 2vh;
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    border-radius: 30px;
+    width: 25vh;
+    padding: 2vh 3vh;
+    margin: 2vh 2vh;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px #b5b5b5);
 }
 
 .btn-1 {
-    background: #2ecc71;
+    background: #00AF6D;
     color: #fff;
 }
 
 .btn-1:hover {
-    background: #27ae60;
+    background: #00DD89;
 }
 .btn-1:active {
-    background: #27ae60;
+    background: #00AF6D;
     top: 2px;
 }
 
 .btn-2 {
-    background: #33ccff;
+    background: #0059A8;
     color: #fff;
 }
 
 .btn-2:hover {
-    background: #00bfff;
+    background: #0372D4;
 }
+
 .btn-2:active {
-    background: #00bfff;
+    background: #0059A8;
     top: 2px;
 }
 
@@ -393,26 +391,26 @@ main {
 }*/
 
 /* fin button */
-.btn-fin2 {
-    outline:none;
-    height: 40px;
-    text-align: center;
-    width: 200px;
-    border-radius:40px;
+
+.btn-fin2 {    
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;  
+    border-radius: 40px;
+    border: 3px solid #646464;
     background: #fff;
     color: #000000;
-    border-radius: 10px;
-    border: 2px solid #646464;
-    letter-spacing:1px;
-    font-size: 12px;    
-    font-weight:bold;    
     cursor: pointer;
-    transition: all 0.25s ease;
-    word-wrap: break-word;
+    width: 25vh;
+    padding: 1.7vh 3vh;
+    margin: 2vh 2vh; 
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px #b5b5b5);
 }
 
 .btn-fin2:hover {
@@ -424,11 +422,18 @@ main {
     background: #b8b8b8;
 }
 
+.rightside {
+    width: 100%;
+    float: right;
+}
+
 .quest-btn {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+
 
 /* questions menu */
 .test-menu {

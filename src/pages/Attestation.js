@@ -496,13 +496,24 @@ export default function Attestation() {
             </fieldset>
 
             <div className="quest-btn">
-                <input className="btn btn-2" type="submit" value="Предыдущий"/>
-                <input className="btn btn-1" type="submit" value="Подтвердить"/>
+                <input className="btn btn-2" type="submit" value="&#9668; Предыдущий"/>
+                <input className="btn btn-1" type="submit" value="Подтвердить &#9660;"/>
+                <input className="btn btn-2" type="submit" value="Следующий &#9658;"/>
+            </div>
+
+            <div dir="rtl">
+            <div className="quest-btn">
+                             
                 <input className="btn btn-2" type="submit" value="Следующий"/>
             </div>
-            <div>
-                <input className="btn-fin2" type="submit" value="Завершить тестирование"/>
             </div>
+
+            <div className="quest-btn">                
+                <input className="btn btn-1" type="submit" value="Подтвердить"/>
+                <input className="btn-fin2" type="submit" value="Завершить"/>                
+            </div>
+
+
                 
         </div>
     </main>

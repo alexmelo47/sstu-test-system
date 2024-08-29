@@ -455,7 +455,7 @@ const ActiveTest = () => {
                     </DialogActions>
                 </Dialog>
 
-                <fieldset>
+                
 
                     <div className="test-menu">
                         {menubtns && started && !is_adaptive_test &&
@@ -470,7 +470,7 @@ const ActiveTest = () => {
                     <div className="timer-position">
                         {started && timer && <Timer dl={timer} />}
                     </div>
-
+                    <div className="quest-back">
                     {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                     {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                     {(question.itemType === "TEXT" || question.itemType === "NUMBER") &&
@@ -479,20 +479,20 @@ const ActiveTest = () => {
                         />}
                     {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                     {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-
-                </fieldset>
+                    </div>
+                
 
                 
 
                 <div className="quest-btn">
-                    {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="Предыдущий &#9668;" />}
-                    {started && !is_adaptive_test && (is_first || is_last) && <div className="btn btn-2" />}
-                    {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="&#9658; Следующий" />}
+                    {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="&lang; Предыдущий " />}
+                    {started && !is_adaptive_test && (is_first || is_last) && <div className="pseudo-btn" />}
+                    {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий &rang;" />}
                 </div>
 
                 <div className="quest-btn">
                     {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
-                    {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#9660;" />}
+                    {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
                     {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}
                 </div>
            

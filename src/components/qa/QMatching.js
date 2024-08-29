@@ -55,8 +55,7 @@ export default function QMatching({ qname, a_arr, Qpic, rtype = 0, status = fals
         <div>
             <div className={classes}>
                 <br/>
-                <p className="questiontext">{qname}</p>
-            <br />
+                <p className="questiontext">{qname}</p>    
             <PictureQ src={Qpic} />
             <br />
                 

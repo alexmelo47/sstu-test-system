@@ -27,11 +27,11 @@ export default function QMultiCheckbox({ qname, cnt, a_arr, Qpic, rtype = 0, sta
   
         <div>
             <div className={classes}>
-                <br/><br/><p className="questiontext">
+                <br/><p className="questiontext">
                     <span>
                         {qname}
                     </span>
-                </p><br />
+                </p>
                 <PictureQ src={Qpic} />
                 <br />
                 

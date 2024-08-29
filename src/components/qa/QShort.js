@@ -27,13 +27,12 @@ export default function QShort({ qname, qa, correctN, correctT, Qpic, rtype = 0,
         <div>
             <div className={classes}>
                 <br/>
-                <p className="questiontext">{qname}</p>
-                <br />
+                <p className="questiontext">{qname}</p>                
                 <PictureQ src={Qpic} />
                 <br />
 
                 {rtype !== 1 && <AShort value={qa} correct={corr} rtype={rtype} />}
-                <br/><br/>
+                <br/>
 
             </div>
             <br />

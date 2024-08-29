@@ -131,7 +131,7 @@ export default function Header() {
                     <div>
                         <nav>
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                            <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp; </a>
+                            <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
 
                               {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти в систему&nbsp; </a>}
                               {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
@@ -162,7 +162,7 @@ export default function Header() {
                                 </DialogActions>
 
                                 <DialogActions>     
-                                    <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Зарегистрироваться</Button>   
+                                    <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Заявка на регистрацию</Button>   
                                 </DialogActions>
                                 
                             </Dialog>

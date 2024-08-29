@@ -73,6 +73,7 @@ body{
     display: inline-block;
     vertical-align: top;
     cursor: pointer;
+    background: #0059a8;
 }
 
 .nav-link:hover{
@@ -146,10 +147,22 @@ h3 {
     display: inherit;
     vertical-align: top;
     font-size: 24px;
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+}
+
+h4 {
+    display: inherit;
+    vertical-align: top;
+    font-size: 30px;
+    border-bottom: 1px solid;
     margin-bottom: -1px;
     padding-bottom: 10px;
 }
 
+p{
+    margin-bottom: 10px;
+}
 /* orientation of work pages */
 main {
     display: flex;
@@ -302,53 +315,58 @@ main {
 }
 
 /* button in test */
-.btn {
-    border: none;
-    border-radius: 10px;
-    font-family: 'Century Gothic', arial;;
-    font-size: inherit;
-    color: inherit;
-    background: none;
-    cursor: pointer;
+.pseudo-btn{
+    border-radius: 30px;
     width: 25vh;
     padding: 2vh 3vh;
-    display: inline-block;
-    margin: 2vh 2vh;
-    text-transform: uppercase;
+    margin: 4vh 2vh 1vh;
+}
+
+.btn {
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
     letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    border-radius: 30px;
+    width: 25vh;
+    padding: 1.8vh 3vh;
+    margin: 4vh 2vh 1vh;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px #b5b5b5);
 }
 
 .btn-1 {
-    background: #2ecc71;
+    background: #00AF6D;
     color: #fff;
 }
 
 .btn-1:hover {
-    background: #27ae60;
+    background: #00DD89;
 }
 .btn-1:active {
-    background: #27ae60;
+    background: #00AF6D;
     top: 2px;
 }
 
 .btn-2 {
-    background: #33ccff;
+    background: #0059A8;;
     color: #fff;
 }
 
 .btn-2:hover {
-    background: #00bfff;
+    background: #0372D4;
 }
+
 .btn-2:active {
-    background: #00bfff;
+    background: #0059A8;
     top: 2px;
 }
+
 
 /*.btn-fin {
     outline:none;
@@ -380,30 +398,29 @@ main {
 }*/
 
 /* fin button */
-.btn-fin2 {
-    outline:none;
-    height: 40px;
-    text-align: center;
-    width: 200px;
-    border-radius:40px;
+
+.btn-fin2 {    
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
+    font-weight: bold;
+    letter-spacing: 1px;  
+    border-radius: 40px;
+    border: 4px solid #0059A8;
     background: #fff;
-    color: #000000;
-    border-radius: 10px;
-    border: 2px solid #646464;
-    letter-spacing:1px;
-    font-size: 12px;    
-    font-weight:bold;    
+    color: #0059A8;
     cursor: pointer;
-    transition: all 0.25s ease;
-    word-wrap: break-word;
+    width: 25vh;
+    padding: 1.5vh 3vh;
+    margin: 3vh 2vh 1vh; 
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 8px #b5b5b5);
 }
 
 .btn-fin2:hover {
-    background: #646464;
+    background: #0059A8;
     color: white;
 }
 
@@ -411,11 +428,18 @@ main {
     background: #b8b8b8;
 }
 
+.rightside {
+    width: 100%;
+    float: right;
+}
+
 .quest-btn {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+
 
 /* questions menu */
 .test-menu {
@@ -487,6 +511,11 @@ fieldset {
     font-size: 18px;
     font-weight: bold; 
     color: #00335e;
+}
+
+.quest-back{
+    background-color: #ddeeff;    /*добавить к классу question ПОСЛЕ завершения теста*/
+    border-radius: 10px;
 }
 
 .question {
@@ -624,4 +653,63 @@ input[type='text'] {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+}
+
+/* guide styles */
+
+.guid-text{
+    display: flex;
+    align-items: center;
+}
+
+.btn-fin-guid {
+    outline:none;
+    height: 40px;
+    text-align: center;
+    width: 200px;
+    border-radius:40px;
+    background: #fff;
+    color: #000000;
+    border-radius: 10px;
+    border: 2px solid #646464;
+    letter-spacing:1px;
+    font-size: 12px;    
+    font-weight:bold;    
+    cursor: pointer;
+    transition: all 0.25s ease;
+    word-wrap: break-word;
+    margin: 1vh 0vh;
+}
+
+.btn-fin-guid:hover {
+    background: #646464;
+    color: white;
+}
+
+.btn-fin-guid:active {
+    background: #b8b8b8;
+}
+
+.btnguid {
+    border: none;
+    border-radius: 10px;
+    font-family: 'Century Gothic', arial;;
+    font-size: inherit;
+    cursor: pointer;
+    width: 25vh;
+    padding: 2vh 3vh;
+    display: inline-block;
+    margin: 1vh 0vh;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.shadow{
+    filter: drop-shadow(0 0 5px #d0d0d0);
 }

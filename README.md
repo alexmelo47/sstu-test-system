@@ -2,11 +2,12 @@ dev ветка
 
 Для запуска можно использовать команды npm в консоли или просто запустить bat файл.
 
-!!
-название ветки изменено, измените и у себя командами гита (если еще не меняли)
+При первой подготовке среды на новом компьютере использовать `RUN npm ci --force --legacy-peer-deps`
 
-!!!!
+> [!NOTE]
+> название ветки изменено, измените и у себя командами гита (если еще не меняли)
 
+```
 git branch -m auth dev
 
 git fetch origin
@@ -14,8 +15,7 @@ git fetch origin
 git branch -u origin/dev dev
 
 git remote set-head origin -a
-
-!!!!
+```
 
 # Getting Started with Create React App
 

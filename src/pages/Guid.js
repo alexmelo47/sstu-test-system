@@ -54,9 +54,9 @@ export default function Guid() {
                     <p>Задание, требующее выбрать в каждом выпадающем списке правильное соответствие, смысловое либо порядковое, относительно соседнего элемента:</p>
                     <img className="shadow" src='./img/select.png' alt=""/><p />
 
-                    <p><input className="btnguid btn-2" type="submit" value="Следующий"/> - кнопка перехода на следующее (или предыдущее задание).</p>
-                    <p><input className="btnguid btn-1" type="submit" value="Подтвердить"/> - кнопка подтверждения ответа для адаптивного метода тестирования.</p>
-                    <p><input className="btn-fin-guid" type="submit" value="Завершить тестирование"/> - кнопка завершения тестирования в классическом методе тестирования.</p><br />
+                    <p><input className="btnguid btn-2" type="submit" value="Следующий &rang;"/> - кнопка перехода на следующее (или предыдущее задание).</p>
+                    <p><input className="btnguid btn-1" type="submit" value="Подтвердить &#10004;"/> - кнопка подтверждения ответа для адаптивного метода тестирования.</p>
+                    <p><input className="btn-fin-guid" type="submit" value="Завершить"/> - кнопка завершения тестирования в классическом методе тестирования.</p><br />
 
                     <h3>Панель навигации между заданиями классического тестирования:</h3>
                     <p><button className="btn-menu"><span>1</span></button> - неотвеченное неоткрытое задание.</p>

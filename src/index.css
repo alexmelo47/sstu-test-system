@@ -337,7 +337,7 @@ main {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 0 8px #b5b5b5);
+    filter: drop-shadow(0 5px 5px #b3b3b3);
 }
 
 .btn-1 {
@@ -416,21 +416,16 @@ main {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    filter: drop-shadow(0 0 8px #b5b5b5);
+    filter: drop-shadow(0 5px 5px #b3b3b3);
 }
 
 .btn-fin2:hover {
-    background: #0059A8;
+    background: #0372D4;
     color: white;
 }
 
 .btn-fin2:active {
-    background: #b8b8b8;
-}
-
-.rightside {
-    width: 100%;
-    float: right;
+    background: #0059A8;
 }
 
 .quest-btn {
@@ -516,6 +511,7 @@ fieldset {
 .quest-back{
     background-color: #ddeeff;    /*добавить к классу question ПОСЛЕ завершения теста*/
     border-radius: 10px;
+    filter: drop-shadow(0 5px 5px #b3b3b3); 
 }
 
 .question {
@@ -523,7 +519,7 @@ fieldset {
     padding: 0px 10px 0px 10px;   
 }
 
- .questiontext{
+.questiontext{
     text-align: justify;
  }
 
@@ -593,12 +589,14 @@ input[type='radio'] {
     width: 1.3em;
     height: 1.3em;
     cursor: pointer;
+    accent-color: #0059A8;
 }
   
 input[type='checkbox'] {
     width: 1.2em;
     height: 1.2em;
     cursor: pointer;
+    accent-color: #0059A8;
 }
 
 input[type='text'] {
@@ -645,7 +643,7 @@ input[type='text'] {
     table-layout: fixed;
     background-color: #FFFFFF;
     border: 3px solid #00335e;
-    border-radius: 10px;
+    border-radius: 40px;
     flex-direction: column;
 }
 
@@ -663,53 +661,57 @@ input[type='text'] {
 }
 
 .btn-fin-guid {
-    outline:none;
-    height: 40px;
-    text-align: center;
-    width: 200px;
-    border-radius:40px;
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
+    font-weight: bold;
+    letter-spacing: 1px;  
+    border-radius: 40px;
+    border: 4px solid #0059A8;
     background: #fff;
-    color: #000000;
-    border-radius: 10px;
-    border: 2px solid #646464;
-    letter-spacing:1px;
-    font-size: 12px;    
-    font-weight:bold;    
+    color: #0059A8;
     cursor: pointer;
-    transition: all 0.25s ease;
-    word-wrap: break-word;
-    margin: 1vh 0vh;
+    width: 25vh;
+    padding: 1.5vh 3vh;
+    margin: 1vh 0vh; 
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 5px #b3b3b3); 
 }
 
 .btn-fin-guid:hover {
-    background: #646464;
+    background: #0372D4;
     color: white;
 }
 
 .btn-fin-guid:active {
-    background: #b8b8b8;
+    background: #0059A8;
 }
 
 .btnguid {
-    border: none;
-    border-radius: 10px;
-    font-family: 'Century Gothic', arial;;
-    font-size: inherit;
-    cursor: pointer;
-    width: 25vh;
-    padding: 2vh 3vh;
-    display: inline-block;
-    margin: 1vh 0vh;
-    text-transform: uppercase;
+    font-family: 'Century Gothic', arial;
+    font-size: inherit;    
     letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    border-radius: 30px;
+    width: 25vh;
+    padding: 1.8vh 3vh;
+    margin: 1vh 0vh; 
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 5px #b3b3b3); 
 }
 
 .shadow{
     filter: drop-shadow(0 0 5px #d0d0d0);
+}
+
+/* forms style */
+
+.styledialog {
+    border-radius: 15px;
 }

@@ -12,6 +12,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
+import { withStyles, styled } from "@material-ui/core/styles";
+
 
 import Home from '../pages/Home';
 import Tests from '../pages/Tests';
@@ -23,7 +25,7 @@ import Guid from '../pages/Guid';
 import setAuthTokenStored from '../components/setTokenStored';
 
 export default function Header() {
-
+    
     setAuthTokenStored();
 
     /* авторизация через модальное окно */
@@ -121,6 +123,47 @@ export default function Header() {
         setOpenAuthorization(false);
     }
 
+
+    const StyleButton = withStyles({
+        root: {
+          
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            '"Century Gothic"',
+            'Arial',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+    
+    /*const StyledDialog = withStyles({
+        root: {
+          borderRadius: '15px',
+          
+          
+        },
+      })(Dialog);
+    
+      const StyleDialog = styled(Dialog)({
+        border: 0,
+        borderRadius: '15px',
+      });
+*/
+    
   return (
     <>
 
@@ -141,12 +184,13 @@ export default function Header() {
                                <DialogTitle id="authorization">Вход в систему</DialogTitle> 
                                 <DialogContent>
                                     <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
-                                    <TextField
+                                    <TextField                               
                                         autoFocus
                                         margin="dense"
                                         id="name_login"
                                         label="Логин"
                                         type="text"
+                                        variant="outlined"
                                         fullWidth
                                     />
                                     <TextField
@@ -155,16 +199,17 @@ export default function Header() {
                                         id="pass_login"
                                         label="Пароль"
                                         type="password"
+                                        variant="outlined"
                                         fullWidth
                                     />
                                 </DialogContent>
 
                                 <DialogActions>
-                                    <Button onClick={handleClickOpenRemind} color="primary">Забыли логин или пароль?</Button>
+                                    <Button color="primary" onClick={handleClickOpenRemind} >Забыли логин или пароль?</Button> 
                                 </DialogActions>
 
                                 <DialogActions>     
-                                    <Button onClick={handleAuth} color="primary">Авторизоваться</Button><Button onClick={handleClickOpenRegistration} color="primary">Заявка на регистрацию</Button>   
+                                    <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Заявка на регистрацию</StyleButton>   
                                 </DialogActions>
                                 
                             </Dialog>
@@ -179,11 +224,12 @@ export default function Header() {
                                     id="mail_remind"
                                     label="Почта"
                                     type="email"
+                                    variant="outlined"
                                     fullWidth
                                     />
                                 </DialogContent>                      
                                 <DialogActions>
-                                    <Button onClick={handleCloseRemind} color="primary">Напомнить данные</Button>
+                                    <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
                                 </DialogActions>
                             </Dialog>
 
@@ -193,7 +239,7 @@ export default function Header() {
                                     <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                      <Button onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } color="primary">Ввести заново</Button>                           
+                                      <StyleButton variant="contained" color="primary" onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } >Ввести заново</StyleButton>                           
                                 </DialogActions>
                             </Dialog>
 
@@ -207,6 +253,7 @@ export default function Header() {
                                           id="name1_reg"
                                           label="Имя"
                                           type="text"
+                                          variant="outlined"
                                           fullWidth
                                       />
                                       <TextField
@@ -215,6 +262,7 @@ export default function Header() {
                                           id="name2_reg"
                                           label="Фамилия"
                                           type="text"
+                                          variant="outlined"
                                           fullWidth
                                       />
                                       <TextField
@@ -223,6 +271,7 @@ export default function Header() {
                                           id="name3_reg"
                                           label="Отчество"
                                           type="text"
+                                          variant="outlined"
                                           fullWidth
                                       />
                                     <TextField
@@ -231,6 +280,7 @@ export default function Header() {
                                         id="mail_reg"
                                         label="Почта"
                                         type="email"
+                                        variant="outlined"
                                         fullWidth
                                     /><br /><br />
 
@@ -239,7 +289,8 @@ export default function Header() {
                                         margin="dense"
                                         id="date_reg"
                                         label=""
-                                        type="date"                                   
+                                        type="date"
+                                        variant="outlined"                                   
                                     /><br /><br />
 
                                     <InputLabel htmlFor="status">Статус в системе</InputLabel> 
@@ -251,6 +302,7 @@ export default function Header() {
                                         name: 'status',
                                         id: 'status_reg',
                                         }}
+                                        variant="outlined"
                                     >
                                         <MenuItem value="EMPLOYEE">Сотрудник СГТУ</MenuItem>
                                         <MenuItem value="STUDENT">Студент СГТУ</MenuItem>
@@ -259,7 +311,7 @@ export default function Header() {
                                 </DialogContent>
 
                                 <DialogActions>     
-                                    <Button onClick={handleRegistr} color="primary">Отправить заявку</Button> 
+                                    <StyleButton variant="contained" color="primary" onClick={handleRegistr} >Отправить заявку</StyleButton> 
                                 </DialogActions>
 
                             </Dialog>

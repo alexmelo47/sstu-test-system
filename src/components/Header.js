@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
-import { withStyles, styled } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 
 import Home from '../pages/Home';
@@ -132,8 +132,9 @@ export default function Header() {
           color: "white",
           textTransform: "none",
           fontFamily: [
-            '"Century Gothic"',
-            'Arial',
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
           ].join(','),
           fontSize: "1rem",
           margin: "5px",
@@ -180,7 +181,7 @@ export default function Header() {
 
                               {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти в систему&nbsp; </a>}
                               {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
-                            <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization">
+                            <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
                                <DialogTitle id="authorization">Вход в систему</DialogTitle> 
                                 <DialogContent>
                                     <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>

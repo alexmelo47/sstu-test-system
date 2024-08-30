@@ -55,7 +55,7 @@ const Tests = () => {
                 <button className="accordion" onClick={getTests}>Доступные тесты</button> 
                 <div className="panel">
                     <div>
-                        <ul className="test-list">
+                        <ul className="test-list test-top">
                             <li>Название</li>
                             <li>Дисциплины</li>
                             <li>Компетенции</li>

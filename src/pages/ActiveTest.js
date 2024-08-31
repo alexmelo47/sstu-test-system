@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 import Timer from "../components/Timer";
 
@@ -428,6 +429,34 @@ const ActiveTest = () => {
     if (finished) {
         return <Navigate to="/result/" />
     }
+
+    const StyleButton = withStyles({
+        root: {
+          
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+
     return (
         <main>
 
@@ -440,8 +469,8 @@ const ActiveTest = () => {
                         <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите завершить тестирование?</DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleAccept} color="primary">Да</Button>
-                        <Button onClick={handleClose} color="primary">Нет</Button>
+                        <StyleButton onClick={handleAccept} color="primary">Да</StyleButton>
+                        <StyleButton onClick={handleClose} color="primary">Нет</StyleButton>
                     </DialogActions>
                 </Dialog>
 
@@ -451,7 +480,7 @@ const ActiveTest = () => {
                         <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCloseTimeWarn} color="primary">Закрыть</Button>
+                        <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
                     </DialogActions>
                 </Dialog>
 

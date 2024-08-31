@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
 
@@ -51,6 +52,33 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
             this_title = "ОШИБКА";
     }
 
+    const StyleButton = withStyles({
+        root: {
+          
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+
     return (
         <div>
             <ul className={this_style} >
@@ -87,8 +115,8 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                     </DialogContentText>}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</Button>
-                    <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
+                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</StyleButton>
+                    <StyleButton onClick={handleCloseTest} color="primary">Закрыть</StyleButton>
                 </DialogActions>
             </Dialog>
         </div>

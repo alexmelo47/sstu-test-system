@@ -179,7 +179,7 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
 
-                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти в систему&nbsp; </a>}
+                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
                               {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                             <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
                                <DialogTitle id="authorization">Вход в систему</DialogTitle> 

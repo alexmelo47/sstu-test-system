@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 const baseURL ="https://maile.fita.cc"
 
@@ -37,6 +38,33 @@ const Tests = () => {
             setTests([])
         }
     }
+
+    const StyleButton = withStyles({
+        root: {
+          
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
  
     return (
         <main>
@@ -48,7 +76,7 @@ const Tests = () => {
                         <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCloseAccessWarn} color="primary">Закрыть</Button>
+                        <StyleButton onClick={handleCloseAccessWarn} color="primary">Закрыть</StyleButton>
                     </DialogActions>
                 </Dialog>
             

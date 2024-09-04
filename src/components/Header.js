@@ -167,163 +167,166 @@ export default function Header() {
     
   return (
     <>
+        <React.StrictMode>
+            <header>
+                <div className="container">
+                    <div className="header-inner">
 
-        <header>
-            <div className="container">
-                <div className="header-inner">
+                          <div className="logo">&nbsp;Система тестирования&nbsp;АИСТ</div>
 
-                      <div className="logo">&nbsp;Система тестирования&nbsp;АИСТ</div>
+                        <div>
+                            <nav>
+                                <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
+                                <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
 
-                    <div>
-                        <nav>
-                            <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                            <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
+                                  {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
+                                  {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
+                                  <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                      open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
+                                   <DialogTitle id="authorization">Вход в систему</DialogTitle> 
+                                    <DialogContent>
+                                        <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
+                                        <TextField                               
+                                            autoFocus
+                                            margin="dense"
+                                            id="name_login"
+                                            label="Логин"
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="pass_login"
+                                            label="Пароль"
+                                            type="password"
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                    </DialogContent>
 
-                              {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
-                              {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
-                            <Dialog open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
-                               <DialogTitle id="authorization">Вход в систему</DialogTitle> 
-                                <DialogContent>
-                                    <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
-                                    <TextField                               
-                                        autoFocus
-                                        margin="dense"
-                                        id="name_login"
-                                        label="Логин"
-                                        type="text"
-                                        variant="outlined"
-                                        fullWidth
-                                    />
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="pass_login"
-                                        label="Пароль"
-                                        type="password"
-                                        variant="outlined"
-                                        fullWidth
-                                    />
-                                </DialogContent>
+                                    <DialogActions>
+                                        <Button color="primary" onClick={handleClickOpenRemind} >Забыли логин или пароль?</Button> 
+                                    </DialogActions>
 
-                                <DialogActions>
-                                    <Button color="primary" onClick={handleClickOpenRemind} >Забыли логин или пароль?</Button> 
-                                </DialogActions>
-
-                                <DialogActions>     
-                                    <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Заявка на регистрацию</StyleButton>   
-                                </DialogActions>
+                                    <DialogActions>     
+                                        <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Заявка на регистрацию</StyleButton>   
+                                    </DialogActions>
                                 
-                            </Dialog>
+                                </Dialog>
 
-                            <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
-                               <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
-                                <DialogContent>
-                                    <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
-                                    <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="mail_remind"
-                                    label="Почта"
-                                    type="email"
-                                    variant="outlined"
-                                    fullWidth
-                                    />
-                                </DialogContent>                      
-                                <DialogActions>
-                                    <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
-                                </DialogActions>
-                            </Dialog>
-
-                            <Dialog open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
-                                <DialogTitle id="warning">Ошибка</DialogTitle> 
-                                <DialogContent>
-                                    <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                      <StyleButton variant="contained" color="primary" onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } >Ввести заново</StyleButton>                           
-                                </DialogActions>
-                            </Dialog>
-
-                            <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
-                               <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
-                                <DialogContent>
-                                    <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
-                                      <TextField
-                                          autoFocus
-                                          margin="dense"
-                                          id="name1_reg"
-                                          label="Имя"
-                                          type="text"
-                                          variant="outlined"
-                                          fullWidth
-                                      />
-                                      <TextField
-                                          autoFocus
-                                          margin="dense"
-                                          id="name2_reg"
-                                          label="Фамилия"
-                                          type="text"
-                                          variant="outlined"
-                                          fullWidth
-                                      />
-                                      <TextField
-                                          autoFocus
-                                          margin="dense"
-                                          id="name3_reg"
-                                          label="Отчество"
-                                          type="text"
-                                          variant="outlined"
-                                          fullWidth
-                                      />
-                                    <TextField
+                                <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
+                                   <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
+                                    <DialogContent>
+                                        <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
+                                        <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="mail_reg"
+                                        id="mail_remind"
                                         label="Почта"
                                         type="email"
                                         variant="outlined"
                                         fullWidth
-                                    /><br /><br />
+                                        />
+                                    </DialogContent>                      
+                                    <DialogActions>
+                                        <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
+                                    </DialogActions>
+                                </Dialog>
 
-                                    <InputLabel htmlFor="date">Дата рождения</InputLabel>
-                                    <TextField
-                                        margin="dense"
-                                        id="date_reg"
-                                        label=""
-                                        type="date"
-                                        variant="outlined"                                   
-                                    /><br /><br />
+                                <Dialog open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
+                                    <DialogTitle id="warning">Ошибка</DialogTitle> 
+                                    <DialogContent>
+                                        <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                          <StyleButton variant="contained" color="primary" onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } >Ввести заново</StyleButton>                           
+                                    </DialogActions>
+                                </Dialog>
 
-                                    <InputLabel htmlFor="status">Статус в системе</InputLabel> 
-                                    <Select
-                                        autoFocus
-                                        value={status}
-                                        onChange={handleStatusChange}
-                                        inputProps={{
-                                        name: 'status',
-                                        id: 'status_reg',
-                                        }}
-                                        variant="outlined"
-                                    >
-                                        <MenuItem value="EMPLOYEE">Сотрудник СГТУ</MenuItem>
-                                        <MenuItem value="STUDENT">Студент СГТУ</MenuItem>
-                                        <MenuItem value="EXTERNAL">Внешний испытуемый</MenuItem>
-                                    </Select><br />
-                                </DialogContent>
+                                <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
+                                   <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
+                                    <DialogContent>
+                                        <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
+                                          <TextField
+                                              autoFocus
+                                              margin="dense"
+                                              id="name1_reg"
+                                              label="Имя"
+                                              type="text"
+                                              variant="outlined"
+                                              fullWidth
+                                          />
+                                          <TextField
+                                              autoFocus
+                                              margin="dense"
+                                              id="name2_reg"
+                                              label="Фамилия"
+                                              type="text"
+                                              variant="outlined"
+                                              fullWidth
+                                          />
+                                          <TextField
+                                              autoFocus
+                                              margin="dense"
+                                              id="name3_reg"
+                                              label="Отчество"
+                                              type="text"
+                                              variant="outlined"
+                                              fullWidth
+                                          />
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="mail_reg"
+                                            label="Почта"
+                                            type="email"
+                                            variant="outlined"
+                                            fullWidth
+                                        /><br /><br />
 
-                                <DialogActions>     
-                                    <StyleButton variant="contained" color="primary" onClick={handleRegistr} >Отправить заявку</StyleButton> 
-                                </DialogActions>
+                                        <InputLabel htmlFor="date">Дата рождения</InputLabel>
+                                        <TextField
+                                            margin="dense"
+                                            id="date_reg"
+                                            label=""
+                                            type="date"
+                                            variant="outlined"                                   
+                                        /><br /><br />
 
-                            </Dialog>
+                                        <InputLabel htmlFor="status">Статус в системе</InputLabel> 
+                                        <Select
+                                            autoFocus
+                                            value={status}
+                                            onChange={handleStatusChange}
+                                            inputProps={{
+                                            name: 'status',
+                                            id: 'status_reg',
+                                            }}
+                                            variant="outlined"
+                                        >
+                                            <MenuItem value="EMPLOYEE">Сотрудник СГТУ</MenuItem>
+                                            <MenuItem value="STUDENT">Студент СГТУ</MenuItem>
+                                            <MenuItem value="EXTERNAL">Внешний испытуемый</MenuItem>
+                                        </Select><br />
+                                    </DialogContent>
+
+                                    <DialogActions>     
+                                        <StyleButton variant="contained" color="primary" onClick={handleRegistr} >Отправить заявку</StyleButton> 
+                                    </DialogActions>
+
+                                </Dialog>
 
 
-                        </nav>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
-
+            </header>
+        </React.StrictMode>
         <Router>
             <Routes>
                 <Route exact path="/" element={<Home/>} />

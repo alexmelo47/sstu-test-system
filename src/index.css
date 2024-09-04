@@ -739,6 +739,6 @@ input[type='text'] {
 
 /* forms style */
 
-.styledialog {
+.styledialog > div:nth-child(3) > div:nth-child(1) {
     border-radius: 15px !important;
 }

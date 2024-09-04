@@ -5,8 +5,10 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <div>
-      <Header />
-      <Footer />
+        <Header />
+        <React.StrictMode>
+            <Footer />
+        </React.StrictMode>
     </div>
   );
 }

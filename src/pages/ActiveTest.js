@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
 
@@ -70,6 +70,10 @@ const ActiveTest = () => {
     const handleCloseTimeWarn = () => {
         setTimeWarn(false);
     }
+
+    useEffect(() => {
+        handleFirst();
+    }, []);
 
     function getBoxes(current_index) {  
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')   //загрузка меню
@@ -520,7 +524,7 @@ const ActiveTest = () => {
                 </div>
 
                 <div className="quest-btn">
-                    {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
+                    {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
                     {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
                     {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}
                 </div>

@@ -13,9 +13,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 }*/
 
 root.render(
-  <React.StrictMode>
-        <App />
-  </React.StrictMode>
+    <App />
 );
 
 /*

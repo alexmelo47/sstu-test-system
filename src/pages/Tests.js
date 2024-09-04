@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Test from '../components/Test'
 import axios from 'axios'
 
@@ -21,6 +21,10 @@ const Tests = () => {
     const handleCloseAccessWarn = () => {
         setAccessWarn(false);
     }
+
+    useEffect(() => {
+        getTests();
+    }, []);
 
     function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
         setButtonClick(!buttonClick)
@@ -79,8 +83,8 @@ const Tests = () => {
                         <StyleButton onClick={handleCloseAccessWarn} color="primary">Закрыть</StyleButton>
                     </DialogActions>
                 </Dialog>
-            
-                <button className="accordion" onClick={getTests}>Доступные тесты</button> 
+
+                {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
                 <div className="panel">
                     <div>
                         <ul className="test-list test-top">

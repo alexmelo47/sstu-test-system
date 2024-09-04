@@ -10,6 +10,9 @@ import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
 
 export default function Result() {
+
+    //Результат теста
+
     let res = JSON.parse(localStorage.getItem("Result"));
     console.log(res);
     let res_type = "GRADE_ONLY";//res.type;

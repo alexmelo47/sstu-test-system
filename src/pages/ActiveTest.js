@@ -467,7 +467,10 @@ const ActiveTest = () => {
             
                 <div className="content-block">
 
-                    <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
+                    <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                   open={open} onClose={handleClose} aria-labelledby="warning">
                         <DialogTitle id="warning">Предупреждение</DialogTitle>
                         <DialogContent>
                             <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите завершить тестирование?</DialogContentText>
@@ -478,7 +481,10 @@ const ActiveTest = () => {
                         </DialogActions>
                     </Dialog>
 
-                    <Dialog open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
+                    <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
                         <DialogTitle id="time-warning">Предупреждение</DialogTitle>
                         <DialogContent>
                             <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>

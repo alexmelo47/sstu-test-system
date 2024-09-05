@@ -218,7 +218,10 @@ export default function Header() {
                                 
                                 </Dialog>
 
-                                <Dialog open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
+                                <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                   open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
                                    <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
                                     <DialogContent>
                                         <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
@@ -237,7 +240,10 @@ export default function Header() {
                                     </DialogActions>
                                 </Dialog>
 
-                                <Dialog open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
+                                <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
                                     <DialogTitle id="warning">Ошибка</DialogTitle> 
                                     <DialogContent>
                                         <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
@@ -247,7 +253,10 @@ export default function Header() {
                                     </DialogActions>
                                 </Dialog>
 
-                                <Dialog open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
+                                <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
                                    <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
                                     <DialogContent>
                                         <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>

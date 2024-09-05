@@ -74,7 +74,10 @@ const Tests = () => {
         <main>
             <div className="content-list">
 
-                <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
+                <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }} 
+                                  open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
                     <DialogTitle id="access-warning">Предупреждение</DialogTitle>
                     <DialogContent>
                         <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>

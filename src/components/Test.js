@@ -91,7 +91,10 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                     <button onClick={handleClickOpenTest} className="open-test">Выбрать тест</button>
                 </li>
             </ul>
-            <Dialog open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
+            <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
                 <DialogTitle id="test-info">{name}</DialogTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>

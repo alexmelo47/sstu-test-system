@@ -92,9 +92,9 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                 </li>
             </ul>
             <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
-                                  }}
-                                  open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
+                                        style: { borderRadius: 15 }
+                                    }}
+                                    open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
                 <DialogTitle id="test-info">{name}</DialogTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>

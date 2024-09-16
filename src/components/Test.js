@@ -121,7 +121,8 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                                       style: { borderRadius: 15 }
                                   }}
                                   open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
-                <StyleTitle disableTypography id="test-info">{name}</StyleTitle>
+                <StyleTitle disableTypography id="test-info">{name}</StyleTitle>                   
+                <DialogTitle id="test-info">{name}</DialogTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
                     <DialogContentText><b>Преподаватель:</b> {teacher.name}</DialogContentText>

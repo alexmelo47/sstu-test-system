@@ -45,7 +45,7 @@ const Tests = () => {
 
     const StyleButton = withStyles({
         root: {
-          
+          width: '93%',
           backgroundColor: '#0059A8',
           borderRadius: '30px',
           color: "white",
@@ -69,6 +69,26 @@ const Tests = () => {
           },
         },
       })(Button);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+    
  
     return (
         <main>
@@ -78,13 +98,13 @@ const Tests = () => {
                                       style: { borderRadius: 15 }
                                   }} 
                                   open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
-                    <DialogTitle id="access-warning">Предупреждение</DialogTitle>
+                    <StyleTitle disableTypography id="access-warning">Предупреждение</StyleTitle>
                     <DialogContent>
                         <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
                     </DialogContent>
-                    <DialogActions>
+                    <StyleAction>
                         <StyleButton onClick={handleCloseAccessWarn} color="primary">Закрыть</StyleButton>
-                    </DialogActions>
+                    </StyleAction>
                 </Dialog>
 
                 {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 

@@ -436,7 +436,7 @@ const ActiveTest = () => {
 
     const StyleButton = withStyles({
         root: {
-          
+          width: '93%',
           backgroundColor: '#0059A8',
           borderRadius: '30px',
           color: "white",
@@ -461,6 +461,32 @@ const ActiveTest = () => {
         },
       })(Button);
 
+      const StyleActions = withStyles({
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      })(DialogActions);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+
     return (
         <main>
             <React.StrictMode>
@@ -471,27 +497,27 @@ const ActiveTest = () => {
                                       style: { borderRadius: 15 }
                                   }}
                                    open={open} onClose={handleClose} aria-labelledby="warning">
-                        <DialogTitle id="warning">Предупреждение</DialogTitle>
+                        <StyleTitle disableTypography id="warning">Предупреждение</StyleTitle>
                         <DialogContent>
                             <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите завершить тестирование?</DialogContentText>
                         </DialogContent>
-                        <DialogActions>
+                        <StyleActions>
                             <StyleButton onClick={handleAccept} color="primary">Да</StyleButton>
                             <StyleButton onClick={handleClose} color="primary">Нет</StyleButton>
-                        </DialogActions>
+                        </StyleActions>
                     </Dialog>
 
                     <Dialog PaperProps={{
                                       style: { borderRadius: 15 }
                                   }}
                                   open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
-                        <DialogTitle id="time-warning">Предупреждение</DialogTitle>
+                        <StyleTitle disableTypography id="time-warning">Предупреждение</StyleTitle>
                         <DialogContent>
                             <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
                         </DialogContent>
-                        <DialogActions>
+                        <StyleAction>
                             <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
-                        </DialogActions>
+                        </StyleAction>
                     </Dialog>
 
                 

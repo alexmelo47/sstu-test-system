@@ -80,6 +80,20 @@ body{
     background: #0077db;
     transition: .5s;
 }
+
+.in-out{
+    background: #ffffff;
+    color: #0059a8;
+    font-weight: bold;
+}
+.in-out:hover{
+    background: #0077db;
+    color: #ffffff;
+    font-weight: bold;
+    transition: .5s;
+}
+
+
  /* style of footer */
 footer {
     /*background: #6ad1f1;*/
@@ -137,11 +151,15 @@ h1 {
 h2 {
     display: inherit;
     vertical-align: top;
-    font-size: 44px;
+    font-size: 44px;  
     border-bottom: 2px solid;
     margin-bottom: -1px;
     padding-bottom: 10px;
     color: #00335e;
+}
+
+.h2border{
+    border-bottom: 2px solid;
 }
 
 h3 {
@@ -380,7 +398,7 @@ main {
 }
 
 .btn-2 {
-    background: #0059A8;;
+    background: #0059A8;
     color: #fff;
 }
 
@@ -531,7 +549,10 @@ main {
 fieldset {
     font-size: 18px;
     font-weight: bold; 
-    color: #00335e;
+    background-color:rgba(38, 101, 195, 0.1) !important;
+    color: #0059A8 !important;
+    border-radius: 15px !important;
+    border: none !important;
 }
 
 .quest-back{
@@ -627,10 +648,49 @@ input[type='checkbox'] {
 
 input[type='text'] {
     font-family: 'Google Sans', Arial, sans-serif;
-    font-size: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    height: 1.5em;
     padding-left: 10px;
-    height: 2em; 
+    color: #0059A8;
+    box-shadow: inset 0px 2px 3px -1px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px; 
+    border-radius: 15px;
 }
+input[type='password'] {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    height: 1.5em;
+    padding-left: 10px;
+    color: #0059A8;
+    box-shadow: inset 0px 2px 3px -1px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px;
+    border-radius: 15px; 
+}
+input[type='email'] {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    height: 1.5em;
+    padding-left: 10px;
+    color: #0059A8;
+    box-shadow: inset 0px 2px 3px -1px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px;
+    border-radius: 15px; 
+}
+input[type='date'] {
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    height: 1.5em;
+    padding-left: 10px;
+    color: #0059A8;
+    box-shadow: inset 0px 2px 3px -1px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px;
+    border-radius: 12px; 
+}
+
 .q-input-text{
     width: 50%;
 }

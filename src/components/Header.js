@@ -126,7 +126,7 @@ export default function Header() {
 
     const StyleButton = withStyles({
         root: {
-          
+          width: '93%',
           backgroundColor: '#0059A8',
           borderRadius: '30px',
           color: "white",
@@ -150,6 +150,32 @@ export default function Header() {
           },
         },
       })(Button);
+
+      const StyleActions = withStyles({
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      })(DialogActions);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
     
     /*const StyledDialog = withStyles({
         root: {
@@ -179,24 +205,24 @@ export default function Header() {
                                 <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                                 <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
 
-                                  {!auth && <a className="nav-link" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
-                                  {auth && <a className="nav-link" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
+                                  {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
+                                  {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
                                   <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
+                                      style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
                                   }}
                                       open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
-                                   <DialogTitle id="authorization">Вход в систему</DialogTitle> 
+                                   <StyleTitle disableTypography id="authorization">Авторизация</StyleTitle> 
                                     <DialogContent>
-                                        <DialogContentText>Авторизуйтесь или зарегистрируйтесь для работы в системе</DialogContentText>
-                                        <TextField                               
+                                        
+                                        <TextField                              
                                             autoFocus
                                             margin="dense"
                                             id="name_login"
                                             label="Логин"
                                             type="text"
-                                            variant="outlined"
+                                            variant="outlined"                       
                                             fullWidth
-                                        />
+                                        /><p />
                                         <TextField
                                             autoFocus
                                             margin="dense"
@@ -212,19 +238,19 @@ export default function Header() {
                                         <Button color="primary" onClick={handleClickOpenRemind} >Забыли логин или пароль?</Button> 
                                     </DialogActions>
 
-                                    <DialogActions>     
-                                        <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Заявка на регистрацию</StyleButton>   
-                                    </DialogActions>
+                                    <StyleActions>     
+                                        <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Регистрация</StyleButton>   
+                                    </StyleActions>
                                 
                                 </Dialog>
 
                                 <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
+                                      style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
                                   }}
                                    open={open2} onClose={handleCloseRemind} aria-labelledby="reminder">
-                                   <DialogTitle id="reminder">Восстановление данных</DialogTitle> 
+                                   <StyleTitle disableTypography id="reminder">Восстановление данных</StyleTitle> 
                                     <DialogContent>
-                                        <DialogContentText>Введите почту для восстановления своих данных</DialogContentText>
+                                        
                                         <TextField
                                         autoFocus
                                         margin="dense"
@@ -235,31 +261,31 @@ export default function Header() {
                                         fullWidth
                                         />
                                     </DialogContent>                      
-                                    <DialogActions>
+                                    <StyleAction>
                                         <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
-                                    </DialogActions>
+                                    </StyleAction>
                                 </Dialog>
 
                                 <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
+                                      style: { borderRadius: 15, width: 512, }
                                   }}
                                   open={open3} onClose={handleCloseWrongPass} aria-labelledby="warning">
-                                    <DialogTitle id="warning">Ошибка</DialogTitle> 
+                                    <StyleTitle id="warning">Ошибка</StyleTitle> 
                                     <DialogContent>
                                         <DialogContentText>Логин или пароль введены неверно.</DialogContentText>
                                     </DialogContent>
-                                    <DialogActions>
+                                    <StyleAction>
                                           <StyleButton variant="contained" color="primary" onClick={() => { setOpenWrongPass(false); setOpenAuthorization(true); } } >Ввести заново</StyleButton>                           
-                                    </DialogActions>
+                                    </StyleAction>
                                 </Dialog>
 
                                 <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
+                                      style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px',}
                                   }}
                                   open={open1} onClose={handleCloseRegistration} aria-labelledby="registration">
-                                   <DialogTitle id="registration">Заявка на регистрацию</DialogTitle> 
+                                   <StyleTitle disableTypography id="registration">Заявка на регистрацию</StyleTitle> 
                                     <DialogContent>
-                                        <DialogContentText>Оформите заявку на регистрацию для работы в системе</DialogContentText>
+                                        
                                           <TextField
                                               autoFocus
                                               margin="dense"
@@ -268,7 +294,7 @@ export default function Header() {
                                               type="text"
                                               variant="outlined"
                                               fullWidth
-                                          />
+                                          /><p />
                                           <TextField
                                               autoFocus
                                               margin="dense"
@@ -277,7 +303,7 @@ export default function Header() {
                                               type="text"
                                               variant="outlined"
                                               fullWidth
-                                          />
+                                          /><p />
                                           <TextField
                                               autoFocus
                                               margin="dense"
@@ -286,7 +312,7 @@ export default function Header() {
                                               type="text"
                                               variant="outlined"
                                               fullWidth
-                                          />
+                                          /><p />
                                         <TextField
                                             autoFocus
                                             margin="dense"
@@ -307,7 +333,7 @@ export default function Header() {
                                         /><br /><br />
 
                                         <InputLabel htmlFor="status">Статус в системе</InputLabel> 
-                                        <Select
+                                        <Select                                            
                                             autoFocus
                                             value={status}
                                             onChange={handleStatusChange}
@@ -323,9 +349,9 @@ export default function Header() {
                                         </Select><br />
                                     </DialogContent>
 
-                                    <DialogActions>     
-                                        <StyleButton variant="contained" color="primary" onClick={handleRegistr} >Отправить заявку</StyleButton> 
-                                    </DialogActions>
+                                    <StyleAction>     
+                                        <StyleButton variant="contained" color="primary" onClick={handleRegistr} >Подать заявку</StyleButton> 
+                                    </StyleAction>
 
                                 </Dialog>
 

@@ -54,7 +54,7 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
 
     const StyleButton = withStyles({
         root: {
-          
+          width: '93%',
           backgroundColor: '#0059A8',
           borderRadius: '30px',
           color: "white",
@@ -79,6 +79,32 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
         },
       })(Button);
 
+      const StyleActions = withStyles({
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      })(DialogActions);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+
     return (
         <div>
             <ul className={this_style} >
@@ -95,7 +121,7 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                                       style: { borderRadius: 15 }
                                   }}
                                   open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
-                <DialogTitle id="test-info">{name}</DialogTitle>
+                <StyleTitle disableTypography id="test-info">{name}</StyleTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
                     <DialogContentText><b>Преподаватель:</b> {teacher.name}</DialogContentText>
@@ -117,10 +143,10 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                         Максимальное количество заданий в тесте {q_cnt}, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
                     </DialogContentText>}
                 </DialogContent>
-                <DialogActions>
+                <StyleActions>
                     <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</StyleButton>
                     <StyleButton onClick={handleCloseTest} color="primary">Закрыть</StyleButton>
-                </DialogActions>
+                </StyleActions>
             </Dialog>
         </div>
     )

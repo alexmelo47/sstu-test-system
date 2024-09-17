@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-fallthrough */
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import QShort from '../components/qa/QShort'
 import QSorting from '../components/qa/QSorting'
@@ -10,11 +10,18 @@ import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
 
 export default function Result() {
+
+    //Результат теста
+
+    if (localStorage.getItem("accessToken") == null) {
+        return <Navigate to="/" />
+    }
+
     let res = JSON.parse(localStorage.getItem("Result"));
-    console.log(res);
+    //console.log(res);
     let res_type = "GRADE_ONLY";//res.type;
 
-    let questions, grade, time, tname, sname, author, sw_cnt = 0, status_en;
+    let questions, grade, percent, time, tname, author, sw_cnt = 0, status_en;
     let q_elements = [];
 
     switch (res_type) {
@@ -68,7 +75,7 @@ export default function Result() {
         default:
             time = res.fullTime;
             tname = res.test.name;
-            //sname = localStorage.getItem("student_name");
+            percent = res.percentage;
             author = res.test.author.name;
             break;
     }
@@ -84,8 +91,8 @@ export default function Result() {
                         </h1>
                         <span>
                             <br /><br /><i>Ваша оценка: {grade}<br /><br />
-                                Метод оценивания: Последняя попытка<br /><br />
-                                Ваше время: {time}</i><br /><br />
+                                Процент выполненных заданий: {percent}%<br /><br />
+                                Время тестирования: {time}</i><br /><br />
                         </span>
                     </>
                     }
@@ -94,7 +101,6 @@ export default function Result() {
                 {q_elements && q_elements}
             </div>
 
-            
         </main>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Test from '../components/Test'
 import axios from 'axios'
 
@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 const baseURL ="https://maile.fita.cc"
 
@@ -21,7 +22,11 @@ const Tests = () => {
         setAccessWarn(false);
     }
 
-    function getTests(){  //Запрос на доступные пользователю тесты
+    useEffect(() => {
+        getTests();
+    }, []);
+
+    function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
         setButtonClick(!buttonClick)
         if(buttonClick){
             axios.get(baseURL + "/tests").then((tests) => {
@@ -37,25 +42,75 @@ const Tests = () => {
             setTests([])
         }
     }
+
+    const StyleButton = withStyles({
+        root: {
+          width: '93%',
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+    
  
     return (
         <main>
             <div className="content-list">
 
-                <Dialog open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
-                    <DialogTitle id="access-warning">Предупреждение</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCloseAccessWarn} color="primary">Закрыть</Button>
-                    </DialogActions>
-                </Dialog>
-            
-                <button className="accordion" onClick={getTests}>Доступные тесты</button> 
+            <Dialog PaperProps={{
+                                    style: { borderRadius: 15 }
+                                }} 
+                                open={open4} onClose={handleCloseAccessWarn} aria-labelledby="access-warning">
+                <StyleTitle disableTypography id="access-warning">Предупреждение</StyleTitle>
+                <DialogContent>
+                    <DialogContentText>Для выполнения данного действия необходимо авторизоваться.</DialogContentText>
+                </DialogContent>
+                <StyleAction>
+                    <StyleButton onClick={handleCloseAccessWarn} color="primary">Закрыть</StyleButton>
+                </StyleAction>
+            </Dialog>                   
+
+                {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
                 <div className="panel">
                     <div>
-                        <ul className="test-list">
+                        <ul className="test-list test-top">
                             <li>Название</li>
                             <li>Дисциплины</li>
                             <li>Компетенции</li>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navigate } from "react-router-dom"
 import axios from 'axios'
 
@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 import Timer from "../components/Timer";
 
@@ -69,6 +70,10 @@ const ActiveTest = () => {
     const handleCloseTimeWarn = () => {
         setTimeWarn(false);
     }
+
+    useEffect(() => {
+        handleFirst();
+    }, []);
 
     function getBoxes(current_index) {  
         axios.get(baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items')   //загрузка меню
@@ -304,34 +309,93 @@ const ActiveTest = () => {
         
     }
     
-    if (finished) {
+    if (finished || localStorage.getItem("accessToken") == null) {
         return <Navigate to="/result/" />
     }
+
+    const StyleButton = withStyles({
+        root: {
+          width: '93%',
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+
+      const StyleActions = withStyles({
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      })(DialogActions);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+
     return (
         <main>
-
             
             <div className="content-block">
 
-                <Dialog open={open} onClose={handleClose} aria-labelledby="warning">
-                    <DialogTitle id="warning">Предупреждение</DialogTitle>
+                <Dialog PaperProps={{
+                                    style: { borderRadius: 15 }
+                                }}
+                                open={open} onClose={handleClose} aria-labelledby="warning">
+                    <StyleTitle disableTypography id="warning">Предупреждение</StyleTitle>
                     <DialogContent>
                         <DialogContentText>Вы не ответили на один или более вопросов. Вы уверены, что хотите завершить тестирование?</DialogContentText>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAccept} color="primary">Да</Button>
-                        <Button onClick={handleClose} color="primary">Нет</Button>
-                    </DialogActions>
+                    <StyleActions>
+                        <StyleButton onClick={handleAccept} color="primary">Да</StyleButton>
+                        <StyleButton onClick={handleClose} color="primary">Нет</StyleButton>
+                    </StyleActions>
                 </Dialog>
 
-                <Dialog open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
-                    <DialogTitle id="time-warning">Предупреждение</DialogTitle>
+                <Dialog PaperProps={{
+                                    style: { borderRadius: 15 }
+                                }}
+                                open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
+                    <StyleTitle disableTypography id="time-warning">Предупреждение</StyleTitle>
                     <DialogContent>
                         <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCloseTimeWarn} color="primary">Закрыть</Button>
-                    </DialogActions>
+                    <StyleAction>
+                        <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
+                    </StyleAction>
                 </Dialog>
 
                 
@@ -370,7 +434,7 @@ const ActiveTest = () => {
                 </div>
 
                 <div className="quest-btn">
-                    {!started && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
+                    {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
                     {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
                     {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}
                 </div>

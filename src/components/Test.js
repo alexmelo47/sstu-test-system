@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
 
@@ -51,6 +52,59 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
             this_title = "ОШИБКА";
     }
 
+    const StyleButton = withStyles({
+        root: {
+          width: '93%',
+          backgroundColor: '#0059A8',
+          borderRadius: '30px',
+          color: "white",
+          textTransform: "none",
+          fontFamily: [
+            "Lucida Sans Unicode", 
+            "Lucida Grande", 
+            'sans-serif',
+          ].join(','),
+          fontSize: "1rem",
+          margin: "5px",
+
+          '&:hover': {
+            backgroundColor: '#0372D4',
+          },
+          '&:active': {
+            backgroundColor: '#0059A8',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+          },
+        },
+      })(Button);
+
+      const StyleActions = withStyles({
+        root: {
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      })(DialogActions);
+
+      const StyleAction = withStyles({
+        root: {
+            display: "flex",
+            justifyContent: "center",
+        },
+      })(DialogActions);
+
+      const StyleTitle = withStyles({
+        root: {
+          color: '#0059A8',
+          fontSize: '2rem ',
+          textAlign: "center",
+          fontFamily: ["Roboto", "Helvetica", "Arial", 'sans-serif'].join(','),
+          fontWeight: 700,
+          lineHeight: 1.6,
+          letterSpacing: '0.0075em',
+        },
+      })(DialogTitle);
+
     return (
         <div>
             <ul className={this_style} >
@@ -63,8 +117,11 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                     <button onClick={handleClickOpenTest} className="open-test">Выбрать тест</button>
                 </li>
             </ul>
-            <Dialog open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
-                <DialogTitle id="test-info">{name}</DialogTitle>
+            <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
+                <StyleTitle disableTypography id="test-info">{name}</StyleTitle>
                 <DialogContent>
                     <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
                     <DialogContentText><b>Преподаватель:</b> {teacher.name}</DialogContentText>
@@ -86,10 +143,10 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                         Максимальное количество заданий в тесте {q_cnt}, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
                     </DialogContentText>}
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'https://web.fita.cc/activetest/'; }} color="primary">Начать тестирование</Button>
-                    <Button onClick={handleCloseTest} color="primary">Закрыть</Button>
-                </DialogActions>
+                <StyleActions>
+                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'https://web.fita.cc/activetest/'; }} color="primary">Начать тестирование</StyleButton>
+                    <StyleButton onClick={handleCloseTest} color="primary">Закрыть</StyleButton>
+                </StyleActions>
             </Dialog>
         </div>
     )

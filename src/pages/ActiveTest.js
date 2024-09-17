@@ -430,7 +430,7 @@ const ActiveTest = () => {
         
     }
     
-    if (finished) {
+    if (finished || localStorage.getItem("accessToken") == null) {
         return <Navigate to="/result/" />
     }
 

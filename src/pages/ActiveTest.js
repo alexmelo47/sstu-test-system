@@ -523,6 +523,7 @@ const ActiveTest = () => {
                 
 
                         <div className="test-menu">
+                            {started && timer && <Timer dl={timer} />}
                             {menubtns && started && !is_adaptive_test &&
                                 menubtns.map(btn => (
                                     <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
@@ -530,10 +531,12 @@ const ActiveTest = () => {
                                     </button>
                                 ))
                             }
+            
+                            {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
                         </div>
 
                         <div className="timer-position">
-                            {started && timer && <Timer dl={timer} />}
+                            
                         </div>
                         <div className="quest-back">
                         {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
@@ -558,7 +561,7 @@ const ActiveTest = () => {
                     <div className="quest-btn">
                         {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
                         {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
-                        {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}
+                        
                     </div>
            
                 </div>

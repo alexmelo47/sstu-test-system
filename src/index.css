@@ -13,6 +13,7 @@ body{
     padding: 0;
     font-family: 'Google Sans', Arial, sans-serif;
     font-size: 20px;
+    user-select: none;
 }
 
 /* orientation and style of home page */
@@ -599,6 +600,13 @@ fieldset {
     text-align: center;
  }
 
+/* style of radio, checkbox questions */
+
+.multichoice label{
+    cursor: pointer;
+}
+
+
 /* style of matches question */
 .matches {
     margin-top: 10px;
@@ -698,13 +706,13 @@ input[type='date'] {
 /*style of pictures*/
 .question-pic {
     max-height: 400px;
-    min-height: 100px;
+    min-height: 80px;
     margin-left: 10px;
 }
 
 .answer-pic {
     max-height: 250px;
-    min-height: 80px;
+    min-height: 50px;
     margin-left: 10px;
 }
 

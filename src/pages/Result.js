@@ -9,6 +9,16 @@ import QMatching from '../components/qa/QMatching'
 import QMultiCheckbox from '../components/qa/QMultiCheckbox'
 import QMultiRadio from '../components/qa/QMultiRadio'
 
+function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}
+
 export default function Result() {
 
     //Результат теста
@@ -16,12 +26,15 @@ export default function Result() {
     if (localStorage.getItem("accessToken") == null) {
         return <Navigate to="/" />
     }
+    //console.log(parseJwt(token));
+    let student = parseJwt(localStorage.getItem("accessToken")).sub;
 
     let res = JSON.parse(localStorage.getItem("Result"));
     console.log(res);
     let res_type = "GRADE_ONLY";//res.type;
+    let is_multidim_test = localStorage.getItem("type") === "MULTIDIMENSIONAL" ? true : false;
 
-    let questions, grade, percent, time, tname, author, sw_cnt = 0, status_en;
+    let questions, grade, grades, percent, timeH, timeM, timeS, tname, author, sw_cnt = 0, status_en;
     let q_elements = [];
 
     switch (res_type) {
@@ -71,15 +84,18 @@ export default function Result() {
             }
         case "GRADE_ONLY": 
             grade = res.grade;
+            grades = res.grades;
         case "HIDDEN":
         default:
-            time = res.fullTime;
+            timeH = Math.floor((parseFloat(res.fullTime) / (60 * 60)) % 24);
+            timeM = Math.floor((parseFloat(res.fullTime) / 60) % 60);
+            timeS = Math.floor(parseFloat(res.fullTime) % 60);
             tname = res.test.name;
             percent = res.percentage;
             author = res.test.author.name;
             break;
     }
-
+    //автора поменять на имя пользователя?
     return (
         <React.StrictMode >
             <main>
@@ -88,12 +104,22 @@ export default function Result() {
                         {res_type != "HIDDEN" &&
                         <>
                             <h1>
-                                <i>{tname} (Преп. {author})</i>
+                                <i>{tname}<br /> (Преп. {author})<br /> Тестируемый {student}</i>
                             </h1>
                             <span>
-                                <br /><br /><i>Ваша оценка: {grade}<br /><br />
+                                <br /><br />
+                                <i>
+                                    {!is_multidim_test && <>Ваша оценка: {grade}</>}
+                                    {is_multidim_test &&
+                                        grades.map(attr => (
+                                            <>Ваша оценка по {attr.name}: {attr.grade}<br /></>
+                                        ))
+                                    }
+                                    <br /><br />
                                     Процент выполненных заданий: {percent}%<br /><br />
-                                    Время тестирования: {time}</i><br /><br />
+                                    Время тестирования: {timeH}ч {timeM}м {timeS}с
+                                </i>
+                                <br /><br />
                             </span>
                         </>
                         }

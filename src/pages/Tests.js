@@ -14,7 +14,6 @@ const baseURL ="https://maile.fita.cc"
 
 const Tests = () => {
     const [tests, setTests] = useState([]);
-    const [buttonClick, setButtonClick] = useState(true); 
     localStorage.removeItem("Result");
 
     const [open4, setAccessWarn] = React.useState(false);
@@ -24,23 +23,20 @@ const Tests = () => {
 
     useEffect(() => {
         getTests();
+        localStorage.removeItem("method");
+        localStorage.removeItem("type");
     }, []);
 
     function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
-        setButtonClick(!buttonClick)
-        if(buttonClick){
-            axios.get(baseURL + "/tests").then((tests) => {
-                //console.log(tests);
-            setTests(tests.data)
-            }).catch((err) => {
-                if (err.toJSON().status === 403) {
-                    setAccessWarn(true);
-                }
-                console.log(err);
-            })
-        }else{
-            setTests([])
-        }
+        axios.get(baseURL + "/tests").then((tests) => {
+            //console.log(tests);
+        setTests(tests.data)
+        }).catch((err) => {
+            if (err.toJSON().status === 403) {
+                setAccessWarn(true);
+            }
+            console.log(err);
+        })
     }
 
     const StyleButton = withStyles({
@@ -117,15 +113,15 @@ const Tests = () => {
                                 <li>Компетенции</li>
                                 <li>Тип</li>
                                 <li>Время окончания</li>
-                                <li></li>
+                                <li><StyleButton onClick={() => { getTests() }} color="primary">Обновить</StyleButton></li>
                             </ul>
                             {tests &&
                                 tests.map(test => (
                                     <Test
                                         key={test.id} tid={test.id}
-                                        status={test.status} method={test.method}
-                                        name={test.name} discipline={test.disciplines[0]?.name} teacher={test.author}
-                                        time={new Date(test.endedAt).toString()} try_time={test.duration} try_cnt={test.attempts}
+                                        status={test.status} method={test.method} type={test.type}
+                                        name={test.name} disciplines={test.disciplines} teacher={test.author}
+                                        time={test.endedAt} try_time={test.duration} try_cnt={test.attempts}
                                         testing_attr={test.competences} q_cnt={test.count}
                                     />
                                 ))   

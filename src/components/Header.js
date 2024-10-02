@@ -95,8 +95,8 @@ export default function Header() {
 
     const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
         const loginPayload = {
-            "login": document.getElementById("name_login").value,
-            "password": document.getElementById("pass_login").value
+            "login": document.getElementById("name_login").value.trim(),
+            "password": document.getElementById("pass_login").value.trim()
         }
         //console.log(loginPayload);
         localStorage.removeItem("accessToken");
@@ -203,7 +203,7 @@ export default function Header() {
                         <div>
                             <nav>
                                 <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                                <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
+                                  {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
 
                                   {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
                                   {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}

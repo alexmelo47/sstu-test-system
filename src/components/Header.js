@@ -194,16 +194,16 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                          <div className="logo"><img src='../img/logowhite.png' alt="АИСТ" width="14%" />&nbsp;Система тестирования&nbsp;</div>
+                    <div className="logo"><img src='../img/logowhite.png' alt="АИСТ" width="14%" />&nbsp;Система тестирования&nbsp;</div>
 
-                        <div>
-                            <nav>
-                                <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                                  {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
+                    <div>
+                        <nav>
+                            <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
+                            {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
 
-                                {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
-                                {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
-                                <Dialog PaperProps={{
+                            {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
+                            {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
+                            <Dialog PaperProps={{
                                     style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
                                 }}
                                     open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
@@ -350,7 +350,6 @@ export default function Header() {
                                 </StyleAction>
 
                             </Dialog>
-
 
                         </nav>
                     </div>

@@ -103,32 +103,32 @@ const Tests = () => {
                 </StyleAction>
             </Dialog>                   
 
-                    {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
-                    <div className="panel">
-                        <div>
-                            <ul className="test-list test-top">
-                                <li>Название</li>
-                                <li>Дисциплины</li>
-                                <li>Компетенции</li>
-                                <li>Тип</li>
-                                <li>Время окончания</li>
-                                <li><StyleButton onClick={() => { getTests() }} color="primary">Обновить</StyleButton></li>
-                            </ul>
-                            {tests &&
-                                tests.map(test => (
-                                    <Test
-                                        key={test.id} tid={test.id}
-                                        status={test.status} method={test.method} type={test.type}
-                                        name={test.name} disciplines={test.disciplines} teacher={test.author}
-                                        time={test.endedAt} try_time={test.duration} try_cnt={test.attempts}
-                                        testing_attr={test.competences} q_cnt={test.count}
-                                    />
-                                ))   
-                            }
-                        </div>
+                {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
+                <div className="panel">
+                    <div>
+                        <ul className="test-list test-top">
+                            <li>Название</li>
+                            <li>Дисциплины</li>
+                            <li>Компетенции</li>
+                            <li>Тип</li>
+                            <li>Время окончания</li>
+                            <li><StyleButton onClick={() => { getTests() }} color="primary">Обновить</StyleButton></li>
+                        </ul>
+                        {tests &&
+                            tests.map(test => (
+                                <Test
+                                    key={test.id} tid={test.id}
+                                    status={test.status} method={test.method} type={test.type}
+                                    name={test.name} disciplines={test.disciplines} teacher={test.author}
+                                    time={test.endedAt} try_time={test.duration} try_cnt={test.attempts}
+                                    testing_attr={test.competences} q_cnt={test.count}
+                                />
+                            ))   
+                        }
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
     )
 }
 

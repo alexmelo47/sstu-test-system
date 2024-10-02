@@ -21,9 +21,10 @@ export default function AMultiRadio({ aid, aname, rname, selected, picture, rtyp
   
         <div>                         
             <li className={classes}>
+                <label>
                 <input className="radioboxes" name={rname} type="radio" value={aid} defaultChecked={selected} ref={inputRef} autoComplete="off" disabled={rtype > 0} />
-                <label>{aname}</label>
-                <PictureA src={picture} />
+                {aname}<PictureA src={picture} />
+                </label>
             </li>
             <br/>
         </div>

@@ -21,9 +21,10 @@ export default function AMultiCheckbox({ aid, aname, rname, selected, picture, r
   
         <div>               
             <li className={classes}>
+                <label>
                 <input className="checkboxes" name={rname} type="checkbox" value={aid} defaultChecked={selected} ref={inputRef} autoComplete="off" disabled={rtype > 0} />
-                <label>{aname}</label>
-                <PictureA src={picture} />
+                {aname}<PictureA src={picture} />
+                </label>
             </li>
             <br/>
         </div>

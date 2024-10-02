@@ -92,8 +92,8 @@ export default function Header() {
 
     const handleAuth = () => {  //Запрос авторизации
         const loginPayload = {
-            "login": document.getElementById("name_login").value,
-            "password": document.getElementById("pass_login").value
+            "login": document.getElementById("name_login").value.trim(),
+            "password": document.getElementById("pass_login").value.trim()
         }
         //console.log(loginPayload);
         localStorage.removeItem("accessToken");
@@ -194,12 +194,12 @@ export default function Header() {
             <div className="container">
                 <div className="header-inner">
 
-                        <div className="logo">&nbsp;Система тестирования&nbsp;АИСТ</div>
+                          <div className="logo"><img src='../img/logowhite.png' alt="АИСТ" width="14%" />&nbsp;Система тестирования&nbsp;</div>
 
-                    <div>
-                        <nav>
-                            <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
-                            <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>
+                        <div>
+                            <nav>
+                                <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
+                                  {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
 
                                 {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
                                 {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}

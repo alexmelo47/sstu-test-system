@@ -9,9 +9,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
-const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
+const Test = ({ tid, status, method, type, name, disciplines, teacher, time, try_time, try_cnt, testing_attr, q_cnt }) => {
 
     //компонент, отображаемый в списке тестов
+
+    let has_attr = true;
+    if (testing_attr.length === 0) {
+        has_attr = false;
+    }
 
     const [openDescr, setOpenTest] = React.useState(false);
     const handleClickOpenTest = () => {
@@ -109,10 +114,10 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
         <div>
             <ul className={this_style} >
                 <li>{name}</li>
-                <li>{discipline}</li>
-                <li>{testing_attr}</li>
+                <li>{disciplines.map(attr => attr.name).join(", ")}</li>
+                <li>{testing_attr && testing_attr.map(attr => attr.description).join(", ")}</li>
                 <li>{this_title}</li>
-                <li>{time}</li>
+                <li>{new Date(time).toLocaleString()}</li>
                 <li>
                     <button onClick={handleClickOpenTest} className="open-test">Выбрать тест</button>
                 </li>
@@ -123,28 +128,36 @@ const Test = ({ tid, status, method, name, discipline, teacher, time, try_time, 
                                   open={openDescr} onClose={handleCloseTest} aria-labelledby="test-info">
                 <StyleTitle disableTypography id="test-info">{name}</StyleTitle>
                 <DialogContent>
-                    <DialogContentText><b>Дисциплина:</b> {discipline}</DialogContentText>
+                    <DialogContentText><b>Дисциплина(ы):</b> {disciplines.map(attr => attr.name).join(", ")}</DialogContentText>
                     <DialogContentText><b>Преподаватель:</b> {teacher.name}</DialogContentText>
-                    <DialogContentText><b>Тест доступен до:</b> {time}</DialogContentText>
+                    <DialogContentText><b>Тест доступен до:</b> {new Date(time).toLocaleString()}</DialogContentText>
                     <DialogContentText><b>Время на выполнение теста (минут):</b> {try_time}</DialogContentText>
                     <DialogContentText><b>Количество попыток:</b> {try_cnt}</DialogContentText>
 
-                    <DialogContentText><b>Проверяемые компетенции:</b> {testing_attr}</DialogContentText>
+                    {testing_attr && has_attr && <DialogContentText><b>Проверяемые компетенции:</b></DialogContentText>}
+                    {testing_attr && has_attr &&
+                        <DialogContentText>
+                            {testing_attr.map(attr => (
+                                <span key={attr.id}>{attr.name}<br /></span>
+                            ))}
+                        </DialogContentText>
+                    }
+
                     {method === "CLASSIC" && <DialogContentText>
                         <b>Инструкция к выполнению:</b> <br />Вам необходимо выполнить {q_cnt} заданий. Перечень заданий изображен в виде светлых кнопок в правом верхнем углу экрана. Каждое задание вызывается нажатием на соответствующую кнопку. Время, оставшееся до конца тестирования, показано.
                         <br />Вы можете  выполнять задания в любом порядке, возвращаться к уже выполненному заданию и изменять Ваш ответ.  Кнопки, соответствующие уже выполненным заданиям, меняют свой цвет.  Для окончания тестирования нажмите кнопку “завершить тестирование”.
                     </DialogContentText>}
-                    {method === "ADAPTIVE" && <DialogContentText>
-                        Вы выполняете адаптивный тест в диалоге с компьютером. Выполните первое задание, предложенное компьютером. Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
+                    {method === "ADAPTIVE" && type !== "MULTIDIMENSIONAL" && <DialogContentText>
+                        <b>Инструкция к выполнению:</b> <br />Вы выполняете адаптивный тест в диалоге с компьютером. Выполните первое задание, предложенное компьютером. Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
                         Максимальное количество заданий в тесте {q_cnt}, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
                     </DialogContentText>}
-                    {method === null && <DialogContentText>
-                        Вы выполняете адаптивное тестирование, позволяющее оценить уровень сформированности сразу нескольких Ваших компетенций.  Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
+                    {method === "ADAPTIVE" && type === "MULTIDIMENSIONAL" && <DialogContentText>
+                        <b>Инструкция к выполнению:</b> <br />Вы выполняете адаптивное тестирование, позволяющее оценить уровень сформированности сразу нескольких Ваших компетенций.  Каждое следующее задание выберет компьютер  в зависимости от того, как Вы справились с предыдущим заданием. Поэтому, будьте внимательны, постарайтесь выполнить все предложенные Вами задания.
                         Максимальное количество заданий в тесте {q_cnt}, но тест закончится, как только компьютеру станет ясно, какую оценку Вы заслуживаете.
                     </DialogContentText>}
                 </DialogContent>
                 <StyleActions>
-                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); window.location.href = 'https://web.fita.cc/activetest/'; }} color="primary">Начать тестирование</StyleButton>
+                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); localStorage.setItem("type", type); window.location.href = 'https://web.fita.cc/activetest/'; }} color="primary">Начать тестирование</StyleButton>
                     <StyleButton onClick={handleCloseTest} color="primary">Закрыть</StyleButton>
                 </StyleActions>
             </Dialog>

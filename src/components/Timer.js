@@ -40,12 +40,10 @@ const Timer = ({ dl }) => {
                 
                 <span className="text"> Осталось:&nbsp; </span><br />
                 <li className="">
-                     
                     <span id="hour">{hours < 10 ? 0 + hours : hours }:</span>                                 
                 </li>
                         
                 <li className="">
-                    
                     <span id="minute">{minutes < 10 ? 0 + minutes : minutes }:</span>                          
                 </li>
                         

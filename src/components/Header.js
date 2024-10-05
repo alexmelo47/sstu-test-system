@@ -218,7 +218,7 @@ export default function Header() {
                                             autoFocus
                                             margin="dense"
                                             id="name_login"
-                                            label="Логин"
+                                            placeholder="Логин"
                                             type="text"
                                             variant="outlined"                       
                                             fullWidth
@@ -227,7 +227,7 @@ export default function Header() {
                                             autoFocus
                                             margin="dense"
                                             id="pass_login"
-                                            label="Пароль"
+                                            placeholder="Пароль"
                                             type="password"
                                             variant="outlined"
                                             fullWidth
@@ -255,7 +255,7 @@ export default function Header() {
                                         autoFocus
                                         margin="dense"
                                         id="mail_remind"
-                                        label="Почта"
+                                        placeholder="Почта"
                                         type="email"
                                         variant="outlined"
                                         fullWidth
@@ -290,7 +290,7 @@ export default function Header() {
                                               autoFocus
                                               margin="dense"
                                               id="name1_reg"
-                                              label="Имя"
+                                              placeholder="Имя"
                                               type="text"
                                               variant="outlined"
                                               fullWidth
@@ -299,7 +299,7 @@ export default function Header() {
                                               autoFocus
                                               margin="dense"
                                               id="name2_reg"
-                                              label="Фамилия"
+                                              placeholder="Фамилия"
                                               type="text"
                                               variant="outlined"
                                               fullWidth
@@ -308,7 +308,7 @@ export default function Header() {
                                               autoFocus
                                               margin="dense"
                                               id="name3_reg"
-                                              label="Отчество"
+                                              placeholder="Отчество"
                                               type="text"
                                               variant="outlined"
                                               fullWidth
@@ -317,7 +317,7 @@ export default function Header() {
                                             autoFocus
                                             margin="dense"
                                             id="mail_reg"
-                                            label="Почта"
+                                            placeholder="Почта"
                                             type="email"
                                             variant="outlined"
                                             fullWidth
@@ -326,8 +326,7 @@ export default function Header() {
                                         <InputLabel htmlFor="date">Дата рождения</InputLabel>
                                         <TextField
                                             margin="dense"
-                                            id="date_reg"
-                                            label=""
+                                            id="date_reg"                                        
                                             type="date"
                                             variant="outlined"                                   
                                         /><br /><br />

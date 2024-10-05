@@ -381,6 +381,7 @@ main {
     border: none;
     border-radius: 30px;
     width: 25vh;
+    min-width: 220px;
     padding: 1.8vh 3vh;
     margin: 4vh 2vh 1vh;
     -webkit-transition: all 0.3s ease;
@@ -458,10 +459,10 @@ main {
     background: #fff;
     color: #0059A8;
     cursor: pointer;
-    width: 15vw;
+    min-width: 180px;
     padding: 1.5vh 3vh;
     margin: 15px 10px 10px 5px !important;
-    /*margin: 3vh 2vh 1vh;*/ 
+    /*width: 15vw;margin: 3vh 2vh 1vh;*/ 
     display: block;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

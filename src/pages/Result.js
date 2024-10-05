@@ -92,7 +92,7 @@ export default function Result() {
             timeS = Math.floor(parseFloat(res.fullTime) % 60);
             tname = res.test.name;
             percent = res.percentage;
-            author = res.test.author.name;
+            //author = res.test.author.name;(Преп. {author})
             break;
     }
     //автора поменять на имя пользователя?
@@ -104,7 +104,7 @@ export default function Result() {
                         {res_type != "HIDDEN" &&
                         <>
                             <h1>
-                                <i>{tname}<br /> (Преп. {author})<br /> Тестируемый {student}</i>
+                                <i>{tname}<br /> <br /> Тестируемый {student}</i>
                             </h1>
                             <span>
                                 <br /><br />

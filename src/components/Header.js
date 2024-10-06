@@ -214,7 +214,7 @@ export default function Header() {
                                         autoFocus
                                         margin="dense"
                                         id="name_login"
-                                        label="Логин"
+                                        placeholder="Логин"
                                         type="text"
                                         variant="outlined"                       
                                         fullWidth
@@ -223,7 +223,7 @@ export default function Header() {
                                         autoFocus
                                         margin="dense"
                                         id="pass_login"
-                                        label="Пароль"
+                                        placeholder="Пароль"
                                         type="password"
                                         variant="outlined"
                                         fullWidth
@@ -247,20 +247,20 @@ export default function Header() {
                                 <StyleTitle disableTypography id="reminder">Восстановление данных</StyleTitle> 
                                 <DialogContent>
                                         
-                                    <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="mail_remind"
-                                    label="Почта"
-                                    type="email"
-                                    variant="outlined"
-                                    fullWidth
-                                    />
-                                </DialogContent>                      
-                                <StyleAction>
-                                    <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
-                                </StyleAction>
-                            </Dialog>
+                                        <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="mail_remind"
+                                        placeholder="Почта"
+                                        type="email"
+                                        variant="outlined"
+                                        fullWidth
+                                        />
+                                    </DialogContent>                      
+                                    <StyleAction>
+                                        <StyleButton variant="contained" color="primary" onClick={handleCloseRemind} >Напомнить данные</StyleButton>
+                                    </StyleAction>
+                                </Dialog>
 
                             <Dialog PaperProps={{
                                     style: { borderRadius: 15, width: 512, }
@@ -282,38 +282,38 @@ export default function Header() {
                                 <StyleTitle disableTypography id="registration">Заявка на регистрацию</StyleTitle> 
                                 <DialogContent>
                                         
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            id="name1_reg"
-                                            label="Имя"
-                                            type="text"
-                                            variant="outlined"
-                                            fullWidth
-                                        /><p />
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            id="name2_reg"
-                                            label="Фамилия"
-                                            type="text"
-                                            variant="outlined"
-                                            fullWidth
-                                        /><p />
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            id="name3_reg"
-                                            label="Отчество"
-                                            type="text"
-                                            variant="outlined"
-                                            fullWidth
-                                        /><p />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name1_reg"
+                                        placeholder="Имя"
+                                        type="text"
+                                        variant="outlined"
+                                        fullWidth
+                                    /><p />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name2_reg"
+                                        placeholder="Фамилия"
+                                        type="text"
+                                        variant="outlined"
+                                        fullWidth
+                                    /><p />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name3_reg"
+                                        placeholder="Отчество"
+                                        type="text"
+                                        variant="outlined"
+                                        fullWidth
+                                    /><p />
                                     <TextField
                                         autoFocus
                                         margin="dense"
                                         id="mail_reg"
-                                        label="Почта"
+                                        placeholder="Почта"
                                         type="email"
                                         variant="outlined"
                                         fullWidth
@@ -322,8 +322,7 @@ export default function Header() {
                                     <InputLabel htmlFor="date">Дата рождения</InputLabel>
                                     <TextField
                                         margin="dense"
-                                        id="date_reg"
-                                        label=""
+                                        id="date_reg"                                        
                                         type="date"
                                         variant="outlined"                                   
                                     /><br /><br />

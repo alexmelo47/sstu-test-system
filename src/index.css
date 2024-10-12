@@ -627,13 +627,17 @@ fieldset {
 }
 
 .select {
-    font-size: inherit;
+    font-size: initial;
     min-width: 20%;
     max-width:  50%;
     height: 4vh;
-
+    min-height: 35px;
     border-radius: 0.25em;
     padding: 0.25em 0.5em;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 
     cursor: pointer;
     line-height: 1.1;

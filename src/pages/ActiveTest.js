@@ -521,9 +521,12 @@ const ActiveTest = () => {
                     </Dialog>
 
                 
-
-                        <div className="test-menu">
+                        <div className="timer-position">
                             {started && timer && <Timer dl={timer} />}
+                        </div>
+                        
+                        <div className="test-menu">
+                            
                             {menubtns && started && !is_adaptive_test &&
                                 menubtns.map(btn => (
                                     <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
@@ -535,9 +538,7 @@ const ActiveTest = () => {
                             {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
                         </div>
 
-                        <div className="timer-position">
-                            
-                        </div>
+                        
                         <div className="quest-back">
                         {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                         {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}

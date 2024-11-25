@@ -186,8 +186,14 @@ const ActiveTest = () => {
                 for (let i = 0; i < chosen_order.length; i++) {
                     answerload[chosen_order[i].value] = Number(chosen_order[i].id);
                 }
+                for (let i = 0; i < chosen_order.length; i++) {
+                    if (!Number.isFinite(answerload[i])) {
+                        //показать окошко, что не выбран верный порядок
+                        return "DONOTSEND";
+                    }
+                }
                 for (let i = 0; i < answerload.length; i++) {
-                    Payload.answer.push({ "id": Number(answerload[i]) });
+                    Payload.answer.push({ "id": answerload[i] });
                 }
                 break;
             case "MATCHING":
@@ -292,7 +298,7 @@ const ActiveTest = () => {
                     //console.log(response.data.item);
                 })
                 .catch(err => {
-                    if (err.toJSON().status === 310) {
+                    if (is_adaptive_test && err.toJSON().status === 310) {
                         handleSendAll();
                     }
                     else {
@@ -490,7 +496,6 @@ const ActiveTest = () => {
     return (
         <main>
             <React.StrictMode>
-            
                 <div className="content-block">
 
                     <Dialog PaperProps={{
@@ -521,25 +526,25 @@ const ActiveTest = () => {
                     </Dialog>
 
                 
-                        <div className="timer-position">
-                            {started && timer && <Timer dl={timer} />}
-                        </div>
+                    <div className="timer-position">
+                        {started && timer && <Timer dl={timer} />}
+                    </div>
                         
-                        <div className="test-menu">
+                    <div className="test-menu">
                             
-                            {menubtns && started && !is_adaptive_test &&
-                                menubtns.map(btn => (
-                                    <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
-                                        <span>{btn.num}</span>
-                                    </button>
-                                ))
-                            }
+                        {menubtns && started && !is_adaptive_test &&
+                            menubtns.map(btn => (
+                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
+                                    <span>{btn.num}</span>
+                                </button>
+                            ))
+                        }
             
-                            {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
-                        </div>
+                        {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
+                    </div>
 
                         
-                        <div className="quest-back">
+                    <div className="quest-back">
                         {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                         {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                         {(question.itemType === "TEXT" || question.itemType === "NUMBER") &&
@@ -548,10 +553,8 @@ const ActiveTest = () => {
                             />}
                         {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
                         {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                        </div>
-                
+                    </div>
 
-                
 
                     <div className="quest-btn">
                         {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="&lang; Предыдущий " />}
@@ -562,7 +565,6 @@ const ActiveTest = () => {
                     <div className="quest-btn">
                         {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
                         {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
-                        
                     </div>
            
                 </div>

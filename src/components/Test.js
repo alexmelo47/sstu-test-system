@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
+import { Navigate } from "react-router-dom"
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -17,6 +18,8 @@ const Test = ({ tid, status, method, type, name, disciplines, teacher, time, try
     if (testing_attr.length === 0) {
         has_attr = false;
     }
+
+    const [test_start, set_test_start] = useState(false);
 
     const [openDescr, setOpenTest] = React.useState(false);
     const handleClickOpenTest = () => {
@@ -110,6 +113,10 @@ const Test = ({ tid, status, method, type, name, disciplines, teacher, time, try
         },
       })(DialogTitle);
 
+    if (test_start) {
+        return <Navigate to="/activetest/" />
+    }
+
     return (
         <div>
             <ul className={this_style} >
@@ -157,7 +164,7 @@ const Test = ({ tid, status, method, type, name, disciplines, teacher, time, try
                     </DialogContentText>}
                 </DialogContent>
                 <StyleActions>
-                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); localStorage.setItem("type", type); window.location.href = 'http://localhost:3000/activetest/'; }} color="primary">Начать тестирование</StyleButton>
+                    <StyleButton onClick={(e) => { e.preventDefault(); localStorage.setItem("tid", tid); localStorage.setItem("method", method); localStorage.setItem("type", type); set_test_start(true); }} color="primary">Начать тестирование</StyleButton>
                     <StyleButton onClick={handleCloseTest} color="primary">Закрыть</StyleButton>
                 </StyleActions>
             </Dialog>

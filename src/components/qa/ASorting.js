@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PictureA from './PictureA'
 
 export default function ASorting({ cnt, aid, aname, anum, picture, rtype = 0, status = false }) {
+
+    const inputRef = React.useRef(null);
+    if (inputRef.current) {
+        inputRef.current.value = anum;
+    }
 
     //for result start
     let classes = "";
@@ -26,12 +31,22 @@ export default function ASorting({ cnt, aid, aname, anum, picture, rtype = 0, st
             <div className="matches">
                 <label className="accesshide"><PictureA src={picture} /> {aname} - </label>
 
-                <select className="orderboxes select custom-select" defaultValue={anum} id={aid} disabled={rtype > 0}>
+                <select className="orderboxes select custom-select" defaultValue={anum} ref={inputRef} id={aid} disabled={rtype > 0}>
                     {componentsArr}
                 </select>
 
                 <br/>
             </div>
+
+            {rtype === 3 && <div className="matches">
+                <div className="accesshide"><PictureA src={picture} />Правильный ответ к {aname} - </div>
+
+                <div className="orderboxes select custom-select" id={aid + 1}>
+                    {anum}
+                </div>
+
+                <br />
+            </div>}
         </li>
     )
 }

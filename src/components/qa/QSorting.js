@@ -11,10 +11,12 @@ export default function QSorting({ qname, cnt, a_arr, Qpic, rtype = 0, status = 
     }
     //for result end
     
+    let nkey = Math.floor(Math.random() * (8000 - 1001) + 1001);//force rerender
+
     let componentsArr = [];
     let i;
     for (i = 0; i < cnt; i++) {
-        componentsArr.push(<ASorting key={i} cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={a_arr[i].number}
+        componentsArr.push(<ASorting key={i + nkey} cnt={cnt} aid={a_arr[i].id} aname={a_arr[i].answer} anum={Number(a_arr[i].number) - 1}
                 picture={a_arr[i].pictures[0]?.url} rtype={rtype} status={a_arr[i]?.correct ?? false} />);
     }
 

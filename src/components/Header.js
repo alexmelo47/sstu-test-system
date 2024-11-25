@@ -190,7 +190,7 @@ export default function Header() {
         borderRadius: '15px',
       });
 */
-    
+    //добавить обработку случая, когда чел выходит из теста кнопкой выход
   return (
     <>
         <React.StrictMode>
@@ -206,7 +206,7 @@ export default function Header() {
                                   {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
 
                                   {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
-                                  {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
+                                  {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); window.location.href = 'http://localhost:3000/'; }}> &nbsp;Выйти&nbsp; </a>}
                                   <Dialog PaperProps={{
                                       style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
                                   }}

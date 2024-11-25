@@ -466,32 +466,84 @@ export default function Attestation() {
                 </div>
 
 
-                    <br /><br /><p className="questiontext"></p>
-                    <span>
-                        <p>ТЕСТ КОМПОНЕНТОВ</p>
-                    </span>
-                    <br /><br />
+                <br /><br /><p className="questiontext"></p>
+                <span>
+                    <p>ТЕСТ КОМПОНЕНТОВ</p>
+                </span>
+                <br /><br />
                     
-                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={""} />
-                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={""} />
-                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={""} />
-                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={""} />
-                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={""} />
-                    <br />
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "" }} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={{ url: "" }} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={{ url: "" }} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={{ url: "" }} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={{ url: "" }} />
+                <br />
 
-                    <span>
-                        <p>ТЕСТ КОМПОНЕНТОВ С КАРТИНКАМИ</p>
-                    </span>
-                    <br /><br />
+                <span>
+                    <p>ТЕСТ КОМПОНЕНТОВ С КАРТИНКАМИ</p>
+                </span>
+                <br /><br />
 
-                    <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} />
-                    <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={"../img/testpic.jpg"} />
-                    <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={"../img/testpic.jpg"} />
-                    <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={"../img/testpic.jpg"} />
-                    <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={"../img/testpic.jpg"} />
-                    <br />
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={{ url: "../img/testpic.jpg" }} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={{ url: "../img/testpic.jpg" }} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={{ url: "../img/testpic.jpg" }} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={{ url: "../img/testpic.jpg" }} />
+                <br />
 
-                    
+                <span>
+                    <p>ТЕСТ КОМПОНЕНТОВ С РЕЗУЛЬТАТАМИ(т1 - вопросы)</p>
+                </span>
+                <br /><br />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} rtype={1} status={false} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={1} status={false} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={1} status={false} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={1} status={false} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={1} status={false} />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "" }} rtype={1} status={true} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={{ url: "" }} rtype={1} status={true} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={{ url: "" }} rtype={1} status={true} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={{ url: "" }} rtype={1} status={true} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={{ url: "" }} rtype={1} status={true} />
+                <br />
+
+                <span>
+                    <p>ТЕСТ КОМПОНЕНТОВ С РЕЗУЛЬТАТАМИ(т2 - ответы)</p>
+                </span>
+                <br /><br />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} rtype={2} status={false} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={2} status={false} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={2} status={false} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={2} status={false} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={2} status={false} />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "" }} rtype={2} status={true} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={{ url: "" }} rtype={2} status={true} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={{ url: "" }} rtype={2} status={true} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={{ url: "" }} rtype={2} status={true} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={{ url: "" }} rtype={2} status={true} />
+                <br />
+
+                <span>
+                    <p>ТЕСТ КОМПОНЕНТОВ С РЕЗУЛЬТАТАМИ(т3 - правильные)</p>
+                </span>
+                <br /><br />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "../img/testpic.jpg" }} rtype={3} status={false} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersRpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={3} status={false} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersCpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={3} status={false} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersSpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={3} status={false} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersMpic} Qpic={{ url: "../img/testpic.jpg" }} rtype={3} status={false} />
+
+                <QShort qname="Напишите оператор сравнения НЕРАВНО в среде MS Excel?" Qpic={{ url: "" }} rtype={3} status={true} />
+                <QMultiRadio qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersR} Qpic={{ url: "" }} rtype={3} status={true} />
+                <QMultiCheckbox qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersC} Qpic={{ url: "" }} rtype={3} status={true} />
+                <QSorting qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={2} a_arr={answersS} Qpic={{ url: "" }} rtype={3} status={true} />
+                <QMatching qname="оператор сравнения НЕРАВНО в среде MS Excel?" cnt={4} a_arr={answersM} Qpic={{ url: "" }} rtype={3} status={true} />
+                <br />
 
             </fieldset>
 

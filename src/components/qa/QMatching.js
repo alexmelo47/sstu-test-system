@@ -42,8 +42,10 @@ export default function QMatching({ qname, a_arr, Qpic, rtype = 0, status = fals
         }
     }
 
+    let nkey = Math.floor(Math.random() * (8000 - 1001) + 1001);//force rerender
+
     for (i = 0; i < L_cnt; i++) {
-        componentsArr.push(<AMatching key={i} cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]}
+        componentsArr.push(<AMatching key={i + nkey} cnt={R_cnt} aid={L_ids[i]} aid_arr={R_ids} aname={L_names[i]}
             name_arr={R_names} anum={L_chosen[i]} picture={L_pics[i]} rtype={rtype} status={L_correct[i]} />);
     }
 

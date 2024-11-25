@@ -9,7 +9,7 @@ export default function AMultiRadio({ aid, aname, rname, selected, picture, rtyp
     }
     //for result start
     let classes = "";
-    if (rtype === 2) {
+    if (rtype >= 2) {
         status ? classes += " a-true" : classes += " a-false";
     }
     //for result end

@@ -34,6 +34,8 @@ const ActiveTest = () => {
     const [is_first, set_first] = useState(true);
     const [finished, set_finished] = useState(false);
 
+    const [loading, setLoading] = React.useState(false);
+
     const [menubtns, set_mb] = useState([]);
     
     const [open, setOpen] = useState(false);
@@ -71,17 +73,6 @@ const ActiveTest = () => {
         setTimeWarn(false);
     }
     
-    //закрытие до завершения, еще не назначено появление
-    const [open4, setFastCloseWarn] = React.useState(false);
-    const handleClosefastExit = () => {
-        setFastCloseWarn(true);
-    }
-    const handleClose2 = () => {
-        setFastCloseWarn(false);
-    }
-    const handleAccept2 = () => {
-        setFastCloseWarn(false);
-    }
 
     useEffect(() => {
         handleFirst();
@@ -133,6 +124,7 @@ const ActiveTest = () => {
         }
 
         //console.log(Payload);
+        setLoading(true);
         axios.post(baseURL + '/sessions', Payload)
             .then(function (response) {
 
@@ -152,6 +144,7 @@ const ActiveTest = () => {
                 timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
 
             })
+            .then(setLoading(false))
             .catch(err => {
                 if (err.toJSON().status === 310) {
                     handleSendAll();
@@ -159,6 +152,7 @@ const ActiveTest = () => {
                 else {
                     console.log(err);
                 }
+                setLoading(false);
             });
     };
 
@@ -290,6 +284,8 @@ const ActiveTest = () => {
 
     function handleSendOne(question_id) {//переход к вопросу по id, отправка старого и загрузка нового
 
+        setLoading(true);
+
         let Payload = prepPayload();
 
         let url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + localStorage.getItem("question_id") + '/answer';
@@ -349,6 +345,8 @@ const ActiveTest = () => {
                 .catch(err => console.log(err));
 
             getBoxes(question_list.findIndex((el) => el.id === question_id));
+
+            setLoading(false);
         }
     }
 
@@ -536,24 +534,10 @@ const ActiveTest = () => {
                             <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
                         </StyleAction>
                     </Dialog>
-
-                    <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
-                                  }}
-                                  open={open4} onClose={handleClosefastExit} aria-labelledby="time-warning">
-                        <StyleTitle disableTypography id="fastclose-warning">Предупреждение</StyleTitle>
-                        <DialogContent>
-                            <DialogContentText>Тестирование еще не завершено, вы точно хотите выйти из системы?</DialogContentText>
-                        </DialogContent>
-                        <StyleActions>
-                            <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
-                            <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
-                        </StyleActions>
-                    </Dialog>
                     
-                        <svg class="spinner" viewBox="0 0 50 50">
+                    {loading && <svg class="spinner" viewBox="0 0 50 50">
                         <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                        </svg>
+                    </svg>}
                 
                     <div className="timer-position">
                         {started && timer && <Timer dl={timer} />}

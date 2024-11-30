@@ -16,6 +16,8 @@ const Tests = () => {
     const [tests, setTests] = useState([]);
     localStorage.removeItem("Result");
 
+    const [loading, setLoading] = React.useState(false);
+
     const [open4, setAccessWarn] = React.useState(false);
     const handleCloseAccessWarn = () => {
         setAccessWarn(false);
@@ -27,15 +29,19 @@ const Tests = () => {
         localStorage.removeItem("type");
     }, []);
 
-    function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
+    function getTests() {  //Запрос на доступные пользователю тесты
+        setLoading(true);
         axios.get(baseURL + "/tests").then((tests) => {
             //console.log(tests);
         setTests(tests.data)
-        }).catch((err) => {
+        })
+        .then(setLoading(false))
+        .catch((err) => {
             if (err.toJSON().status === 403) {
                 setAccessWarn(true);
             }
             console.log(err);
+            setLoading(false);
         })
     }
 
@@ -129,6 +135,9 @@ const Tests = () => {
                         </div>
                     </div>
                 </div>
+                {loading && < svg class="spinner" viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>}
             </main>
         </React.StrictMode>
     )

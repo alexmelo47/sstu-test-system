@@ -39,7 +39,7 @@ export default function ASorting({ cnt, aid, aname, anum, picture, rtype = 0, st
             </div>
 
             {rtype === 3 && <div className="matches">
-                <div className="accesshide"><PictureA src={picture} />Правильный ответ к {aname} - </div>
+                <div className="accesshide">Правильный ответ к <PictureA src={picture} /> {aname} - </div>
 
                 <div className="orderboxes select custom-select" id={aid + 1}>
                     {anum}

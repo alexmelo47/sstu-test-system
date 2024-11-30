@@ -21,6 +21,7 @@ export default function AShort({ value, correct, rtype = 0 }) {
                 <input className="q-input-text" id="AnsShort" name={rname} type="text" placeholder="Введите ответ здесь" defaultValue={value} ref={inputRef} autoComplete="off" disabled={rtype > 0} />
             </li>
             {rtype === 3 && <li>
+                <br/>
                 <label className="accesshide" htmlFor="AnsShortC">Правильный ответ:</label>
                 <input className="q-input-text" id="AnsShortC" name={rname + "1"} type="text" defaultValue={correct} autoComplete="off" disabled />
             </li>}

@@ -95,34 +95,33 @@ export default function Result() {
             break;
     }
     return (
-        <React.StrictMode >
-            <main>
-                <div className="content-block">
-                    <div className="result-info">
-                        {res_type != "HIDDEN" &&
-                        <>
-                            <h1>
-                                <i>{tname}<br /> <br /> Тестируемый {student}</i>
-                            </h1>
+        <main>
+            <div className="content-block">
+                <div className="result-info">
+                    {res_type != "HIDDEN" &&
+                    <>
+                        <h1>
+                            <i>{tname}<br /> <br /> Тестируемый {student}</i>
+                        </h1>
+                        <br /><br />
+                        <span>
+                            {!is_multidim_test && <>Ваша оценка: {grade}</>}
+                            {is_multidim_test &&
+                                grades.map(attr => (
+                                    <i key={attr.name}>Ваша оценка по {attr.name}: {attr.grade}<br /></i>
+                                ))
+                            }
                             <br /><br />
-                            <span>
-                                {!is_multidim_test && <>Ваша оценка: {grade}</>}
-                                {is_multidim_test &&
-                                    grades.map(attr => (
-                                        <i key={attr.name}>Ваша оценка по {attr.name}: {attr.grade}<br /></i>
-                                    ))
-                                }
-                                <br /><br />
-                                Процент выполненных заданий: {percent}%<br /><br />
-                                Время тестирования: {timeH}ч {timeM}м {timeS}с
-                            </span>
-                            <br /><br />
-                        </>
-                        }
-                        <Link className="btn btn-1" to="/tests/">Закрыть</Link>
-                    </div>
-                    {q_elements && q_elements}
+                            Процент выполненных заданий: {percent}%<br /><br />
+                            Время тестирования: {timeH}ч {timeM}м {timeS}с
+                        </span>
+                        <br /><br />
+                    </>
+                    }
+                    <Link className="btn btn-1" to="/tests/">Закрыть</Link>
                 </div>
+                {q_elements && q_elements}
+            </div>
 
         </main>
     )

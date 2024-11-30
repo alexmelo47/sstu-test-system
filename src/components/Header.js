@@ -143,7 +143,7 @@ export default function Header() {
     {
         localStorage.clear();
         setAuth(false);
-        window.location.href = 'http://localhost:3000/';
+        window.location.href = baseURL;
     }
 
     const StyleButton = withStyles({
@@ -383,29 +383,29 @@ export default function Header() {
 
                             </Dialog>
 
-                                <Dialog PaperProps={{
-                                    style: { borderRadius: 15 }
-                                }}
-                                    open={open4} onClose={handleClosefastExit} aria-labelledby="time-warning">
-                                    <StyleTitle disableTypography id="fastclose-warning">Предупреждение</StyleTitle>
-                                    <DialogContent>
-                                        <DialogContentText>Тестирование еще не завершено, вы точно хотите выйти из системы?</DialogContentText>
-                                    </DialogContent>
-                                    <StyleActions>
-                                        <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
-                                        <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
-                                    </StyleActions>
-                                  </Dialog>
+                            <Dialog PaperProps={{
+                                style: { borderRadius: 15 }
+                            }}
+                                open={open4} onClose={handleClosefastExit} aria-labelledby="time-warning">
+                                <StyleTitle disableTypography id="fastclose-warning">Предупреждение</StyleTitle>
+                                <DialogContent>
+                                    <DialogContentText>Тестирование еще не завершено, вы точно хотите выйти из системы?</DialogContentText>
+                                </DialogContent>
+                                <StyleActions>
+                                    <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
+                                    <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
+                                </StyleActions>
+                                </Dialog>
 
-                                {loading && < svg class="spinner" viewBox="0 0 50 50">
-                                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                                </svg>}
-                            </nav>
-                        </div>
+                            {loading && < svg class="spinner" viewBox="0 0 50 50">
+                                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                            </svg>}
+                        </nav>
                     </div>
                 </div>
-            </header>
-        </React.StrictMode>
+            </div>
+        </header>
+
         <Router>
             <Routes>
                 <Route exact path="/" element={<Home/>} />
@@ -415,7 +415,6 @@ export default function Header() {
                 <Route exact path="/Guid" element={<Guid/>} />
             </Routes>
         </Router>
-
     </>
   )
 }

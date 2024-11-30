@@ -401,63 +401,63 @@ const ActiveTest = () => {
                     </StyleActions>
                 </Dialog>
 
-                    <Dialog PaperProps={{
-                                      style: { borderRadius: 15 }
-                                  }}
-                                  open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
-                        <StyleTitle disableTypography id="time-warning">Предупреждение</StyleTitle>
-                        <DialogContent>
-                            <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
-                        </DialogContent>
-                        <StyleAction>
-                            <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
-                        </StyleAction>
-                    </Dialog>
+                <Dialog PaperProps={{
+                                    style: { borderRadius: 15 }
+                                }}
+                                open={open3} onClose={handleCloseTimeWarn} aria-labelledby="time-warning">
+                    <StyleTitle disableTypography id="time-warning">Предупреждение</StyleTitle>
+                    <DialogContent>
+                        <DialogContentText>Время на прохождение теста подходит к концу.</DialogContentText>
+                    </DialogContent>
+                    <StyleAction>
+                        <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
+                    </StyleAction>
+                </Dialog>
                     
-                    {loading && <svg class="spinner" viewBox="0 0 50 50">
-                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                    </svg>}
+                {loading && <svg class="spinner" viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>}
                 
-                    <div className="timer-position">
-                        {started && timer && <Timer dl={timer} />}
-                    </div>
+                <div className="timer-position">
+                    {started && timer && <Timer dl={timer} />}
+                </div>
                         
-                    <div className="test-menu">
+                <div className="test-menu">
                             
-                        {menubtns && started && !is_adaptive_test &&
-                            menubtns.map(btn => (
-                                <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
-                                    <span>{btn.num}</span>
-                                </button>
-                            ))
-                        }
+                    {menubtns && started && !is_adaptive_test &&
+                        menubtns.map(btn => (
+                            <button key={btn.num} className={btn.style} onClick={() => { handleSendOne(btn.id) }}>
+                                <span>{btn.num}</span>
+                            </button>
+                        ))
+                    }
             
-                        {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
-                    </div>
+                    {started && <input onClick={handleClickOpenWarn} className="btn-fin2" type="submit" value="Завершить" />}                           
+                </div>
 
                         
-                    <div className="quest-back">
-                        {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                        {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                        {(question.itemType === "TEXT" || question.itemType === "NUMBER") &&
-                            <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""}
-                                correctN={question.answers[0]?.correctNumber ?? ""} correctT={question.answers[0]?.correctAnswer ?? ""} Qpic={question.pictures[0] ?? ""}
-                            />}
-                        {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                        {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
-                    </div>
+                <div className="quest-back">
+                    {question.itemType === "MULTIPLE_CHOICE" && <QMultiRadio qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "MULTIPLE_ANSWER" && <QMultiCheckbox qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {(question.itemType === "TEXT" || question.itemType === "NUMBER") &&
+                        <QShort qname={question.question} qa={question.answers[0]?.answer ?? ""}
+                            correctN={question.answers[0]?.correctNumber ?? ""} correctT={question.answers[0]?.correctAnswer ?? ""} Qpic={question.pictures[0] ?? ""}
+                        />}
+                    {question.itemType === "SORTING" && <QSorting qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                    {question.itemType === "MATCHING" && <QMatching qname={question.question} cnt={question.answers.length} a_arr={question.answers} Qpic={question.pictures[0] ?? ""} />}
+                </div>
 
 
-                    <div className="quest-btn">
-                        {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="&lang; Предыдущий " />}
-                        {started && !is_adaptive_test && (is_first || is_last) && <div className="pseudo-btn" />}
-                        {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий &rang;" />}
-                    </div>
+                <div className="quest-btn">
+                    {started && !is_adaptive_test && !is_first && <input onClick={handlePrev} className="btn btn-2" type="submit" value="&lang; Предыдущий " />}
+                    {started && !is_adaptive_test && (is_first || is_last) && <div className="pseudo-btn" />}
+                    {started && !is_adaptive_test && !is_last && <input onClick={handleNext} className="btn btn-2" type="submit" value="Следующий &rang;" />}
+                </div>
 
-                    <div className="quest-btn">
-                        {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
-                        {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
-                    </div>
+                <div className="quest-btn">
+                    {!started && false && <input onClick={handleFirst} className="btn btn-1" type="submit" value="Начать тест" />}     
+                    {started && is_adaptive_test && <input onClick={handleNext} className="btn btn-1" type="submit" value="Подтвердить &#10004;" />}
+                </div>
            
             </div>
         </main>

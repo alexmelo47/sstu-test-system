@@ -70,6 +70,18 @@ const ActiveTest = () => {
     const handleCloseTimeWarn = () => {
         setTimeWarn(false);
     }
+    
+    //закрытие до завершения, еще не назначено появление
+    const [open4, setFastCloseWarn] = React.useState(false);
+    const handleClosefastExit = () => {
+        setFastCloseWarn(true);
+    }
+    const handleClose2 = () => {
+        setFastCloseWarn(false);
+    }
+    const handleAccept2 = () => {
+        setFastCloseWarn(false);
+    }
 
     useEffect(() => {
         handleFirst();
@@ -525,6 +537,23 @@ const ActiveTest = () => {
                         </StyleAction>
                     </Dialog>
 
+                    <Dialog PaperProps={{
+                                      style: { borderRadius: 15 }
+                                  }}
+                                  open={open4} onClose={handleClosefastExit} aria-labelledby="time-warning">
+                        <StyleTitle disableTypography id="fastclose-warning">Предупреждение</StyleTitle>
+                        <DialogContent>
+                            <DialogContentText>Тестирование еще не завершено, вы точно хотите выйти из системы?</DialogContentText>
+                        </DialogContent>
+                        <StyleActions>
+                            <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
+                            <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
+                        </StyleActions>
+                    </Dialog>
+                    
+                        <svg class="spinner" viewBox="0 0 50 50">
+                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
                 
                     <div className="timer-position">
                         {started && timer && <Timer dl={timer} />}

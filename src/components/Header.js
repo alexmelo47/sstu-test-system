@@ -82,7 +82,7 @@ export default function Header() {
         setStatus(event.target.value);
     }
 
-    const handleRegistr = () => {   //Запрос регистрации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
+    const handleRegistr = () => {   //Запрос регистрации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ
         const regPayload = {
             "firstName": document.getElementById("name1_reg").value,
             "lastName": document.getElementById("name2_reg").value,
@@ -109,7 +109,7 @@ export default function Header() {
         setOpenRegistration(false);
     }
 
-    const handleAuth = () => {  //Запрос авторизации ДОБАВИТЬ ЗАЩИТУ ДАННЫХ ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
+    const handleAuth = () => {  //Запрос авторизации
         const loginPayload = {
             "login": document.getElementById("name_login").value.trim(),
             "password": document.getElementById("pass_login").value.trim()
@@ -215,7 +215,7 @@ export default function Header() {
         borderRadius: '15px',
       });
 */
-    //добавить обработку случая, когда чел выходит из теста кнопкой выход
+
   return (
     <>
         <React.StrictMode>

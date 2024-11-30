@@ -16,6 +16,8 @@ const Tests = () => {
     const [tests, setTests] = useState([]);
     localStorage.removeItem("Result");
 
+    const [loading, setLoading] = React.useState(false);
+
     const [open4, setAccessWarn] = React.useState(false);
     const handleCloseAccessWarn = () => {
         setAccessWarn(false);
@@ -27,15 +29,19 @@ const Tests = () => {
         localStorage.removeItem("type");
     }, []);
 
-    function getTests() {  //Запрос на доступные пользователю тесты  ДОБАВИТЬ КРУЖОК ЗАГРУЗКИ
+    function getTests() {  //Запрос на доступные пользователю тесты
+        setLoading(true);
         axios.get(baseURL + "/tests").then((tests) => {
             //console.log(tests);
         setTests(tests.data)
-        }).catch((err) => {
+        })
+        .then(setLoading(false))
+        .catch((err) => {
             if (err.toJSON().status === 403) {
                 setAccessWarn(true);
             }
             console.log(err);
+            setLoading(false);
         })
     }
 
@@ -103,32 +109,36 @@ const Tests = () => {
                 </StyleAction>
             </Dialog>                   
 
-                {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
-                <div className="panel">
-                    <div>
-                        <ul className="test-list test-top">
-                            <li>Название</li>
-                            <li>Дисциплины</li>
-                            <li>Компетенции</li>
-                            <li>Тип</li>
-                            <li>Время окончания</li>
-                            <li><StyleButton onClick={() => { getTests() }} color="primary">Обновить</StyleButton></li>
-                        </ul>
-                        {tests &&
-                            tests.map(test => (
-                                <Test
-                                    key={test.id} tid={test.id}
-                                    status={test.status} method={test.method} type={test.type}
-                                    name={test.name} disciplines={test.disciplines} teacher={test.author}
-                                    time={test.endedAt} try_time={test.duration} try_cnt={test.attempts}
-                                    testing_attr={test.competences} q_cnt={test.count}
-                                />
-                            ))   
-                        }
+                    {false && <button className="accordion" onClick={getTests}>Доступные тесты</button>} 
+                    <div className="panel">
+                        <div>
+                            <ul className="test-list test-top">
+                                <li>Название</li>
+                                <li>Дисциплины</li>
+                                <li>Компетенции</li>
+                                <li>Тип</li>
+                                <li>Время окончания</li>
+                                <li><StyleButton onClick={() => { getTests() }} color="primary">Обновить</StyleButton></li>
+                            </ul>
+                            {tests &&
+                                tests.map(test => (
+                                    <Test
+                                        key={test.id} tid={test.id}
+                                        status={test.status} method={test.method} type={test.type}
+                                        name={test.name} disciplines={test.disciplines} teacher={test.author}
+                                        time={test.endedAt} try_time={test.duration} try_cnt={test.attempts}
+                                        testing_attr={test.competences} q_cnt={test.count}
+                                    />
+                                ))   
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
+                {loading && < svg class="spinner" viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                </svg>}
+            </main>
+        </React.StrictMode>
     )
 }
 

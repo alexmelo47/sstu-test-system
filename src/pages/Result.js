@@ -31,19 +31,18 @@ export default function Result() {
 
     let res = JSON.parse(localStorage.getItem("Result"));
     //console.log(res);
-    let res_type = "GRADE_ONLY";//res.type;
+    let res_type = res.resultDisplayMethod;
     let is_multidim_test = localStorage.getItem("type") === "MULTIDIMENSIONAL" ? true : false;
 
-    let questions, grade, grades, percent, timeH, timeM, timeS, tname, author, sw_cnt = 0, status_en;
+    let questions, grade, grades, percent, timeH, timeM, timeS, tname, author, sw_cnt = 1, status_en;
     let q_elements = [];
 
     switch (res_type) {
         case "CORRECT":
-            //sw_cnt++;
-        case "SELECTED":
-            //sw_cnt++;
-        case "INCORRECT":
             sw_cnt++;
+        case "SELECTED":
+            sw_cnt++;
+        case "INCORRECT":
             questions = res.items;
             for (var i = 0; i < questions.length; i++) {
                 switch (questions[i].status) {
@@ -85,7 +84,7 @@ export default function Result() {
         case "GRADE_ONLY": 
             grade = res.grade;
             grades = res.grades;
-        case "HIDDEN":
+        //case "HIDDEN":
         default:
             timeH = Math.floor((parseFloat(res.fullTime) / (60 * 60)) % 24);
             timeM = Math.floor((parseFloat(res.fullTime) / 60) % 60);
@@ -96,35 +95,34 @@ export default function Result() {
             break;
     }
     return (
-        <main>
-            <div className="content-block">
-                <div className="result-info">
-                    {res_type != "HIDDEN" &&
-                    <>
-                        <h1>
-                            <i>{tname}<br /> <br /> Тестируемый {student}</i>
-                        </h1>
-                        <span>
+        <React.StrictMode >
+            <main>
+                <div className="content-block">
+                    <div className="result-info">
+                        {res_type != "HIDDEN" &&
+                        <>
+                            <h1>
+                                <i>{tname}<br /> <br /> Тестируемый {student}</i>
+                            </h1>
                             <br /><br />
-                            <i>
+                            <span>
                                 {!is_multidim_test && <>Ваша оценка: {grade}</>}
                                 {is_multidim_test &&
                                     grades.map(attr => (
-                                        <>Ваша оценка по {attr.name}: {attr.grade}<br /></>
+                                        <i key={attr.name}>Ваша оценка по {attr.name}: {attr.grade}<br /></i>
                                     ))
                                 }
                                 <br /><br />
                                 Процент выполненных заданий: {percent}%<br /><br />
                                 Время тестирования: {timeH}ч {timeM}м {timeS}с
-                            </i>
+                            </span>
                             <br /><br />
-                        </span>
-                    </>
-                    }
-                    <Link className="btn btn-1" to="/tests/">Закрыть</Link>
+                        </>
+                        }
+                        <Link className="btn btn-1" to="/tests/">Закрыть</Link>
+                    </div>
+                    {q_elements && q_elements}
                 </div>
-                {q_elements && q_elements}
-            </div>
 
         </main>
     )

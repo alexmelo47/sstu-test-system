@@ -33,6 +33,7 @@ export default function Header() {
     const [status, setStatus] = React.useState('EXTERNAL');
     const [open2, setOpenRemind] = React.useState(false);
     const [open3, setOpenWrongPass] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
     const baseURL = "https://maile.fita.cc";
 
     useEffect(() => {
@@ -63,9 +64,21 @@ export default function Header() {
         setOpenWrongPass(false);
     }
 
+    const [open4, setFastCloseWarn] = React.useState(false);
+    const handleClosefastExit = () => {
+        setFastCloseWarn(true);
+    }
+    const handleClose2 = () => {
+        setFastCloseWarn(false);
+    }
+    const handleAccept2 = () => {
+        setFastCloseWarn(false);
+        handleExit();
+    }
+
     const handleStatusChange = (event) => {
         setStatus(event.target.value);
-      }
+    }
 
     const handleRegistr = () => {   //Запрос регистрации
         const regPayload = {
@@ -78,14 +91,17 @@ export default function Header() {
             "workPlace": document.getElementById("status_reg").value
         }
 
+        setLoading(true);
         axios.post(baseURL + '/waitlist', regPayload)
             .then(function (response) {
                 //console.log(response);
             })
+            .then(setLoading(false))
             .catch((err) => {
                 /*if (err.toJSON().status === 500) { //пользователь существует
                 }*/
                 console.log(err);
+                setLoading(false);
             });
         setOpenRegistration(false);
     }
@@ -99,6 +115,7 @@ export default function Header() {
         localStorage.removeItem("accessToken");
         delete axios.defaults.headers.common["Authorization"];
 
+        setLoading(true);
         axios.post(baseURL + '/auth/login', loginPayload)
             .then(function (response) {
                 //console.log(response);
@@ -111,15 +128,23 @@ export default function Header() {
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
             })
+            .then(setLoading(false))
             .catch((err) => {
                 if (err.toJSON().status === 500) {
                     setOpenWrongPass(true);
                 }
                 console.log(err);
+                setLoading(false);
             });
         setOpenAuthorization(false);
     }
 
+    const handleExit = () =>
+    {
+        localStorage.clear();
+        setAuth(false);
+        window.location.href = 'http://localhost:3000/';
+    }
 
     const StyleButton = withStyles({
         root: {
@@ -187,7 +212,7 @@ export default function Header() {
         borderRadius: '15px',
       });
 */
-    
+
   return (
     <>
         <header>
@@ -201,14 +226,22 @@ export default function Header() {
                             <a className="nav-link" href="/"> &nbsp;Домашняя страница&nbsp;</a>
                             {auth && <a className="nav-link" href="/tests"> &nbsp;Тестирование&nbsp;</a>}
 
-                            {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
-                            {auth && <a className="nav-link in-out" onClick={() => { localStorage.clear(); setAuth(false); }}> &nbsp;Выйти&nbsp; </a>}
-                            <Dialog PaperProps={{
-                                    style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
-                                }}
-                                    open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
-                                <StyleTitle disableTypography id="authorization">Авторизация</StyleTitle> 
-                                <DialogContent>
+                                  {!auth && <a className="nav-link in-out" onClick={handleClickOpenAuthorization}> &nbsp;Войти&nbsp; </a>}
+                                  {auth && <a className="nav-link in-out" onClick={() => {
+                                      if (localStorage.getItem("question_id") !== null) {
+                                          setFastCloseWarn(true);
+                                      }
+                                      else
+                                      {
+                                          handleExit();
+                                      }
+                                  }}> &nbsp;Выйти&nbsp; </a>}
+                                  <Dialog PaperProps={{
+                                      style: { borderRadius: 15, width: 512, padding: '10px 18px 0 18px', }
+                                  }}
+                                      open={open} onClose={handleCloseAuthorization} aria-labelledby="authorization" className='styledialog'>
+                                   <StyleTitle disableTypography id="authorization">Авторизация</StyleTitle> 
+                                    <DialogContent>
                                         
                                     <TextField                              
                                         autoFocus
@@ -350,12 +383,29 @@ export default function Header() {
 
                             </Dialog>
 
-                        </nav>
+                                <Dialog PaperProps={{
+                                    style: { borderRadius: 15 }
+                                }}
+                                    open={open4} onClose={handleClosefastExit} aria-labelledby="time-warning">
+                                    <StyleTitle disableTypography id="fastclose-warning">Предупреждение</StyleTitle>
+                                    <DialogContent>
+                                        <DialogContentText>Тестирование еще не завершено, вы точно хотите выйти из системы?</DialogContentText>
+                                    </DialogContent>
+                                    <StyleActions>
+                                        <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
+                                        <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
+                                    </StyleActions>
+                                  </Dialog>
+
+                                {loading && < svg class="spinner" viewBox="0 0 50 50">
+                                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                                </svg>}
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
-
+            </header>
+        </React.StrictMode>
         <Router>
             <Routes>
                 <Route exact path="/" element={<Home/>} />

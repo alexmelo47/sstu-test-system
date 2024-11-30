@@ -491,12 +491,22 @@ main {
 /* questions menu */
 .test-menu {
     width: 18%;
+    top: 18%;
+    right: 1%;
+    position:absolute;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.timer-position{
+    width: 18%;
     top: 10%;
     right: 1%;
     position:absolute;
     display: flex;
     flex-wrap: wrap;
 }
+
 
 .btn-menu {
     width: 35px;
@@ -627,13 +637,17 @@ fieldset {
 }
 
 .select {
-    font-size: inherit;
+    font-size: initial;
     min-width: 20%;
     max-width:  50%;
     height: 4vh;
-
+    min-height: 35px;
     border-radius: 0.25em;
     padding: 0.25em 0.5em;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 
     cursor: pointer;
     line-height: 1.1;
@@ -748,7 +762,7 @@ input[type='date'] {
     border: 4px solid #0059A8;
     border-radius: 40px;*/
     flex-direction: column;
-    margin: 0px 500px 0px 10px;
+    margin: 0px 0px 0px 10px;
 }
 
 .timer li {
@@ -820,3 +834,45 @@ input[type='date'] {
 .styledialog > div:nth-child(3) > div:nth-child(1) {
     border-radius: 15px !important;
 }
+
+/* loading */
+
+.spinner {
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    
+    & .path {
+      stroke: hsl(210, 74%, 45%);
+      stroke-linecap: round;
+      animation: dash 1.5s ease-in-out infinite;
+    }
+    
+  }
+  
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+  

@@ -143,7 +143,7 @@ export default function Header() {
     {
         localStorage.clear();
         setAuth(false);
-        window.location.href = baseURL;
+        window.location.href = "https://web.fita.cc";
     }
 
     const StyleButton = withStyles({

@@ -10,6 +10,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
+import Spinner from '../components/Spinner';
+
 const baseURL ="https://maile.fita.cc"
 
 const Tests = () => {
@@ -33,9 +35,9 @@ const Tests = () => {
         setLoading(true);
         axios.get(baseURL + "/tests").then((tests) => {
             //console.log(tests);
+            setLoading(false);
         setTests(tests.data)
         })
-        .then(setLoading(false))
         .catch((err) => {
             if (err.toJSON().status === 403) {
                 setAccessWarn(true);
@@ -135,9 +137,7 @@ const Tests = () => {
                         </div>
                     </div>
                 </div>
-                {loading && < svg class="spinner" viewBox="0 0 50 50">
-                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                </svg>}
+                {loading && <Spinner></Spinner>}
             </main>
         </React.StrictMode>
     )

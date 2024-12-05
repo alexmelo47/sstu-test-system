@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
 import Timer from "../components/Timer";
+import Spinner from '../components/Spinner';
 
 const baseURL = "https://maile.fita.cc";
 
@@ -126,9 +127,8 @@ const ActiveTest = () => {
 
                 timerReminder = setTimeout(handleClickOpenTimeWarn, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 20000);//за 20с до конца
                 timerEject = setTimeout(handleSendAll, Date.parse(new Date(new Date().getTime() + Number(response.data.remainingTime) * 1000)) - Date.now() - 1500);//actual deadline, needs testing
-
+                setLoading(false);
             })
-            .then(setLoading(false))
             .catch(err => {
                 if (err.toJSON().status === 310) {
                     handleSendAll();
@@ -234,6 +234,7 @@ const ActiveTest = () => {
                         localStorage.setItem("question_id", response.data.item.id);
                         setQuestion(response.data.item);
                     }
+                    setLoading(false);
                 })
                 .catch(err => {
                     if (is_adaptive_test && err.toJSON().status === 310) {
@@ -242,6 +243,7 @@ const ActiveTest = () => {
                     else {
                         console.log(err);
                     }
+                    setLoading(false);
                 });
         }
 
@@ -266,16 +268,19 @@ const ActiveTest = () => {
             //load
             url = baseURL + '/sessions/' + localStorage.getItem("session_id") + '/items/' + question_id;
 
+            setLoading(true);
             axios.get(url)
                 .then(function (response) {
                     localStorage.setItem("question_id", response.data.item.id);
                     setQuestion(response.data.item);
+                    setLoading(false);
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.log(err);
+                    setLoading(false);
+                });
 
             getBoxes(question_list.findIndex((el) => el.id === question_id));
-
-            setLoading(false);
         }
     }
 
@@ -413,10 +418,8 @@ const ActiveTest = () => {
                         <StyleButton onClick={handleCloseTimeWarn} color="primary">Закрыть</StyleButton>
                     </StyleAction>
                 </Dialog>
-                    
-                {loading && <svg class="spinner" viewBox="0 0 50 50">
-                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                </svg>}
+
+                {loading && <Spinner></Spinner>}
                 
                 <div className="timer-position">
                     {started && timer && <Timer dl={timer} />}

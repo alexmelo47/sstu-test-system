@@ -21,6 +21,7 @@ import Result from '../pages/Result';
 import Guid from '../pages/Guid';
 
 import setAuthTokenStored from '../components/setTokenStored';
+import Spinner from '../components/Spinner';
 
 export default function Header() {
 
@@ -81,6 +82,7 @@ export default function Header() {
     }
 
     const handleRegistr = () => {   //Запрос регистрации
+        setLoading(true);
         const regPayload = {
             "firstName": document.getElementById("name1_reg").value,
             "lastName": document.getElementById("name2_reg").value,
@@ -91,12 +93,11 @@ export default function Header() {
             "workPlace": document.getElementById("status_reg").value
         }
 
-        setLoading(true);
         axios.post(baseURL + '/waitlist', regPayload)
             .then(function (response) {
                 //console.log(response);
+                setLoading(false);
             })
-            .then(setLoading(false))
             .catch((err) => {
                 /*if (err.toJSON().status === 500) { //пользователь существует
                 }*/
@@ -107,6 +108,7 @@ export default function Header() {
     }
 
     const handleAuth = () => {  //Запрос авторизации
+        setLoading(true); 
         const loginPayload = {
             "login": document.getElementById("name_login").value.trim(),
             "password": document.getElementById("pass_login").value.trim()
@@ -115,7 +117,6 @@ export default function Header() {
         localStorage.removeItem("accessToken");
         delete axios.defaults.headers.common["Authorization"];
 
-        setLoading(true);
         axios.post(baseURL + '/auth/login', loginPayload)
             .then(function (response) {
                 //console.log(response);
@@ -127,8 +128,9 @@ export default function Header() {
 
                 //setAuthToken(token);
                 //localStorage.getItem("token") ? flag=true : flag=false
+
+                setLoading(false);
             })
-            .then(setLoading(false))
             .catch((err) => {
                 if (err.toJSON().status === 500) {
                     setOpenWrongPass(true);
@@ -267,9 +269,10 @@ export default function Header() {
                                     <Button color="primary" onClick={handleClickOpenRemind} >Забыли логин или пароль?</Button> 
                                 </DialogActions>
 
-                                <StyleActions>     
-                                    <StyleButton variant="contained"  color="primary" onClick={handleAuth} >Авторизоваться</StyleButton><StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Регистрация</StyleButton>   
-                                </StyleActions>
+                                    <StyleActions>     
+                                          <StyleButton variant="contained" color="primary" onClick={() => { handleAuth(); }} >Авторизоваться</StyleButton>
+                                          <StyleButton variant="contained" color="primary" onClick={handleClickOpenRegistration} >Регистрация</StyleButton>   
+                                    </StyleActions>
                                 
                             </Dialog>
 
@@ -395,17 +398,14 @@ export default function Header() {
                                     <StyleButton onClick={handleAccept2} color="primary">Да</StyleButton>
                                     <StyleButton onClick={handleClose2} color="primary">Нет</StyleButton>
                                 </StyleActions>
-                                </Dialog>
+                            </Dialog>
 
-                            {loading && < svg class="spinner" viewBox="0 0 50 50">
-                                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                            </svg>}
+                            {loading && <Spinner></Spinner>}
                         </nav>
                     </div>
                 </div>
             </div>
         </header>
-
         <Router>
             <Routes>
                 <Route exact path="/" element={<Home/>} />

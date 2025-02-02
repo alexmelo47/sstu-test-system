@@ -154,7 +154,7 @@ export default function Attestation() {
         </div>
 
         <div className="timer-position">
-            <Timer dl={"December, 31, 2024"} />
+            <Timer dl={"January, 31, 2025"} />
         </div>
         
             <div className="content-block">

@@ -93,7 +93,7 @@ export default function Result() {
             percent = res.percentage;
             //author = res.test.author.name;(Преп. {author})
             break;
-    }
+    }//Процент выполненных заданий: {percent}%<br /><br />
     return (
         <main>
             <div className="content-block">
@@ -112,7 +112,7 @@ export default function Result() {
                                 ))
                             }
                             <br /><br />
-                            Процент выполненных заданий: {percent}%<br /><br />
+                            
                             Время тестирования: {timeH}ч {timeM}м {timeS}с
                         </span>
                         <br /><br />

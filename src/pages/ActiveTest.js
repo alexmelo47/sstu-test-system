@@ -326,8 +326,11 @@ const ActiveTest = () => {
                 localStorage.setItem("Result", JSON.stringify(response.data));
                 set_finished(!finished);
             })
-            .catch(err => console.log(err));
-        
+            .catch (err => {
+                if (err.toJSON().status !== 310) {
+                    console.log(err);
+                }
+            });
     }
     
     if (finished || localStorage.getItem("accessToken") == null) {
